@@ -30,7 +30,7 @@ Installation
 #. Add ``'terms',`` to your ``INSTALLED_APPS``.
 #. Add ``'terms.middleware.TermsMiddleware',`` to your ``MIDDLEWARE_CLASSES``.
 #. Add terms to your urls:
-    * add ``url(r'^/', include('cmsplugin_poll.urls')),`` to your ``urls.py`` ;
+    * add ``url(r'^terms/', include('cmsplugin_poll.urls')),`` to your ``urls.py`` ;
     * or, if you are using django-CMS, add a page and use the apphook and menu.
 
 
