@@ -86,3 +86,34 @@ Example:
         {{ article.section2 }}
       {% endfilter %}
     {% endblock %}
+
+
+
+Settings
+========
+
+Common settings
+---------------
+
+``TERMS_ADDITIONAL_IGNORED_TAGS``
+    A list or tuple of HTML tags (expressed as strings) ignored by
+    django-terms.  This setting extends ``TERMS_IGNORED_TAGS``
+    (see `Advanced settings`_)
+
+``TERMS_IGNORED_CLASSES``
+    A list or tuple of HTML classes (expressed as strings) ignored by
+    django-terms.
+
+``TERMS_IGNORED_IDS``
+    A list or tuple of HTML IDs (expressed as strings) ignored by
+    django-terms.
+
+
+Advanced settings
+-----------------
+
+``TERMS_IGNORED_TAGS``
+    A list or tuple of HTML tags (expressed as strings) ignored by
+    django-terms.  This is already set, so you should use
+    ``TERMS_ADDITIONAL_IGNORED_TAGS`` (see `Common settings`_) if you do not
+    want to break the default behavior.

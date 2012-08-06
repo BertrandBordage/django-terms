@@ -2,6 +2,8 @@
 
 from HTMLParser import HTMLParser
 from .models import Term
+from .settings import TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, \
+                      TERMS_IGNORED_IDS
 
 
 class NeutralHTMLReconstructor(HTMLParser):
@@ -52,8 +54,14 @@ class NeutralHTMLReconstructor(HTMLParser):
 class TermsHTMLReconstructor(NeutralHTMLReconstructor):
     def reset(self):
         NeutralHTMLReconstructor.reset(self)
+        self.tree_level = 0
+        self.disabled_level = None
         self.replace_dict = Term.objects.replace_dict()
         self.replace_regexp = Term.objects.replace_regexp()
+
+    @property
+    def allow_replacements(self):
+        return not self.disabled_level
 
     def replace_terms(self, html):
         def translate(match):
@@ -64,6 +72,24 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
         return self.replace_regexp.sub(translate, html)
 
+    def handle_starttag(self, tag, attrs):
+        NeutralHTMLReconstructor.handle_starttag(self, tag, attrs)
+        self.tree_level += 1
+        has_disabled_tag = tag in TERMS_IGNORED_TAGS
+        classes = frozenset(dict(attrs).get('class', '').split())
+        has_disabled_class = not classes.isdisjoint(TERMS_IGNORED_CLASSES)
+        has_disabled_id = tag in TERMS_IGNORED_IDS
+        if self.allow_replacements and (has_disabled_tag or has_disabled_class
+                                        or has_disabled_id):
+            self.disabled_level = self.tree_level
+
+    def handle_endtag(self, tag):
+        NeutralHTMLReconstructor.handle_endtag(self, tag)
+        if self.disabled_level and self.disabled_level == self.tree_level:
+            self.disabled_level = None
+        self.tree_level -= 1
+
     def handle_data(self, data):
-        data = self.replace_terms(data)
+        if self.allow_replacements:
+            data = self.replace_terms(data)
         self.out.append(data)
