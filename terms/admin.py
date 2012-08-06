@@ -2,6 +2,7 @@
 
 from django.contrib.admin import site
 from .models import Term
+from .forms import TermForm
 try:
     from reversion import VersionAdmin as ModelAdmin
 except ImportError:
@@ -10,6 +11,7 @@ except ImportError:
 
 class TermAdmin(ModelAdmin):
     model = Term
+    form = TermForm
 
 
 site.register(Term, TermAdmin)
