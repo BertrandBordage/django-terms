@@ -28,3 +28,5 @@ TERMS_IGNORED_IDS = getattr(settings, 'TERMS_IGNORED_IDS',
     (
     )
 )
+
+TERMS_REPLACE_FIRST_ONLY = getattr(settings, 'TERMS_REPLACE_FIRST_ONLY', True)

@@ -96,24 +96,28 @@ Common settings
 ---------------
 
 ``TERMS_ADDITIONAL_IGNORED_TAGS``
-    A list or tuple of HTML tags (expressed as strings) ignored by
-    django-terms.  This setting extends ``TERMS_IGNORED_TAGS``
+    **Default: ()** A list or tuple of HTML tags (expressed as strings)
+    ignored by django-terms.  This setting extends ``TERMS_IGNORED_TAGS``
     (see `Advanced settings`_)
 
 ``TERMS_IGNORED_CLASSES``
-    A list or tuple of HTML classes (expressed as strings) ignored by
-    django-terms.
+    **Default: ()** A list or tuple of HTML classes (expressed as strings)
+    ignored by django-terms.
 
 ``TERMS_IGNORED_IDS``
-    A list or tuple of HTML IDs (expressed as strings) ignored by
-    django-terms.
+    **Default: ()** A list or tuple of HTML IDs (expressed as strings)
+    ignored by django-terms.
+
+``TERMS_REPLACE_FIRST_ONLY``
+    **Default: True** If set to True, add a link only on the first
+    occurrence of each term.
 
 
 Advanced settings
 -----------------
 
 ``TERMS_IGNORED_TAGS``
-    A list or tuple of HTML tags (expressed as strings) ignored by
-    django-terms.  This is already set, so you should use
+    **Default: see settings.py** A list or tuple of HTML tags (expressed as
+    strings) ignored by django-terms.  This is already set, so you should use
     ``TERMS_ADDITIONAL_IGNORED_TAGS`` (see `Common settings`_) if you do not
     want to break the default behavior.

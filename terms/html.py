@@ -3,7 +3,7 @@
 from HTMLParser import HTMLParser
 from .models import Term
 from .settings import TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, \
-                      TERMS_IGNORED_IDS
+                      TERMS_IGNORED_IDS, TERMS_REPLACE_FIRST_ONLY
 
 
 class NeutralHTMLReconstructor(HTMLParser):
@@ -65,13 +65,13 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def replace_terms(self, html):
         def translate(match):
-            try:
-                before, term, after = match.group('before'), \
-                                      match.group('term'), \
-                                      match.group('after')
-                return before + self.replace_dict[term] + after
-            except KeyError:
-                pass
+            before, term, after = match.group('before'), \
+                                  match.group('term'), \
+                                  match.group('after')
+            replaced_term = self.replace_dict.get(term, term)
+            if TERMS_REPLACE_FIRST_ONLY and term in self.replace_dict:
+                del self.replace_dict[term]
+            return before + replaced_term + after
 
         return self.replace_regexp.sub(translate, html)
 
