@@ -11,7 +11,8 @@ setup(
     author = 'Bertrand Bordage',
     author_email = 'bordage.bertrand@gmail.com',
     url = 'https://github.com/BertrandBordage/django-terms',
-    description = 'Site-wide adds a description or a link for specialized terms.',
+    description = 'Site-wide adds a definition '
+                  'or a link for specialized terms.',
     long_description = open('README.rst').read(),
     classifiers = [
         'Development Status :: 3 - Alpha',

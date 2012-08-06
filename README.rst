@@ -2,7 +2,7 @@
 django-terms
 ************
 
-Site-wide adds a description or a link for specialized terms.
+Site-wide adds a definition or a link for specialized terms.
 
 
 

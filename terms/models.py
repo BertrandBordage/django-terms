@@ -8,8 +8,8 @@ from django.core.urlresolvers import reverse
 
 class Term(Model):
     name = CharField(_('name'), max_length=100)
-    description = TextField(_('description'), blank=True)
-    url = URLField(_("link"), verify_exists=False, blank=True, null=True)
+    definition = TextField(_('definition'), blank=True)
+    url = URLField(_('link'), verify_exists=True, blank=True, null=True)
     objects = TermManager()
 
     def __unicode__(self):
