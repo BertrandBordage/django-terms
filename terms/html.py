@@ -66,7 +66,10 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
     def replace_terms(self, html):
         def translate(match):
             try:
-                return self.replace_dict[match.group(0)]
+                before, term, after = match.group('before'), \
+                                      match.group('term'), \
+                                      match.group('after')
+                return before + self.replace_dict[term] + after
             except KeyError:
                 pass
 
