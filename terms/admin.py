@@ -12,6 +12,8 @@ except ImportError:
 class TermAdmin(ModelAdmin):
     model = Term
     form = TermForm
+    list_display = ('name', 'url')
+    search_fields = ('name', 'definition', 'url')
 
 
 site.register(Term, TermAdmin)

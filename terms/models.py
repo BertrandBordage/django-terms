@@ -7,10 +7,17 @@ from django.core.urlresolvers import reverse
 
 
 class Term(Model):
-    name = CharField(_('name'), max_length=100)
+    name = CharField(_('name'), max_length=100, unique=True)
     definition = TextField(_('definition'), blank=True)
-    url = URLField(_('link'), verify_exists=True, blank=True, null=True)
+    url = URLField(_('link'), verify_exists=True, blank=True, null=True,
+                   help_text=_('Address to which the term will redirect '
+                               '(instead of redirecting to the definition).'))
     objects = TermManager()
+
+    class Meta:
+        verbose_name = _('term')
+        verbose_name_plural = _('terms')
+        ordering = ('name',)
 
     def __unicode__(self):
         return self.name

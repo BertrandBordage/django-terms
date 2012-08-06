@@ -12,15 +12,18 @@ Requirements
 Mandatory
 ---------
 
-* ``Django`` (tested with 1.4).
+* `Django <https://www.djangoproject.com/>`_ (tested with 1.4).
 
 
 Optional
 --------
 
-* ``django-reversion`` (tested with 1.6.0) to recover changes and deletions;
-* ``django-CMS`` (tested with 2.3), because django-terms has an apphook and
-  a menu.
+* `django-ckeditor <https://github.com/shaunsephton/django-ckeditor>`_
+  (tested with 3.6.2.1) to type the definition in a beautiful GUI;
+* `django-reversion <https://github.com/etianen/django-reversion>`_
+  (tested with 1.6.0) to recover changes and deletions;
+* `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3),
+  because django-terms has an apphook and a menu.
 
 
 
