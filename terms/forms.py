@@ -7,10 +7,9 @@ from django.utils.translation import ugettext as _
 
 class TermForm(ModelForm):
     def clean(self):
-        cleaned_data = self.cleaned_data
-        definition = cleaned_data.get('definition')
-        link = cleaned_data.get('link')
-        if not definition and not link:
+        definition = self.cleaned_data.get('definition')
+        url = self.cleaned_data.get('url')
+        if not definition and not url:
             raise ValidationError(_(u'Fill either “Definition” or “Link”.'))
         return super(TermForm, self).clean()
 
