@@ -15,5 +15,5 @@ class TermManager(Manager):
 
     def replace_regexp(self):
         replace_dict = self.replace_dict()
-        return re.compile('(?P<before>\W)(?P<term>%s)(?P<after>\W)'
+        return re.compile('(?P<before>^|\W)(?P<term>%s)(?P<after>\W|$)'
                           % '|'.join(map(re.escape, replace_dict)))
