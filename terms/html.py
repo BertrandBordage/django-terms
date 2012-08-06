@@ -1,12 +1,17 @@
 # coding: utf-8
 
 from HTMLParser import HTMLParser
+from .models import Term
 
 
 class NeutralHTMLReconstructor(HTMLParser):
     def reset(self):
         HTMLParser.reset(self)
         self.out = []
+
+    def feed(self, data):
+        HTMLParser.feed(self, data)
+        self.out = ''.join(self.out)
 
     def concat_attrs(self, attrs):
         return ''.join(' %s="%s"' % (attr[0], attr[1]) for attr in attrs)
@@ -42,3 +47,23 @@ class NeutralHTMLReconstructor(HTMLParser):
 
     def unknown_decl(self, data):
         self.out.append('<![%s]>' % decl)
+
+
+class TermsHTMLReconstructor(NeutralHTMLReconstructor):
+    def reset(self):
+        NeutralHTMLReconstructor.reset(self)
+        self.replace_dict = Term.objects.replace_dict()
+        self.replace_regexp = Term.objects.replace_regexp()
+
+    def replace_terms(self, html):
+        def translate(match):
+            try:
+                return self.replace_dict[match.group(0)]
+            except KeyError:
+                pass
+
+        return self.replace_regexp.sub(translate, html)
+
+    def handle_data(self, data):
+        data = self.replace_terms(data)
+        self.out.append(data)
