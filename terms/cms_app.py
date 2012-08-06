@@ -11,4 +11,3 @@ class TermApp(CMSApp):
 
 
 apphook_pool.register(TermApp)
-

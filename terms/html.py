@@ -47,7 +47,7 @@ class NeutralHTMLReconstructor(HTMLParser):
     def handle_pi(self, data):
         self.out.append('<?%s>' % data)
 
-    def unknown_decl(self, data):
+    def unknown_decl(self, decl):
         self.out.append('<![%s]>' % decl)
 
 

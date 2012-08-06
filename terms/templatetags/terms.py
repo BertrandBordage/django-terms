@@ -2,7 +2,6 @@
 
 from django.template import Library
 from ..html import TermsHTMLReconstructor
-from ..models import Term
 
 register = Library()
 

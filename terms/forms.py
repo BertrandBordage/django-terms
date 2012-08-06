@@ -10,7 +10,6 @@ class TermForm(ModelForm):
         cleaned_data = self.cleaned_data
         definition = cleaned_data.get('definition')
         link = cleaned_data.get('link')
-        errors = []
         if not definition and not link:
             raise ValidationError(_(u'Fill either “Definition” or “Link”.'))
         return super(TermForm, self).clean()
