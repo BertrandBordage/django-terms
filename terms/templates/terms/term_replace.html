@@ -1,1 +1,4 @@
-<a href="javascript:window.open('{{ term.get_absolute_url }}', '', 'height=480px, width=640px');">{{ term.name }}</a>
+<a onclick="window.open('{{ term.get_absolute_url }}',
+                        '',
+                        'height=480px, width=640px');"
+   style="cursor: pointer;">{{ term.name }}</a>
