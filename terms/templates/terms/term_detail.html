@@ -1,2 +1,12 @@
-<h2>{{ term }}</h2>
-<p>{{ term.definition|safe }}</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ term|capfirst }}</title>
+  </head>
+  <body>
+    <h2>{{ term|capfirst }}</h2>
+    <div style="text-align: justify;">
+      {{ term.definition|safe }}
+    </div>
+  </body>
+</html>
