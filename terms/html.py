@@ -77,11 +77,12 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def handle_starttag(self, tag, attrs):
         NeutralHTMLReconstructor.handle_starttag(self, tag, attrs)
+        dict_attrs = dict(attrs)
         self.tree_level += 1
         has_disabled_tag = tag in TERMS_IGNORED_TAGS
-        classes = frozenset(dict(attrs).get('class', '').split())
+        classes = frozenset(dict_attrs.get('class', '').split())
         has_disabled_class = not classes.isdisjoint(TERMS_IGNORED_CLASSES)
-        has_disabled_id = tag in TERMS_IGNORED_IDS
+        has_disabled_id = dict_attrs.get('id', '') in TERMS_IGNORED_IDS
         if self.allow_replacements and (has_disabled_tag or has_disabled_class
                                         or has_disabled_id):
             self.disabled_level = self.tree_level

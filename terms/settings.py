@@ -2,7 +2,7 @@ from django.conf import settings
 
 
 TERMS_IGNORED_TAGS = getattr(settings, 'TERMS_IGNORED_TAGS',
-    (
+    [
         'head',
         'style',
         'script',
@@ -12,21 +12,26 @@ TERMS_IGNORED_TAGS = getattr(settings, 'TERMS_IGNORED_TAGS',
         'code',
         'samp',
         'kbd',
-    )
+    ]
 )
 if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_TAGS'):
     TERMS_IGNORED_TAGS.extend(settings.TERMS_ADDITIONAL_IGNORED_TAGS)
 
-TERMS_IGNORED_CLASSES = frozenset(
+TERMS_IGNORED_CLASSES = set(
     getattr(settings, 'TERMS_IGNORED_CLASSES',
         (
+            'cms_reset',
         )
     )
 )
+if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_CLASSES'):
+    TERMS_IGNORED_CLASSES |= set(settings.TERMS_ADDITIONAL_IGNORED_CLASSES)
 
 TERMS_IGNORED_IDS = getattr(settings, 'TERMS_IGNORED_IDS',
-    (
-    )
+    [
+    ]
 )
+if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_IDS'):
+    TERMS_IGNORED_IDS.extend(settings.TERMS_ADDITIONAL_IGNORED_IDS)
 
 TERMS_REPLACE_FIRST_ONLY = getattr(settings, 'TERMS_REPLACE_FIRST_ONLY', True)
