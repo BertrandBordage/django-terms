@@ -101,53 +101,59 @@ Common settings
 ---------------
 
 ``TERMS_ADDITIONAL_IGNORED_TAGS``
-    **Default: ()** A list or tuple of ignored HTML tags
-    (expressed as strings).  This setting extends ``TERMS_IGNORED_TAGS``
-    (see `Advanced settings`_).
+    | Default: ``()``
+    | A list or tuple of ignored HTML tags (expressed as strings).
+      This setting extends ``TERMS_IGNORED_TAGS``
+      (see `Advanced settings`_).
 
 ``TERMS_ADDITIONAL_IGNORED_CLASSES``
-    **Default: ()** A list or tuple of ignored HTML classes
-    (expressed as strings).  This setting extends ``TERMS_IGNORED_CLASSES``
-    (see `Advanced settings`_).
+    | Default: ``()``
+    | A list or tuple of ignored HTML classes (expressed as strings).
+      This setting extends ``TERMS_IGNORED_CLASSES``
+      (see `Advanced settings`_).
 
 ``TERMS_ADDITIONAL_IGNORED_IDS``
-    **Default: ()** A list or tuple of ignored HTML IDs
-    (expressed as strings).  This setting extends ``TERMS_IGNORED_IDS``
-    (see `Advanced settings`_).
+    | Default: ``()``
+    | A list or tuple of ignored HTML IDs (expressed as strings).
+      This setting extends ``TERMS_IGNORED_IDS``
+      (see `Advanced settings`_).
 
 ``TERMS_ADDITIONAL_IGNORED_APPS``
-    **Default: ()** A list or tuple of ignored Django apps
-    (expressed as strings).  This setting extends ``TERMS_IGNORED_APPS``
-    (see `Advanced settings`_).
+    | Default: ``()``
+    | A list or tuple of ignored Django apps (expressed as strings).
+      This setting extends ``TERMS_IGNORED_APPS``
+      (see `Advanced settings`_).
 
 ``TERMS_REPLACE_FIRST_ONLY``
-    **Default: True** If set to True, add a link only on the first
-    occurrence of each term.
+    | Default: ``True``
+    | If set to True, add a link only on the first occurrence of each term.
 
 ``TERMS_CACHE_TIMEOUT``
-    **Default: 30** Cache timeout of django-terms (in seconds).
+    | Default: ``30``
+    | Cache timeout of django-terms (in seconds).
 
 
 Advanced settings
 -----------------
 
 ``TERMS_IGNORED_TAGS``
-    **Default: see terms/settings.py** A list or tuple of ignored HTML tags
-    (expressed as strings).  This is already set, so you should use
-    ``TERMS_ADDITIONAL_IGNORED_TAGS`` (see `Common settings`_) if you do
-    not want to break the default behavior.
+    | Default: see ``terms/settings.py``
+    | A list or tuple of ignored HTML tags (expressed as strings).
+      This is already set, so you should use ``TERMS_ADDITIONAL_IGNORED_TAGS``
+      (see `Common settings`_) if you do not want to break
+      the default behavior.
 
 ``TERMS_IGNORED_CLASSES``
-    **Default: see terms/settings.py** A list or tuple of ignored HTML classes
-    (expressed as strings).
+    | Default: see ``terms/settings.py``
+    | A list or tuple of ignored HTML classes (expressed as strings).
 
 ``TERMS_IGNORED_IDS``
-    **Default: see terms/settings.py** A list or tuple of ignored HTML IDs
-    (expressed as strings).
+    | Default: see ``terms/settings.py``
+    | A list or tuple of ignored HTML IDs (expressed as strings).
 
 ``TERMS_IGNORED_APPS``
-    **Default: see terms/settings.py** A list or tuple of ignored Django apps
-    (expressed as strings).
+    | Default: see ``terms/settings.py``
+    | A list or tuple of ignored Django apps (expressed as strings).
 
 
 
@@ -157,7 +163,8 @@ Side effects
 Why?
 ----
 
-When using django-terms, your HTML pages are totally or partially reconstructed:
+When using django-terms, your HTML pages are totally or partially
+reconstructed:
 
 * totally reconstructed if you use the middleware (see `Global Use`_);
 * partially reconstructed if you use the filter (see `Local Use`_).
@@ -171,8 +178,7 @@ in `tems/html.py` to understand exactly how it is rebuilt.
 List of known side effects
 --------------------------
 
-A few side effects are therefore happening during HTML reconstruction.
-I don't see why they could be undesired, but here is a list of them:
+A few side effects are therefore happening during HTML reconstruction:
 
 * Entity names and numbers (e.g. ``&eacute;``, ``&#233;``, …) are unescaped.
   This means they are replaced with their unicode characters
