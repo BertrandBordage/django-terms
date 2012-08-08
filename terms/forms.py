@@ -4,15 +4,12 @@ from django.forms import ModelForm, CharField, Textarea, ValidationError
 from .models import Term
 from django.utils.translation import ugettext as _
 try:
-    from ckeditor.widgets import CKEditorWidget
-    Textarea = CKEditorWidget()
+    from ckeditor.widgets import CKEditorWidget as Textarea
 except ImportError:
     pass
 
 
 class TermForm(ModelForm):
-    definition = CharField(widget=Textarea)
-
     def clean(self):
         definition = self.cleaned_data.get('definition')
         url = self.cleaned_data.get('url')
@@ -22,3 +19,6 @@ class TermForm(ModelForm):
 
     class Meta:
         model = Term
+        widgets = {
+            'definition': Textarea(),
+        }
