@@ -100,6 +100,12 @@ Settings
 Common settings
 ---------------
 
+``TERMS_ADDITIONAL_IGNORED_APPS``
+    | Default: ``()``
+    | A list or tuple of ignored Django apps (expressed as strings).
+      This setting extends ``TERMS_IGNORED_APPS``
+      (see `Advanced settings`_).
+
 ``TERMS_ADDITIONAL_IGNORED_TAGS``
     | Default: ``()``
     | A list or tuple of ignored HTML tags (expressed as strings).
@@ -118,12 +124,6 @@ Common settings
       This setting extends ``TERMS_IGNORED_IDS``
       (see `Advanced settings`_).
 
-``TERMS_ADDITIONAL_IGNORED_APPS``
-    | Default: ``()``
-    | A list or tuple of ignored Django apps (expressed as strings).
-      This setting extends ``TERMS_IGNORED_APPS``
-      (see `Advanced settings`_).
-
 ``TERMS_REPLACE_FIRST_ONLY``
     | Default: ``True``
     | If set to True, add a link only on the first occurrence of each term.
@@ -135,6 +135,10 @@ Common settings
 
 Advanced settings
 -----------------
+
+``TERMS_IGNORED_APPS``
+    | Default: see ``terms/settings.py``
+    | A list or tuple of ignored Django apps (expressed as strings).
 
 ``TERMS_IGNORED_TAGS``
     | Default: see ``terms/settings.py``
@@ -150,10 +154,6 @@ Advanced settings
 ``TERMS_IGNORED_IDS``
     | Default: see ``terms/settings.py``
     | A list or tuple of ignored HTML IDs (expressed as strings).
-
-``TERMS_IGNORED_APPS``
-    | Default: see ``terms/settings.py``
-    | A list or tuple of ignored Django apps (expressed as strings).
 
 
 

@@ -3,6 +3,15 @@
 from django.conf import settings
 
 
+TERMS_IGNORED_APPS = getattr(settings, 'TERMS_IGNORED_APPS',
+    [
+        'admin',
+    ]
+)
+if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_APPS'):
+    TERMS_IGNORED_APPS.extend(settings.TERMS_ADDITIONAL_IGNORED_APPS)
+
+
 TERMS_IGNORED_TAGS = getattr(settings, 'TERMS_IGNORED_TAGS',
     [
         'head',
@@ -44,12 +53,3 @@ TERMS_REPLACE_FIRST_ONLY = getattr(settings, 'TERMS_REPLACE_FIRST_ONLY', True)
 
 TERMS_CACHE_TIMEOUT = getattr(settings, 'TERMS_CACHE_TIMEOUT',
                               30)  # seconds
-
-
-TERMS_IGNORED_APPS = getattr(settings, 'TERMS_IGNORED_APPS',
-    [
-        'admin',
-    ]
-)
-if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_APPS'):
-    TERMS_IGNORED_APPS.extend(settings.TERMS_ADDITIONAL_IGNORED_APPS)
