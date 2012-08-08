@@ -33,7 +33,7 @@ Optional
 Installation
 ============
 
-#. ``pip install django-terms``;
+#. ``[sudo] pip install django-terms``;
 #. Add ``'terms',`` to your ``INSTALLED_APPS``;
 #. Add terms to your urls:
     * add ``url(r'^terms/', include('terms.urls')),`` to your ``urls.py``;
