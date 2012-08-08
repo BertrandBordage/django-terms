@@ -30,12 +30,6 @@ class NeutralHTMLReconstructor(HTMLParser):
     def handle_endtag(self, tag):
         self.out.append('</%s>' % tag)
 
-    def handle_charref(self, name):
-        self.out.append('&#%s;' % name)
-
-    def handle_entityref(self, name):
-        self.out.append('&%s;' % name)
-
     def handle_data(self, data):
         self.out.append(data)
 
