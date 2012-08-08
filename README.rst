@@ -36,8 +36,7 @@ Installation
 #. ``pip install django-terms``;
 #. Add ``'terms',`` to your ``INSTALLED_APPS``;
 #. Add terms to your urls:
-    * add ``url(r'^terms/', include('cmsplugin_poll.urls')),``
-      to your ``urls.py``;
+    * add ``url(r'^terms/', include('terms.urls')),`` to your ``urls.py``;
     * or, if you are using django-CMS, add a page and use the apphook and menu.
 
 
@@ -198,8 +197,8 @@ First, you need to get it from Transifex, then to compile it:
 
 #. Make sure you have
    `transifex-client <http://pypi.python.org/pypi/transifex-client/>`_
-   installed: ``[sudo] pip install transifex-client``.
-#. Pull your translation: ``tx pull -l [lang]``
+   installed: ``[sudo] pip install transifex-client``;
+#. Pull your translation: ``tx pull -l [lang]``;
 #. Compile it:
    ``msgfmt terms/locale/[lang]/LC_MESSAGES/django.po
-   -o terms/locale/[lang]/LC_MESSAGES/django.mo``
+   -o terms/locale/[lang]/LC_MESSAGES/django.mo``.
