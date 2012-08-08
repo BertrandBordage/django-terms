@@ -5,6 +5,7 @@ django-terms
 Site-wide adds a definition or a link for specialized terms.
 
 .. contents::
+   :depth: 2
 
 
 
@@ -163,7 +164,7 @@ List of known side effects
 --------------------------
 
 A few side effects are therefore happening during HTML reconstruction.
-I don't see why they could be undesired, but here is a list of them.
+I don't see why they could be undesired, but here is a list of them:
 
 * Entity names and numbers (e.g. ``&eacute;``, ``&#233;``, …) are unescaped.
   This means they are replaced with their unicode characters
