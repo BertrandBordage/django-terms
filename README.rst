@@ -4,6 +4,8 @@ django-terms
 
 Site-wide adds a definition or a link for specialized terms.
 
+.. contents::
+
 
 
 Requirements
@@ -137,3 +139,39 @@ Advanced settings
 ``TERMS_IGNORED_IDS``
     **Default: see terms/settings.py** A list or tuple of HTML IDs
     (expressed as strings) ignored by django-terms.
+
+
+
+Side effects
+============
+
+Why?
+----
+
+When using django-terms, your HTML pages are totally or partially reconstructed:
+
+* totally reconstructed if you use the middleware (see `Global Use`_);
+* partially reconstructed if you use the filter (see `Local Use`_).
+
+The content is parsed with
+`HTMLParser <http://docs.python.org/library/htmlparser.html>`_,
+then rebuilt.  See ``NeutralHTMLReconstructor`` and ``TermsHTMLReconstructor``
+in `tems/html.py` to understand exactly how it is rebuilt.
+
+
+List of known side effects
+--------------------------
+
+A few side effects are therefore happening during HTML reconstruction.
+I don't see why they could be undesired, but here is a list of them.
+
+* Entity names and numbers (e.g. ``&eacute;``, ``&#233;``, …) are unescaped.
+  This means they are replaced with their unicode characters
+  (e.g. ``&eacute;`` -> ``é``);
+* Additional spaces inside HTML tags are stripped:
+    * Start tags ``<a  href = "url" >``
+      -> ``<a href="url">``;
+    * End tags ``</ a >``
+      -> ``</a>``;
+    * “Start-end” tags ``<input  style = "text"  />``
+      -> ``<input style="text" />``.
