@@ -205,6 +205,12 @@ A few side effects are therefore happening during HTML reconstruction:
 Translations
 ============
 
+Status
+------
+
+.. image::
+   https://www.transifex.com/projects/p/django-terms/resource/core/chart/image_png
+
 Write your translation
 ----------------------
 
