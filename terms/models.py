@@ -3,6 +3,7 @@
 from django.db.models import Model, CharField, TextField, URLField
 from django.utils.translation import ugettext_lazy as _
 from .managers import TermManager
+from HTMLParser import HTMLParser
 from django.core.urlresolvers import reverse
 
 
@@ -21,6 +22,10 @@ class Term(Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        HTMLParser.unescape.__func__(HTMLParser, self.name)
+        super(Term, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         if self.url:

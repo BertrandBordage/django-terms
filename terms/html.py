@@ -12,6 +12,7 @@ class NeutralHTMLReconstructor(HTMLParser):
         self.out = []
 
     def feed(self, data):
+        data = self.unescape(data)
         HTMLParser.feed(self, data)
         self.out = ''.join(self.out)
 
