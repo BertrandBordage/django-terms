@@ -6,12 +6,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-terms',
-    version='0.2.1',
+    version='0.3',
     author='Bertrand Bordage',
     author_email='bordage.bertrand@gmail.com',
     url='https://github.com/BertrandBordage/django-terms',
     description='Site-wide adds a definition '
-                  'or a link for specialized terms.',
+                'or a link for specialized terms.',
     long_description=open('README.rst').read(),
     classifiers=[
         'Development Status :: 3 - Alpha',
