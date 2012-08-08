@@ -176,3 +176,30 @@ I don't see why they could be undesired, but here is a list of them:
       -> ``</a>``;
     * “Start-end” tags ``<input  style = "text"  />``
       -> ``<input style="text" />``.
+
+
+
+Translations
+============
+
+Write your translation
+----------------------
+
+Localization is done directly on
+`our Transifex page <https://www.transifex.com/projects/p/django-terms/>`_.
+Ask for a new language, and you'll get it ready for translation
+within a couple of days.
+
+
+Compile it
+----------
+
+First, you need to get it from Transifex, then to compile it:
+
+#. Make sure you have
+   `transifex-client <http://pypi.python.org/pypi/transifex-client/>`_
+   installed: ``[sudo] pip install transifex-client``.
+#. Pull your translation: ``tx pull -l [lang]``
+#. Compile it:
+   ``msgfmt terms/locale/[lang]/LC_MESSAGES/django.po
+   -o terms/locale/[lang]/LC_MESSAGES/django.mo``
