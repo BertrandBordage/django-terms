@@ -101,18 +101,23 @@ Common settings
 ---------------
 
 ``TERMS_ADDITIONAL_IGNORED_TAGS``
-    **Default: ()** A list or tuple of HTML tags (expressed as strings)
-    ignored by django-terms.  This setting extends ``TERMS_IGNORED_TAGS``
+    **Default: ()** A list or tuple of ignored HTML tags
+    (expressed as strings).  This setting extends ``TERMS_IGNORED_TAGS``
     (see `Advanced settings`_).
 
 ``TERMS_ADDITIONAL_IGNORED_CLASSES``
-    **Default: ()** A list or tuple of HTML classes (expressed as strings)
-    ignored by django-terms.  This setting extends ``TERMS_IGNORED_CLASSES``
+    **Default: ()** A list or tuple of ignored HTML classes
+    (expressed as strings).  This setting extends ``TERMS_IGNORED_CLASSES``
     (see `Advanced settings`_).
 
 ``TERMS_ADDITIONAL_IGNORED_IDS``
-    **Default: ()** A list or tuple of HTML IDs (expressed as strings)
-    ignored by django-terms.  This setting extends ``TERMS_IGNORED_IDS``
+    **Default: ()** A list or tuple of ignored HTML IDs
+    (expressed as strings).  This setting extends ``TERMS_IGNORED_IDS``
+    (see `Advanced settings`_).
+
+``TERMS_ADDITIONAL_IGNORED_APPS``
+    **Default: ()** A list or tuple of ignored Django apps
+    (expressed as strings).  This setting extends ``TERMS_IGNORED_APPS``
     (see `Advanced settings`_).
 
 ``TERMS_REPLACE_FIRST_ONLY``
@@ -127,18 +132,22 @@ Advanced settings
 -----------------
 
 ``TERMS_IGNORED_TAGS``
-    **Default: see terms/settings.py** A list or tuple of HTML tags (expressed
-    as strings) ignored by django-terms.  This is already set, so you should
-    use ``TERMS_ADDITIONAL_IGNORED_TAGS`` (see `Common settings`_) if you do
+    **Default: see terms/settings.py** A list or tuple of ignored HTML tags
+    (expressed as strings).  This is already set, so you should use
+    ``TERMS_ADDITIONAL_IGNORED_TAGS`` (see `Common settings`_) if you do
     not want to break the default behavior.
 
 ``TERMS_IGNORED_CLASSES``
-    **Default: see terms/settings.py** A list or tuple of HTML classes
-    (expressed as strings) ignored by django-terms.
+    **Default: see terms/settings.py** A list or tuple of ignored HTML classes
+    (expressed as strings).
 
 ``TERMS_IGNORED_IDS``
-    **Default: see terms/settings.py** A list or tuple of HTML IDs
-    (expressed as strings) ignored by django-terms.
+    **Default: see terms/settings.py** A list or tuple of ignored HTML IDs
+    (expressed as strings).
+
+``TERMS_IGNORED_APPS``
+    **Default: see terms/settings.py** A list or tuple of ignored Django apps
+    (expressed as strings).
 
 
 
