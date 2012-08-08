@@ -117,6 +117,9 @@ Common settings
     **Default: True** If set to True, add a link only on the first
     occurrence of each term.
 
+``TERMS_CACHE_TIMEOUT``
+    **Default: 30** Cache timeout of django-terms (in seconds).
+
 
 Advanced settings
 -----------------
