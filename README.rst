@@ -191,6 +191,15 @@ A few side effects are therefore happening during HTML reconstruction:
     * “Start-end” tags ``<input  style = "text"  />``
       -> ``<input style="text" />``.
 
+.. warning::
+   This implies one bad side effect: the unescaping breaks the special
+   characters rendering in some complex form fields like
+   `django-ckeditor`_.  `django.contrib.admin` is already ignored,
+   so you should not encounter any problem.  Otherwise, using filters
+   instead of the middleware and/or ignore the correct
+   apps/tags/classes/ids using `Common settings`_ will ensure a proper
+   rendering.
+
 
 
 Translations
