@@ -1,8 +1,9 @@
 # coding: utf-8
 
 from .html import TermsHTMLReconstructor
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, Resolver404
 from .settings import TERMS_IGNORED_APPS
+from django.conf import settings
 
 
 class TermsMiddleware:
@@ -10,10 +11,21 @@ class TermsMiddleware:
         self.parser = TermsHTMLReconstructor()
 
     def process_response(self, request, response):
-        ignored = resolve(request.path).app_name in TERMS_IGNORED_APPS
+        url = request.path
+        try:
+            app_name = resolve(url).app_name
+            app_ignored = app_name in TERMS_IGNORED_APPS
+        except Resolver404:
+            if settings.DEBUG:
+                raise Resolver404("could not find whether the application of "
+                                  "'%s' is in TERMS_IGNORED_APPS" % url)
+            app_ignored = True
+
         is_html = 'text/html' in response['Content-Type']
-        if not ignored and is_html:
+
+        if not app_ignored and is_html:
             self.parser.feed(response.content.decode('utf-8'))
             response.content = self.parser.out
             self.parser.reset()
+
         return response
