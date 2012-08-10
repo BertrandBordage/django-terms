@@ -11,7 +11,6 @@ class TermsMiddleware:
 
     def process_response(self, request, response):
         ignored = resolve(request.path).app_name in TERMS_IGNORED_APPS
-        print resolve(request.path).app_name
         is_html = 'text/html' in response['Content-Type']
         if not ignored and is_html:
             self.parser.feed(response.content.decode('utf-8'))
