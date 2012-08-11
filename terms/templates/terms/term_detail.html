@@ -2,25 +2,50 @@
 
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>{{ term|capfirst }}</title>
+    <style type="text/css">
+      .term-container {
+        margin: 10px;
+      }
+      .term-container .term-header {
+        display: inline-block;
+        padding-bottom: 7px;
+        margin: 10px 0;
+        border-bottom: 2px dotted lightGrey;
+      }
+      .term-container .term-definition {
+        text-align: justify;
+      }
+      .term-container .term-definition p {
+        margin: 10px 0;
+      }
+    </style>
   </head>
+
   <body>
-    <h2>{{ term|capfirst }}</h2>
-    <div style="text-align: justify;">
-      {{ term.definition|safe }}
-    </div>
-    {% if perms.terms_change_term %}
-      <button onclick="document.location =
+    <div class="term-container">
+
+      <h2 class="term-header">{{ term|capfirst }}</h2>
+      <div class="term-definition">
+        {{ term.definition|safe }}
+      </div>
+
+      {% if perms.terms_change_term %}
+        <button onclick="document.location =
                                  '{% url admin:terms_term_change term.pk %}';">
-        {% trans 'Change' %}
-      </button>
-    {% endif %}
-    {% if perms.terms_delete_term %}
-      <button onclick="document.location =
+          {% trans 'Change' %}
+        </button>
+      {% endif %}
+      {% if perms.terms_delete_term %}
+        <button onclick="document.location =
                                  '{% url admin:terms_term_delete term.pk %}';">
-        {% trans 'Delete' %}
-      </button>
-    {% endif %}
+          {% trans 'Delete' %}
+        </button>
+      {% endif %}
+
+    </div>
   </body>
+
 </html>
