@@ -2,8 +2,9 @@
 
 from django.db.models import Model, CharField, TextField, URLField
 from django.utils.translation import ugettext_lazy as _
-from .managers import TermManager
+from .managers import TermManager, CACHE_KEYS
 from HTMLParser import HTMLParser
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 
 
@@ -25,6 +26,7 @@ class Term(Model):
 
     def save(self, *args, **kwargs):
         HTMLParser.unescape.__func__(HTMLParser, self.name)
+        cache.delete_many(CACHE_KEYS)
         super(Term, self).save(*args, **kwargs)
 
     def get_absolute_url(self):

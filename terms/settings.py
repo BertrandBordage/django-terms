@@ -49,7 +49,3 @@ if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_IDS'):
 
 
 TERMS_REPLACE_FIRST_ONLY = getattr(settings, 'TERMS_REPLACE_FIRST_ONLY', True)
-
-
-TERMS_CACHE_TIMEOUT = getattr(settings, 'TERMS_CACHE_TIMEOUT',
-                              30)  # seconds
