@@ -27,6 +27,8 @@ Optional
   (tested with 1.6.0) to recover changes and deletions;
 * `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3),
   because django-terms has an apphook and a menu.
+* `django-haystack <http://haystacksearch.org/>`_ (tested with 2.0.0-beta)
+  because django-terms has a search index.
 
 
 
