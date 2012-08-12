@@ -29,6 +29,9 @@ Optional
   because django-terms has an apphook and a menu.
 * `django-haystack <http://haystacksearch.org/>`_ (tested with 2.0.0-beta)
   because django-terms has a search index.
+* `django.contrib.sitemaps
+  <https://docs.djangoproject.com/en/1.4/ref/contrib/sitemaps/>`_
+  because django-terms has a sitemap.
 
 
 
