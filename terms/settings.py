@@ -6,6 +6,7 @@ from django.conf import settings
 TERMS_IGNORED_APPS = getattr(settings, 'TERMS_IGNORED_APPS',
     [
         'admin',
+        'admindocs',
     ]
 )
 if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_APPS'):
