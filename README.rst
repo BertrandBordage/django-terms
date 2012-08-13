@@ -15,44 +15,46 @@ Requirements
 Mandatory
 ---------
 
-* `Django <https://www.djangoproject.com/>`_ (tested with 1.4).
+* `Django <https://www.djangoproject.com/>`_ (tested with 1.4)
 
 
 Optional
 --------
 
 * `django-ckeditor <https://github.com/shaunsephton/django-ckeditor>`_
-  (tested with 3.6.2.1) to type the definition in a beautiful GUI;
+  (tested with 3.6.2.1) to type the definition in a beautiful GUI
 * `django-reversion <https://github.com/etianen/django-reversion>`_
-  (tested with 1.6.0) to recover changes and deletions;
-* `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3),
-  because django-terms has an apphook and a menu.
+  (tested with 1.6.0) to recover changes and deletions
+* `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3)
+  because django-terms has an apphook and a menu
 * `django-haystack <http://haystacksearch.org/>`_ (tested with 2.0.0-beta)
-  because django-terms has a search index.
+  because django-terms has a search index
 * `django.contrib.sitemaps
   <https://docs.djangoproject.com/en/1.4/ref/contrib/sitemaps/>`_
-  because django-terms has a sitemap.
+  because django-terms has a sitemap
 
 
 
 Installation
 ============
 
-#. ``[sudo] pip install django-terms``;
-#. Add ``'terms',`` to your ``INSTALLED_APPS``;
+#. ``[sudo] pip install django-terms``
+#. Add ``'terms',`` to your ``INSTALLED_APPS``
 #. Add terms to your urls:
-    * add ``url(r'^terms/', include('terms.urls')),`` to your ``urls.py``;
-    * or, if you are using django-CMS, add a page and use the apphook and menu.
+
+   * add ``url(r'^terms/', include('terms.urls')),`` to your `urls.py`
+   * or, if you are using django-CMS, add a page and use the apphook and menu
 
 
 
 Usage
 =====
 
-#. Add some terms in the admin;
+#. Add some terms in the admin
 #. Choose how django-terms should apply to your website:
-   `Global use`_ (recommended to give django-terms a try) or
-   `Local use`_ (recommended for production).
+
+   * `Global use`_ (recommended to give django-terms a try) or
+   * `Local use`_ (recommended for production).
 
 The added terms should now be automatically linked to their definitions.
 
@@ -61,12 +63,14 @@ Global use
 ----------
 
 A middleware is available to automatically add links on all your website.
-It is not recommended to use it, since it will add links in all your
-applications, including django.contrib.admin.  But since it only requires one
-line of change, it is a perfect way to start using django-terms.
+It is not recommended to use it in production because it is less predictable.
+But since it only requires one line of code, it is a perfect way
+to start using django-terms.
 
-#. Just add ``'terms.middleware.TermsMiddleware',``
-   to your ``MIDDLEWARE_CLASSES``.
+#. Add ``'terms.middleware.TermsMiddleware',``
+   to your ``MIDDLEWARE_CLASSES``
+#. If the middleware applies to unwanted Django applications,
+   HTML tags, classes, or IDs, set the corresponding `Common settings`_
 
 
 Local use
@@ -75,27 +79,55 @@ Local use
 A template filter is available to add links only on desired parts of
 your website.
 
-#. Choose one of your existing templates;
+#. Choose one of your existing templates
 #. Add ``{% load terms %}`` to the beginning of the file (just after
-   ``{% extends '[file]' %}`` if you have one);
-#. Use the filter ``replace_terms`` like every normal filter.
+   ``{% extends '[file]' %}`` if you have one)
+#. Use the filter ``replace_terms`` like every normal filter
+#. If the filter applies to unwanted HTML tags, classes, or IDs,
+   set the corresponding `Common settings`_
 
 Example:
 
-::
+   Suppose you have such a template:
 
-    {% extends 'base.html' %}
-    {% load terms %}
+     ::
 
-    {% block article_header %}
-      {{ article.header|replace_terms }}
-    {% endblock %}
-    {% block article_content %}
-      {% filter replace_terms %}
-        {{ article.section1 }}
-        {{ article.section2 }}
-      {% endfilter %}
-    {% endblock %}
+        {% extends 'base.html' %}
+
+        {% block article_header %}
+          {{ article.header }}
+        {% endblock %}
+
+        {% block article_content %}
+          {{ article.section1 }}
+          {{ article.section2 }}
+        {% endblock %}
+
+   Here is how you can modify it:
+
+     ::
+
+        {% extends 'base.html' %}
+        {% load terms %}
+
+        {% block article_header %}
+          {{ article.header|replace_terms }}
+        {% endblock %}
+
+        {% block article_content %}
+          {% filter replace_terms %}
+            {{ article.section1 }}
+            {{ article.section2 }}
+          {% endfilter %}
+        {% endblock %}
+
+   Now, suppose you have an HTML class ``code-snippet`` in ``article.section2``
+   where you do not want to add links on terms.
+   Go to `Common settings`_, and you will find the solution:
+
+     Add this line in `settings.py`::
+
+       TERMS_ADDITIONAL_IGNORED_CLASSES = ['code-snippet']
 
 
 
@@ -106,55 +138,84 @@ Common settings
 ---------------
 
 ``TERMS_ADDITIONAL_IGNORED_APPS``
-    | Default: ``()``
-    | A list or tuple of ignored Django apps (expressed as strings).
-      This setting extends ``TERMS_IGNORED_APPS``
-      (see `Advanced settings`_).
+.................................
+:Default: ``()``
+:Definition: A list or tuple of ignored Django applications
+             (expressed as strings)
+:Used in: `Global use`_
+:Extends: `TERMS_IGNORED_APPS`_
+:Syntax example: ``['cms']``
 
 ``TERMS_ADDITIONAL_IGNORED_TAGS``
-    | Default: ``()``
-    | A list or tuple of ignored HTML tags (expressed as strings).
-      This setting extends ``TERMS_IGNORED_TAGS``
-      (see `Advanced settings`_).
+.................................
+
+:Default: ``()``
+:Definition: A list or tuple of ignored HTML tags (expressed as strings)
+:Used in: `Global use`_, `Local use`_
+:Extends: `TERMS_IGNORED_TAGS`_
+:Syntax example: ``['h1', 'h2', 'h3', 'footer']``
 
 ``TERMS_ADDITIONAL_IGNORED_CLASSES``
-    | Default: ``()``
-    | A list or tuple of ignored HTML classes (expressed as strings).
-      This setting extends ``TERMS_IGNORED_CLASSES``
-      (see `Advanced settings`_).
+....................................
+
+:Default: ``()``
+:Definition: A list or tuple of ignored HTML classes (expressed as strings)
+:Used in: `Global use`_, `Local use`_
+:Extends: `TERMS_IGNORED_CLASSES`_
+:Syntax example: ``['footnote', 'text-caption']``
 
 ``TERMS_ADDITIONAL_IGNORED_IDS``
-    | Default: ``()``
-    | A list or tuple of ignored HTML IDs (expressed as strings).
-      This setting extends ``TERMS_IGNORED_IDS``
-      (see `Advanced settings`_).
+................................
+
+:Default: ``()``
+:Definition: A list or tuple of ignored HTML IDs (expressed as strings)
+:Used in: `Global use`_, `Local use`_
+:Extends: `TERMS_IGNORED_IDS`_
+:Syntax example: ``['article-footer', 'side-content']``
 
 ``TERMS_REPLACE_FIRST_ONLY``
-    | Default: ``True``
-    | If set to True, add a link only on the first occurrence of each term.
+............................
+
+:Default: ``True``
+:Definition: If set to True, add a link only on the first occurrence
+             of each term
+:Used in: `Global use`_, `Local use`_
 
 
 Advanced settings
 -----------------
 
+These settings should not be used, unless you know perfectly
+what you are doing.
+
 ``TERMS_IGNORED_APPS``
-    | Default: see ``terms/settings.py``
-    | A list or tuple of ignored Django apps (expressed as strings).
+......................
+
+:Default: see `terms/settings.py`
+:Definition: A list or tuple of ignored Django applications
+             (expressed as strings)
+:Used in: `Global use`_
 
 ``TERMS_IGNORED_TAGS``
-    | Default: see ``terms/settings.py``
-    | A list or tuple of ignored HTML tags (expressed as strings).
-      This is already set, so you should use ``TERMS_ADDITIONAL_IGNORED_TAGS``
-      (see `Common settings`_) if you do not want to break
-      the default behavior.
+......................
+
+:Default: see `terms/settings.py`
+:Definition: A list or tuple of ignored HTML tags (expressed as strings)
+:Used in: `Global use`_, `Local use`_
 
 ``TERMS_IGNORED_CLASSES``
-    | Default: see ``terms/settings.py``
-    | A list or tuple of ignored HTML classes (expressed as strings).
+.........................
+
+:Default: see `terms/settings.py`
+:Definition: A list or tuple of ignored HTML classes (expressed as strings)
+:Used in: `Global use`_, `Local use`_
 
 ``TERMS_IGNORED_IDS``
-    | Default: see ``terms/settings.py``
-    | A list or tuple of ignored HTML IDs (expressed as strings).
+.....................
+
+:Default: see `terms/settings.py`
+:Definition: A list or tuple of ignored HTML IDs (expressed as strings)
+:Used in: `Global use`_, `Local use`_
 
 
 
@@ -167,8 +228,8 @@ Why?
 When using django-terms, your HTML pages are totally or partially
 reconstructed:
 
-* totally reconstructed if you use the middleware (see `Global Use`_);
-* partially reconstructed if you use the filter (see `Local Use`_).
+* totally reconstructed if you use the middleware (see `Global Use`_)
+* partially reconstructed if you use the filter (see `Local Use`_)
 
 The content is parsed with
 `HTMLParser <http://docs.python.org/library/htmlparser.html>`_,
@@ -183,14 +244,14 @@ A few side effects are therefore happening during HTML reconstruction:
 
 * Entity names and numbers (e.g. ``&eacute;``, ``&#233;``, …) are unescaped.
   This means they are replaced with their unicode characters
-  (e.g. ``&eacute;`` -> ``é``);
+  (e.g. ``&eacute;`` -> ``é``)
 * Additional spaces inside HTML tags are stripped:
     * Start tags ``<a  href = "url" >``
-      -> ``<a href="url">``;
+      -> ``<a href="url">``
     * End tags ``</ a >``
-      -> ``</a>``;
+      -> ``</a>``
     * “Start-end” tags ``<input  style = "text"  />``
-      -> ``<input style="text" />``.
+      -> ``<input style="text" />``
 
 .. warning::
    This implies one bad side effect: the unescaping breaks the special
@@ -200,6 +261,21 @@ A few side effects are therefore happening during HTML reconstruction:
    instead of the middleware and/or ignore the correct
    apps/tags/classes/ids using `Common settings`_ will ensure a proper
    rendering.
+
+
+Exceptions
+----------
+
+``Resolver404``
+...............
+
+:Raised in: `Global use`_, only if ``DEBUG`` evaluates to ``True``.
+            If ``DEBUG`` evaluates to ``False``, this exception is not raised
+            but the page is ignored by django-terms.
+:Reason: This happens when django-terms is unable to resolve the current
+         ``request.path`` to determine whether the application
+         of the current page is in `TERMS_IGNORED_APPS`_.
+:Encountered: In django-CMS 2.3, when adding a plugin in frontend editing.
 
 
 
@@ -221,15 +297,11 @@ Ask for a new language, and you'll get it ready for translation
 within a couple of days.
 
 
-Compile it
-----------
-
-First, you need to get it from Transifex, then to compile it:
+Get & Compile
+-------------
 
 #. Make sure you have
    `transifex-client <http://pypi.python.org/pypi/transifex-client/>`_
-   installed: ``[sudo] pip install transifex-client``;
-#. Pull your translation: ``tx pull -l [lang]``;
-#. Compile it:
-   ``msgfmt terms/locale/[lang]/LC_MESSAGES/django.po
-   -o terms/locale/[lang]/LC_MESSAGES/django.mo``.
+   installed: ``[sudo] pip install transifex-client``
+#. Pull all translations from Transifex: ``tx pull -a``
+#. Compile them: ``cd terms && django-admin.py compilemessages``
