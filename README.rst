@@ -82,9 +82,10 @@ Local use
 A template filter is available to add links only on desired parts of
 your website.
 
-If an error occurs, like every filter, it will fail silently.
-If this filter mysteriously has no effect, remove it, use the middleware,
-switch to ``DEBUG`` mode and see `Exceptions`_.
+.. note::
+   If an error occurs, like every filter, it will fail silently.
+   If this filter mysteriously has no effect, remove it, use the middleware,
+   switch to ``DEBUG`` mode and see `Exceptions`_.
 
 #. Choose one of your existing templates
 #. Add ``{% load terms %}`` to the beginning of the file (just after
