@@ -94,7 +94,6 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
         opened_tag, full_start_tag = self.opened_tags.pop()
         if tag != opened_tag:
             if settings.DEBUG:
-                self.reset()
                 raise HTMLValidationWarning('unable to find the end tag for '
                                             + full_start_tag)
             self.tree_level -= 1  # We suppose the start tag is a start-end tag
