@@ -4,6 +4,8 @@ from HTMLParser import HTMLParser
 from .models import Term
 from .settings import TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, \
                       TERMS_IGNORED_IDS, TERMS_REPLACE_FIRST_ONLY
+from django.conf import settings
+from .exceptions import HTMLValidationWarning
 
 
 class NeutralHTMLReconstructor(HTMLParser):
@@ -50,13 +52,14 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
     def reset(self):
         NeutralHTMLReconstructor.reset(self)
         self.tree_level = 0
+        self.opened_tags = []
         self.disabled_level = None
         self.replace_dict = Term.objects.replace_dict()
         self.replace_regexp = Term.objects.replace_regexp()
 
     @property
     def allow_replacements(self):
-        return not self.disabled_level
+        return self.disabled_level is None
 
     def replace_terms(self, html):
         def translate(match):
@@ -72,20 +75,33 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def handle_starttag(self, tag, attrs):
         NeutralHTMLReconstructor.handle_starttag(self, tag, attrs)
-        dict_attrs = dict(attrs)
+        self.opened_tags.append((tag, self.get_starttag_text()))
         self.tree_level += 1
+
+        dict_attrs = dict(attrs)
         has_disabled_tag = tag in TERMS_IGNORED_TAGS
         classes = frozenset(dict_attrs.get('class', '').split())
         has_disabled_class = not classes.isdisjoint(TERMS_IGNORED_CLASSES)
         has_disabled_id = dict_attrs.get('id', '') in TERMS_IGNORED_IDS
+
         if self.allow_replacements and (has_disabled_tag or has_disabled_class
                                         or has_disabled_id):
             self.disabled_level = self.tree_level
 
     def handle_endtag(self, tag):
         NeutralHTMLReconstructor.handle_endtag(self, tag)
+
+        opened_tag, full_start_tag = self.opened_tags.pop()
+        if tag != opened_tag:
+            if settings.DEBUG:
+                raise HTMLValidationWarning('unable to find the end tag for '
+                                            + full_start_tag)
+            self.tree_level -= 1  # We suppose the start tag is a start-end tag
+                                  # with its final '/' missing.
+
         if self.disabled_level and self.disabled_level == self.tree_level:
             self.disabled_level = None
+
         self.tree_level -= 1
 
     def handle_data(self, data):

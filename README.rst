@@ -219,11 +219,14 @@ what you are doing.
 
 
 
+Troubleshooting
+===============
+
 Side effects
-============
+------------
 
 Why?
-----
+....
 
 When using django-terms, your HTML pages are totally or partially
 reconstructed:
@@ -236,9 +239,8 @@ The content is parsed with
 then rebuilt.  See ``NeutralHTMLReconstructor`` and ``TermsHTMLReconstructor``
 in `tems/html.py` to understand exactly how it is rebuilt.
 
-
 List of known side effects
---------------------------
+..........................
 
 A few side effects are therefore happening during HTML reconstruction:
 
@@ -276,6 +278,17 @@ Exceptions
          ``request.path`` to determine whether the application
          of the current page is in `TERMS_IGNORED_APPS`_.
 :Encountered: In django-CMS 2.3, when adding a plugin in frontend editing.
+
+
+``HTMLValidationWarning``
+.........................
+
+:Raised in: `Global use`_ and `Local use`_ only if ``DEBUG`` evaluates to
+            ``True``.  If ``DEBUG`` evaluates to ``False``, this exception
+            is not raised and we try to make terms replacements work anyway.
+:Reason: This happens when django-terms finds a problem in the architecture
+         of the current HTML page.
+:Encountered: If you forget the final ``/`` of a “start-end” tag.
 
 
 
