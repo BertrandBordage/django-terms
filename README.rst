@@ -314,8 +314,8 @@ Write your translation
 
 Localization is done directly on
 `our Transifex page <https://www.transifex.com/projects/p/django-terms/>`_.
-Ask for a new language, and you'll get it ready for translation
-within a couple of days.
+There is no access restriction, so feel free to spend two minutes translating
+django-terms to your language :o)
 
 
 Get & Compile
