@@ -1,2 +1,2 @@
-class HTMLValidationWarning(Exception):
+class HTMLValidationWarning(Warning):
     pass
