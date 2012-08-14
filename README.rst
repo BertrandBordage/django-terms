@@ -53,8 +53,8 @@ Usage
 #. Add some terms in the admin
 #. Choose how django-terms should apply to your website:
 
-   * `Global use`_ (recommended to give django-terms a try) or
-   * `Local use`_ (recommended for production).
+   * `Global use`_ (to give django-terms a try or for development)
+   * `Local use`_ (for production)
 
 The added terms should now be automatically linked to their definitions.
 
@@ -63,9 +63,12 @@ Global use
 ----------
 
 A middleware is available to automatically add links on all your website.
-It is not recommended to use it in production because it is less predictable.
-But since it only requires one line of code, it is a perfect way
-to start using django-terms.
+It is not recommended to use it in production because it parses and rebuilds
+whole pages, which can be an overkill in most cases (even though django-terms
+has excellent performances).
+
+It is also perfect for development: it never fails silently, unlike filters
+(see `Exceptions`_ for more details).
 
 #. Add ``'terms.middleware.TermsMiddleware',``
    to your ``MIDDLEWARE_CLASSES``
@@ -78,6 +81,10 @@ Local use
 
 A template filter is available to add links only on desired parts of
 your website.
+
+If an error occurs, like every filter, it will fail silently.
+If this filter mysteriously has no effect, remove it, use the middleware,
+switch to ``DEBUG`` mode and see `Exceptions`_.
 
 #. Choose one of your existing templates
 #. Add ``{% load terms %}`` to the beginning of the file (just after
@@ -268,12 +275,14 @@ A few side effects are therefore happening during HTML reconstruction:
 Exceptions
 ----------
 
+These exceptions are only happening in `Global use`_, since
+`Django filters should always fail silently
+<https://docs.djangoproject.com/en/1.4/howto/custom-template-tags/#writing-custom-template-filters>`_.
+
 ``Resolver404``
 ...............
 
-:Raised in: `Global use`_, only if ``DEBUG`` evaluates to ``True``.
-            If ``DEBUG`` evaluates to ``False``, this exception is not raised
-            but the page is ignored by django-terms.
+:Raised in: ``DEBUG`` mode.  Otherwise the page is ignored by django-terms.
 :Reason: This happens when django-terms is unable to resolve the current
          ``request.path`` to determine whether the application
          of the current page is in `TERMS_IGNORED_APPS`_.
@@ -283,9 +292,8 @@ Exceptions
 ``HTMLValidationWarning``
 .........................
 
-:Raised in: `Global use`_ and `Local use`_ only if ``DEBUG`` evaluates to
-            ``True``.  If ``DEBUG`` evaluates to ``False``, this exception
-            is not raised and we try to make terms replacements work anyway.
+:Raised in: ``DEBUG`` mode.  Otherwise we try to make terms replacements
+            work anyway.
 :Reason: This happens when django-terms finds a problem in the architecture
          of the current HTML page.
 :Encountered: If you forget the final ``/`` of a “start-end” tag.
