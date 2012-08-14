@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-11 19:09+0200\n"
+"POT-Creation-Date: 2012-08-14 15:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,27 +38,31 @@ msgid "definition"
 msgstr ""
 
 #: models.py:14
-msgid "link"
+msgid "Accepts HTML tags."
 msgstr ""
 
 #: models.py:15
+msgid "link"
+msgstr ""
+
+#: models.py:16
 msgid ""
 "Address to which the term will redirect (instead of redirecting to the "
 "definition)."
 msgstr ""
 
-#: models.py:20
+#: models.py:21
 msgid "term"
 msgstr ""
 
-#: models.py:21
+#: models.py:22
 msgid "terms"
 msgstr ""
 
-#: templates/terms/term_detail.html:16
+#: templates/terms/term_detail.html:38
 msgid "Change"
 msgstr ""
 
-#: templates/terms/term_detail.html:20
+#: templates/terms/term_detail.html:44
 msgid "Delete"
 msgstr ""
