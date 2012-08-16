@@ -14,7 +14,7 @@ class Term(Model):
                                  u'a “|” separator (e.g. “Name|name|names”).'))
     definition = TextField(_('definition'), blank=True,
                            help_text=_('Accepts HTML tags.'))
-    url = URLField(_('link'), verify_exists=True, blank=True, null=True,
+    url = URLField(_('link'), blank=True, null=True,
                    help_text=_('Address to which the term will redirect '
                                '(instead of redirecting to the definition).'))
 
