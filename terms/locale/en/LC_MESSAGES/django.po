@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-14 15:44+0200\n"
+"POT-Creation-Date: 2012-08-16 16:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Term"
 msgstr ""
 
-#: forms.py:17
+#: forms.py:28
 msgid "Fill either “Definition” or “Link”."
 msgstr ""
 
@@ -34,28 +34,34 @@ msgid "name"
 msgstr ""
 
 #: models.py:13
-msgid "definition"
-msgstr ""
-
-#: models.py:14
-msgid "Accepts HTML tags."
+msgid ""
+"Variants of the name can be specified with a “|” separator (e.g. “Name|name|"
+"names”)."
 msgstr ""
 
 #: models.py:15
-msgid "link"
+msgid "definition"
 msgstr ""
 
 #: models.py:16
+msgid "Accepts HTML tags."
+msgstr ""
+
+#: models.py:17
+msgid "link"
+msgstr ""
+
+#: models.py:18
 msgid ""
 "Address to which the term will redirect (instead of redirecting to the "
 "definition)."
 msgstr ""
 
-#: models.py:21
+#: models.py:24
 msgid "term"
 msgstr ""
 
-#: models.py:22
+#: models.py:25
 msgid "terms"
 msgstr ""
 
