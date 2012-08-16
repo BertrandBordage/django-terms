@@ -50,3 +50,11 @@ if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_IDS'):
 
 
 TERMS_REPLACE_FIRST_ONLY = getattr(settings, 'TERMS_REPLACE_FIRST_ONLY', True)
+
+
+AVAILABLE_WIDGETS = ('auto', 'basic', 'tinymce', 'ckeditor')
+TERMS_DEFINITION_WIDGET = getattr(settings, 'TERMS_DEFINITION_WIDGET', 'auto')
+if TERMS_DEFINITION_WIDGET not in AVAILABLE_WIDGETS:
+    raise Exception("unknown value '%s' for TERMS_DEFINITION_WIDGET "
+                    "(choices are '%s')" % (TERMS_DEFINITION_WIDGET,
+                                            "', '".join(AVAILABLE_WIDGETS)))

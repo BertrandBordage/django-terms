@@ -21,8 +21,12 @@ Mandatory
 Optional
 --------
 
+* `django-tinymce <https://github.com/aljosa/django-tinymce>`_
+  (tested with 1.5.1b2) to type the definition in a beautiful GUI
+  (see `TERMS_DEFINITION_WIDGET`_)
 * `django-ckeditor <https://github.com/shaunsephton/django-ckeditor>`_
-  (tested with 3.6.2.1) to type the definition in a beautiful GUI
+  (tested with 3.6.2.1) to type the definition in another beautiful GUI
+  (see `TERMS_DEFINITION_WIDGET`_)
 * `django-reversion <https://github.com/etianen/django-reversion>`_
   (tested with 1.6.0) to recover changes and deletions
 * `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3)
@@ -145,8 +149,8 @@ Settings
 Common settings
 ---------------
 
-``TERMS_ADDITIONAL_IGNORED_APPS``
-.................................
+TERMS_ADDITIONAL_IGNORED_APPS
+.............................
 :Default: ``()``
 :Definition: A list or tuple of ignored Django applications
              (expressed as strings)
@@ -154,8 +158,8 @@ Common settings
 :Extends: `TERMS_IGNORED_APPS`_
 :Syntax example: ``['cms']``
 
-``TERMS_ADDITIONAL_IGNORED_TAGS``
-.................................
+TERMS_ADDITIONAL_IGNORED_TAGS
+.............................
 
 :Default: ``()``
 :Definition: A list or tuple of ignored HTML tags (expressed as strings)
@@ -163,8 +167,8 @@ Common settings
 :Extends: `TERMS_IGNORED_TAGS`_
 :Syntax example: ``['h1', 'h2', 'h3', 'footer']``
 
-``TERMS_ADDITIONAL_IGNORED_CLASSES``
-....................................
+TERMS_ADDITIONAL_IGNORED_CLASSES
+................................
 
 :Default: ``()``
 :Definition: A list or tuple of ignored HTML classes (expressed as strings)
@@ -172,8 +176,8 @@ Common settings
 :Extends: `TERMS_IGNORED_CLASSES`_
 :Syntax example: ``['footnote', 'text-caption']``
 
-``TERMS_ADDITIONAL_IGNORED_IDS``
-................................
+TERMS_ADDITIONAL_IGNORED_IDS
+............................
 
 :Default: ``()``
 :Definition: A list or tuple of ignored HTML IDs (expressed as strings)
@@ -181,13 +185,21 @@ Common settings
 :Extends: `TERMS_IGNORED_IDS`_
 :Syntax example: ``['article-footer', 'side-content']``
 
-``TERMS_REPLACE_FIRST_ONLY``
-............................
+TERMS_REPLACE_FIRST_ONLY
+........................
 
 :Default: ``True``
 :Definition: If set to True, add a link only on the first occurrence
              of each term
 :Used in: `Global use`_, `Local use`_
+
+TERMS_DEFINITION_WIDGET
+.......................
+
+:Default: ``'auto'``
+:Definition: Explicitly tells django-terms which text widget to choose
+             for the definition of a term.  Accepted values are
+             ``'auto'``, ``'basic'``, ``'tinymce'``, and ``'ckeditor'``.
 
 
 Advanced settings
@@ -196,30 +208,30 @@ Advanced settings
 These settings should not be used, unless you know perfectly
 what you are doing.
 
-``TERMS_IGNORED_APPS``
-......................
+TERMS_IGNORED_APPS
+..................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored Django applications
              (expressed as strings)
 :Used in: `Global use`_
 
-``TERMS_IGNORED_TAGS``
-......................
+TERMS_IGNORED_TAGS
+..................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored HTML tags (expressed as strings)
 :Used in: `Global use`_, `Local use`_
 
-``TERMS_IGNORED_CLASSES``
-.........................
+TERMS_IGNORED_CLASSES
+.....................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored HTML classes (expressed as strings)
 :Used in: `Global use`_, `Local use`_
 
-``TERMS_IGNORED_IDS``
-.....................
+TERMS_IGNORED_IDS
+.................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored HTML IDs (expressed as strings)
@@ -280,8 +292,8 @@ These exceptions are only happening in `Global use`_, since
 `Django filters should always fail silently
 <https://docs.djangoproject.com/en/1.4/howto/custom-template-tags/#writing-custom-template-filters>`_.
 
-``Resolver404``
-...............
+Resolver404
+...........
 
 :Raised in: ``DEBUG`` mode.  Otherwise the page is ignored by django-terms.
 :Reason: This happens when django-terms is unable to resolve the current
@@ -290,8 +302,8 @@ These exceptions are only happening in `Global use`_, since
 :Encountered: In django-CMS 2.3, when adding a plugin in frontend editing.
 
 
-``HTMLValidationWarning``
-.........................
+HTMLValidationWarning
+.....................
 
 :Raised in: ``DEBUG`` mode.  Otherwise we try to make terms replacements
             work anyway.
