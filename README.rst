@@ -36,6 +36,8 @@ Optional
 * `django.contrib.sitemaps
   <https://docs.djangoproject.com/en/1.4/ref/contrib/sitemaps/>`_
   because django-terms has a sitemap
+* `South <http://south.aeracode.org/>`_ (tested with 0.7.6) because
+  django-terms has migrations
 
 
 
@@ -44,6 +46,7 @@ Installation
 
 #. ``[sudo] pip install django-terms``
 #. Add ``'terms',`` to your ``INSTALLED_APPS``
+#. ``./manage.py syncdb`` (``./manage.py migrate terms`` if you use `South`_)
 #. Add terms to your urls:
 
    * add ``url(r'^terms/', include('terms.urls')),`` to your `urls.py`
