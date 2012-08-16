@@ -54,6 +54,7 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
         self.tree_level = 0
         self.opened_tags = []
         self.disabled_level = None
+        self.variants_dict = Term.objects.variants_dict()
         self.replace_dict = Term.objects.replace_dict()
         self.replace_regexp = Term.objects.replace_regexp()
 
@@ -63,13 +64,14 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def replace_terms(self, html):
         def translate(match):
-            before, term, after = match.group('before'), \
-                                  match.group('term'), \
+            before, name, after = match.group('before'), \
+                                  match.group('name'), \
                                   match.group('after')
-            replaced_term = self.replace_dict.get(term, term)
-            if TERMS_REPLACE_FIRST_ONLY and term in self.replace_dict:
-                del self.replace_dict[term]
-            return before + replaced_term + after
+            replaced_name = self.replace_dict.get(name, name)
+            if TERMS_REPLACE_FIRST_ONLY and name in self.replace_dict:
+                for variant in self.variants_dict[name]:
+                    del self.replace_dict[variant]
+            return before + replaced_name + after
 
         return self.replace_regexp.sub(translate, html)
 
