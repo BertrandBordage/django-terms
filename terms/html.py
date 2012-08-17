@@ -91,9 +91,15 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
             self.disabled_level = self.tree_level
 
     def handle_endtag(self, tag):
-        NeutralHTMLReconstructor.handle_endtag(self, tag)
-
-        opened_tag, full_start_tag = self.opened_tags.pop()
+        try:
+            opened_tag, full_start_tag = self.opened_tags.pop()
+            # Adds the tag to HTML only if it has a start tag.
+            NeutralHTMLReconstructor.handle_endtag(self, tag)
+        except IndexError:
+            if settings.DEBUG:
+                raise HTMLValidationWarning('unable to find the start tag '
+                                            'for </%s>' % tag)
+            return None
         if tag != opened_tag:
             if settings.DEBUG:
                 raise HTMLValidationWarning('unable to find the end tag for '

@@ -312,7 +312,8 @@ HTMLValidationWarning
             work anyway.
 :Reason: This happens when django-terms finds a problem in the architecture
          of the current HTML page.
-:Encountered: If you forget the final ``/`` of a “start-end” tag.
+:Encountered: If your HTML page is malformed; if you forget a start tag,
+              an end tag, or the final ``/`` of a “start-end” tag.
 
 
 
