@@ -23,7 +23,7 @@ class TermsMiddleware:
 
         is_html = 'text/html' in response['Content-Type']
 
-        if not app_ignored and is_html:
+        if not app_ignored and is_html and response.status_code == 200:
             try:
                 self.parser.feed(response.content.decode('utf-8'))
                 response.content = self.parser.out
