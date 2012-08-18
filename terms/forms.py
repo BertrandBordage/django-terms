@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.forms import ModelForm, CharField, ValidationError
+from django.forms import ModelForm, TextInput, ValidationError
 from .models import Term
 from django.utils.translation import ugettext as _
 from .settings import AVAILABLE_WIDGETS, TERMS_DEFINITION_WIDGET as WIDGET
@@ -31,5 +31,6 @@ class TermForm(ModelForm):
     class Meta:
         model = Term
         widgets = {
+            'name': TextInput(attrs={'size': 120}),
             'definition': Textarea(),
         }
