@@ -77,7 +77,7 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def handle_starttag(self, tag, attrs):
         NeutralHTMLReconstructor.handle_starttag(self, tag, attrs)
-        self.opened_tags.append((tag, self.get_starttag_text()))
+        self.opened_tags.append((tag, self.get_starttag_text(), self.getpos()))
         self.tree_level += 1
 
         dict_attrs = dict(attrs)
@@ -92,18 +92,26 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def handle_endtag(self, tag):
         try:
-            opened_tag, full_start_tag = self.opened_tags.pop()
+            opened_tag, full_start_tag, pos = self.opened_tags.pop()
             # Adds the tag to HTML only if it has a start tag.
             NeutralHTMLReconstructor.handle_endtag(self, tag)
         except IndexError:
             if settings.DEBUG:
+                lines = self.rawdata.split('\n')
+                line = self.getpos()[0]
+                lines = '\n'.join(lines[line - 2:line])
                 raise HTMLValidationWarning('unable to find the start tag '
-                                            'for </%s>' % tag)
+                                            'for </%s> in:\n\n%s'
+                                            % (tag, lines))
             return None
         if tag != opened_tag:
             if settings.DEBUG:
-                raise HTMLValidationWarning('unable to find the end tag for '
-                                            + full_start_tag)
+                lines = self.rawdata.split('\n')
+                start_line, end_line = pos[0], self.getpos()[0]
+                lines = '\n'.join(lines[start_line - 1:end_line])
+                raise HTMLValidationWarning('unable to find the end tag '
+                                            'for %s in:\n\n%s'
+                                            % (full_start_tag, lines))
             self.tree_level -= 1  # We suppose the start tag is a start-end tag
                                   # with its final '/' missing.
 
