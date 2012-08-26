@@ -60,13 +60,13 @@ Usage
 #. Add some terms in the admin
 #. Choose how django-terms should apply to your website:
 
-   * `Global use`_ (to give django-terms a try or for development)
-   * `Local use`_ (for production)
+   * `Middleware`_ (to give django-terms a try or for development)
+   * `Template filter`_ (for production)
 
 The added terms should now be automatically linked to their definitions.
 
 
-Global use
+Middleware
 ----------
 
 A middleware is available to automatically add links on all your website.
@@ -83,8 +83,8 @@ It is also perfect for development: it never fails silently, unlike filters
    HTML tags, classes, or IDs, set the corresponding `Common settings`_
 
 
-Local use
----------
+Template filter
+---------------
 
 A template filter is available to add links only on desired parts of
 your website.
@@ -157,7 +157,7 @@ TERMS_ADDITIONAL_IGNORED_APPS
 :Default: ``()``
 :Definition: A list or tuple of ignored Django applications
              (expressed as strings)
-:Used in: `Global use`_
+:Used by: `Middleware`_
 :Extends: `TERMS_IGNORED_APPS`_
 :Syntax example: ``['cms']``
 
@@ -166,7 +166,7 @@ TERMS_ADDITIONAL_IGNORED_TAGS
 
 :Default: ``()``
 :Definition: A list or tuple of ignored HTML tags (expressed as strings)
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 :Extends: `TERMS_IGNORED_TAGS`_
 :Syntax example: ``['h1', 'h2', 'h3', 'footer']``
 
@@ -175,7 +175,7 @@ TERMS_ADDITIONAL_IGNORED_CLASSES
 
 :Default: ``()``
 :Definition: A list or tuple of ignored HTML classes (expressed as strings)
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 :Extends: `TERMS_IGNORED_CLASSES`_
 :Syntax example: ``['footnote', 'text-caption']``
 
@@ -184,7 +184,7 @@ TERMS_ADDITIONAL_IGNORED_IDS
 
 :Default: ``()``
 :Definition: A list or tuple of ignored HTML IDs (expressed as strings)
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 :Extends: `TERMS_IGNORED_IDS`_
 :Syntax example: ``['article-footer', 'side-content']``
 
@@ -194,7 +194,7 @@ TERMS_REPLACE_FIRST_ONLY
 :Default: ``True``
 :Definition: If set to True, adds a link only on the first occurrence
              of each term
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 
 TERMS_DEFINITION_WIDGET
 .......................
@@ -217,28 +217,28 @@ TERMS_IGNORED_APPS
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored Django applications
              (expressed as strings)
-:Used in: `Global use`_
+:Used by: `Middleware`_
 
 TERMS_IGNORED_TAGS
 ..................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored HTML tags (expressed as strings)
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 
 TERMS_IGNORED_CLASSES
 .....................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored HTML classes (expressed as strings)
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 
 TERMS_IGNORED_IDS
 .................
 
 :Default: see `terms/settings.py`
 :Definition: A list or tuple of ignored HTML IDs (expressed as strings)
-:Used in: `Global use`_, `Local use`_
+:Used by: `Middleware`_, `Template filter`_
 
 
 
@@ -254,8 +254,8 @@ Why?
 When using django-terms, your HTML pages are totally or partially
 reconstructed:
 
-* totally reconstructed if you use the middleware (see `Global Use`_)
-* partially reconstructed if you use the filter (see `Local Use`_)
+* totally reconstructed if you use the middleware (see `Middleware`_)
+* partially reconstructed if you use the filter (see `Template filter`_)
 
 The content is parsed with
 `HTMLParser <http://docs.python.org/library/htmlparser.html>`_,
@@ -292,7 +292,7 @@ A few side effects are therefore happening during HTML reconstruction:
 Exceptions
 ----------
 
-These exceptions are only happening in `Global use`_, since
+These exceptions are only happening in `Middleware`_, since
 `Django filters should always fail silently
 <https://docs.djangoproject.com/en/1.4/howto/custom-template-tags/#writing-custom-template-filters>`_.
 
