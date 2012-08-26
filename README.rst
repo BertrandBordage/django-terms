@@ -272,12 +272,12 @@ A few side effects are therefore happening during HTML reconstruction:
   (e.g. ``&eacute;`` -> ``é``)
 * Additional spaces inside HTML tags are stripped:
 
-    * Start tags ``<a  href = "url" >``
-      -> ``<a href="url">``
-    * End tags ``</ a >``
-      -> ``</a>``
-    * “Start-end” tags ``<input  style = "text"  />``
-      -> ``<input style="text" />``
+  * Start tags ``<a  href = "url" >``
+    -> ``<a href="url">``
+  * End tags ``</ a >``
+    -> ``</a>``
+  * “Start-end” tags ``<input  style = "text"  />``
+    -> ``<input style="text" />``
 
 .. warning::
    This implies one bad side effect: the unescaping breaks the special
