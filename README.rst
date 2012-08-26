@@ -192,7 +192,7 @@ TERMS_REPLACE_FIRST_ONLY
 ........................
 
 :Default: ``True``
-:Definition: If set to True, add a link only on the first occurrence
+:Definition: If set to True, adds a link only on the first occurrence
              of each term
 :Used in: `Global use`_, `Local use`_
 
