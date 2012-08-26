@@ -271,6 +271,7 @@ A few side effects are therefore happening during HTML reconstruction:
   This means they are replaced with their unicode characters
   (e.g. ``&eacute;`` -> ``é``)
 * Additional spaces inside HTML tags are stripped:
+
     * Start tags ``<a  href = "url" >``
       -> ``<a href="url">``
     * End tags ``</ a >``
