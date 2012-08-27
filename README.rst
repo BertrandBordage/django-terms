@@ -5,7 +5,7 @@ django-terms
 Site-wide adds a definition or a link for specialized terms.
 
 .. contents::
-   :depth: 2
+   :depth: 3
 
 
 
