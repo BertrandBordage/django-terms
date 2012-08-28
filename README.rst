@@ -89,11 +89,6 @@ Template filter
 A template filter is available to add links only on desired parts of
 your website.
 
-.. note::
-   If an error occurs, like every filter, it will fail silently.
-   If this filter mysteriously has no effect, remove it, use the middleware,
-   switch to ``DEBUG`` mode and see `Exceptions`_.
-
 #. Choose one of your existing templates
 #. Add ``{% load terms %}`` to the beginning of the file (just after
    ``{% extends '[file]' %}`` if you have one)
@@ -292,13 +287,10 @@ A few side effects are therefore happening during HTML reconstruction:
 Exceptions
 ----------
 
-These exceptions are only happening in `Middleware`_, since
-`Django filters should always fail silently
-<https://docs.djangoproject.com/en/1.4/howto/custom-template-tags/#writing-custom-template-filters>`_.
-
 Resolver404
 ...........
 
+:Raised by: `Middleware`_ only.
 :Raised in: ``DEBUG`` mode.  Otherwise the page is ignored by django-terms.
 :Reason: This happens when django-terms is unable to resolve the current
          ``request.path`` to determine whether the application
@@ -309,6 +301,7 @@ Resolver404
 HTMLValidationWarning
 .....................
 
+:Raised by: `Middleware`_ and `Template filter`_.
 :Raised in: ``DEBUG`` mode.  Otherwise we try to make terms replacements
             work anyway.
 :Reason: This happens when django-terms finds a problem in the architecture
