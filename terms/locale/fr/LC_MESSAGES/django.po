@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bertrand Bordage <bordage.bertrand@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-terms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-16 16:08+0200\n"
+"PO-Revision-Date: 2012-08-17 17:29+0000\n"
+"Last-Translator: Bertrand Bordage <bordage.bertrand@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/django-terms/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: cms_app.py:8
+msgid "Term"
+msgstr "Glossaire"
+
+#: forms.py:28
+msgid "Fill either “Definition” or “Link”."
+msgstr "Remplir « Définition » ou bien « Lien »."
+
+#: menu.py:10
+msgid "Term Menu"
+msgstr "Menu du glossaire"
+
+#: models.py:12
+msgid "name"
+msgstr "nom"
+
+#: models.py:13
+msgid ""
+"Variants of the name can be specified with a “|” separator (e.g. "
+"“Name|name|names”)."
+msgstr "Des variantes du nom peuvent être précisées avec un séparateur « | » (par ex. « Nom|nom|noms »)."
+
+#: models.py:15
+msgid "definition"
+msgstr "définition"
+
+#: models.py:16
+msgid "Accepts HTML tags."
+msgstr "Accepte des balises HTML."
+
+#: models.py:17
+msgid "link"
+msgstr "lien"
+
+#: models.py:18
+msgid ""
+"Address to which the term will redirect (instead of redirecting to the "
+"definition)."
+msgstr "Adresse vers laquelle le terme redirigera (au lieu de rediriger vers la définition)."
+
+#: models.py:24
+msgid "term"
+msgstr "terme"
+
+#: models.py:25
+msgid "terms"
+msgstr "termes"
+
+#: templates/terms/term_detail.html:38
+msgid "Change"
+msgstr "Modifier"
+
+#: templates/terms/term_detail.html:44
+msgid "Delete"
+msgstr "Supprimer"
