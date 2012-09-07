@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-terms',
-    version='0.4.1',
+    version='0.4.5',
     author='Bertrand Bordage',
     author_email='bordage.bertrand@gmail.com',
     url='https://github.com/BertrandBordage/django-terms',
