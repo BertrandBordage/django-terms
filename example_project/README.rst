@@ -5,7 +5,7 @@ django-terms example project
 Usage
 =====
 
-#. Run `python manage.py runserver`
+#. Run ``./manage.py runserver``
 #. In your browser, go to http://localhost:8000
 
 
