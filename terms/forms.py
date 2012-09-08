@@ -4,6 +4,7 @@ from django.forms import ModelForm, TextInput, ValidationError
 from .models import Term
 from django.utils.translation import ugettext as _
 from .settings import AVAILABLE_WIDGETS, TERMS_DEFINITION_WIDGET as WIDGET
+from django.conf import settings
 
 # If WIDGET == 'auto': get the best widget one can import and ignore
 #                      ImportError if it is raised.
@@ -13,7 +14,8 @@ try:
         from django.forms import Textarea  # 'basic'
     if WIDGET in AVAILABLE_WIDGETS[:3:2]:
         from tinymce.widgets import TinyMCE as Textarea  # 'tinymce'
-    if WIDGET in AVAILABLE_WIDGETS[:4:3]:
+    if WIDGET == AVAILABLE_WIDGETS[3] or (WIDGET == AVAILABLE_WIDGETS[0]
+                                    and 'ckeditor' in settings.INSTALLED_APPS):
         from ckeditor.widgets import CKEditorWidget as Textarea  # 'ckeditor'
 except ImportError as e:
     if WIDGET != AVAILABLE_WIDGETS[0]:
