@@ -12,7 +12,8 @@ from django.conf import settings
 try:
     if WIDGET in AVAILABLE_WIDGETS[:2]:
         from django.forms import Textarea  # 'basic'
-    if WIDGET in AVAILABLE_WIDGETS[:3:2]:
+    if WIDGET == AVAILABLE_WIDGETS[2] or (WIDGET == AVAILABLE_WIDGETS[0]
+                                    and 'tinymce' in settings.INSTALLED_APPS):
         from tinymce.widgets import TinyMCE as Textarea  # 'tinymce'
     if WIDGET == AVAILABLE_WIDGETS[3] or (WIDGET == AVAILABLE_WIDGETS[0]
                                     and 'ckeditor' in settings.INSTALLED_APPS):
