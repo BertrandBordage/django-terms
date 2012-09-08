@@ -3,10 +3,10 @@
 from django.contrib.admin import site
 from .models import Term
 from .forms import TermForm
-try:
+from django.conf import settings
+from django.contrib.admin import ModelAdmin
+if 'reversion' in settings.INSTALLED_APPS:
     from reversion import VersionAdmin as ModelAdmin
-except ImportError:
-    from django.contrib.admin import ModelAdmin
 
 
 class TermAdmin(ModelAdmin):
