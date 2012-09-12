@@ -8,44 +8,44 @@ from django.conf import settings
 from .exceptions import HTMLValidationWarning
 
 
+def concat_attrs(attrs):
+        return ''.join(' %s="%s"' % attr for attr in attrs)
+
+
 class NeutralHTMLReconstructor(HTMLParser):
     def reset(self):
         HTMLParser.reset(self)
         self.out = []
+        self.out__append = self.out.append
 
     def feed(self, data):
         data = self.unescape(data)
         HTMLParser.feed(self, data)
         self.out = ''.join(self.out)
 
-    def concat_attrs(self, attrs):
-        return ''.join(' %s="%s"' % (attr[0], attr[1]) for attr in attrs)
-
     def handle_startendtag(self, tag, attrs):
-        attrs = self.concat_attrs(attrs)
-        self.out.append('<%s%s />' % (tag, attrs))
+        self.out__append('<%s%s />' % (tag, concat_attrs(attrs)))
 
     def handle_starttag(self, tag, attrs):
-        attrs = self.concat_attrs(attrs)
-        self.out.append('<%s%s>' % (tag, attrs))
+        self.out__append('<%s%s>' % (tag, concat_attrs(attrs)))
 
     def handle_endtag(self, tag):
-        self.out.append('</%s>' % tag)
+        self.out__append('</%s>' % tag)
 
     def handle_data(self, data):
-        self.out.append(data)
+        self.out__append(data)
 
     def handle_comment(self, data):
-        self.out.append('<!--%s-->' % data)
+        self.out__append('<!--%s-->' % data)
 
     def handle_decl(self, decl):
-        self.out.append('<!%s>' % decl)
+        self.out__append('<!%s>' % decl)
 
     def handle_pi(self, data):
-        self.out.append('<?%s>' % data)
+        self.out__append('<?%s>' % data)
 
     def unknown_decl(self, decl):
-        self.out.append('<![%s]>' % decl)
+        self.out__append('<![%s]>' % decl)
 
 
 class TermsHTMLReconstructor(NeutralHTMLReconstructor):
@@ -53,10 +53,13 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
         NeutralHTMLReconstructor.reset(self)
         self.tree_level = 0
         self.opened_tags = []
+        self.opened_tags__append = self.opened_tags.append
+        self.opened_tags__pop = self.opened_tags.pop
         self.disabled_level = None
         self.variants_dict = Term.objects.variants_dict()
         self.replace_dict = Term.objects.replace_dict()
         self.replace_regexp = Term.objects.replace_regexp()
+        self.replace_regexp__sub = self.replace_regexp.sub
 
     @property
     def allow_replacements(self):
@@ -64,27 +67,30 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def replace_terms(self, html):
         def translate(match):
-            before, name, after = match.group('before'), \
-                                  match.group('name'), \
-                                  match.group('after')
-            replaced_name = self.replace_dict.get(name, name)
-            if TERMS_REPLACE_FIRST_ONLY and name in self.replace_dict:
+            replace_dict = self.replace_dict
+            match_group = match.group
+            before, name, after = match_group('before'), \
+                                  match_group('name'), \
+                                  match_group('after')
+            replaced_name = replace_dict.get(name, name)
+            if TERMS_REPLACE_FIRST_ONLY and name in replace_dict:
                 for variant in self.variants_dict[name]:
-                    del self.replace_dict[variant]
+                    del replace_dict[variant]
             return before + replaced_name + after
-
-        return self.replace_regexp.sub(translate, html)
+        return self.replace_regexp__sub(translate, html)
 
     def handle_starttag(self, tag, attrs):
         NeutralHTMLReconstructor.handle_starttag(self, tag, attrs)
-        self.opened_tags.append((tag, self.get_starttag_text(), self.getpos()))
+        self.opened_tags__append((tag, self.get_starttag_text(),
+                                  self.getpos()))
         self.tree_level += 1
 
         dict_attrs = dict(attrs)
+        dict_attrs__get = dict_attrs.get
         has_disabled_tag = tag in TERMS_IGNORED_TAGS
-        classes = frozenset(dict_attrs.get('class', '').split())
+        classes = frozenset(dict_attrs__get('class', '').split())
         has_disabled_class = not classes.isdisjoint(TERMS_IGNORED_CLASSES)
-        has_disabled_id = dict_attrs.get('id', '') in TERMS_IGNORED_IDS
+        has_disabled_id = dict_attrs__get('id', '') in TERMS_IGNORED_IDS
 
         if self.allow_replacements and (has_disabled_tag or has_disabled_class
                                         or has_disabled_id):
@@ -92,7 +98,7 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
 
     def handle_endtag(self, tag):
         try:
-            opened_tag, full_start_tag, pos = self.opened_tags.pop()
+            opened_tag, full_start_tag, pos = self.opened_tags__pop()
             # Adds the tag to HTML only if it has a start tag.
             NeutralHTMLReconstructor.handle_endtag(self, tag)
         except IndexError:
@@ -115,7 +121,8 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
             self.tree_level -= 1  # We suppose the start tag is a start-end tag
                                   # with its final '/' missing.
 
-        if self.disabled_level and self.disabled_level == self.tree_level:
+        disabled_level = self.disabled_level
+        if disabled_level and disabled_level == self.tree_level:
             self.disabled_level = None
 
         self.tree_level -= 1
@@ -123,4 +130,4 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
     def handle_data(self, data):
         if self.allow_replacements:
             data = self.replace_terms(data)
-        self.out.append(data)
+        self.out__append(data)
