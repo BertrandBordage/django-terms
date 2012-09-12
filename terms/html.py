@@ -68,10 +68,10 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
     def replace_terms(self, html):
         def translate(match):
             replace_dict = self.replace_dict
-            match_group = match.group
-            before, name, after = match_group('before'), \
-                                  match_group('name'), \
-                                  match_group('after')
+            match__group = match.group
+            before, name, after = match__group('before'), \
+                                  match__group('name'), \
+                                  match__group('after')
             replaced_name = replace_dict.get(name, name)
             if TERMS_REPLACE_FIRST_ONLY and name in replace_dict:
                 for variant in self.variants_dict[name]:
