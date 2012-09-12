@@ -24,28 +24,28 @@ class NeutralHTMLReconstructor(HTMLParser):
         self.out = ''.join(self.out)
 
     def handle_startendtag(self, tag, attrs):
-        self.out__append('<%s%s />' % (tag, concat_attrs(attrs)))
+        self.out__append('<' + tag + concat_attrs(attrs) + ' />')
 
     def handle_starttag(self, tag, attrs):
-        self.out__append('<%s%s>' % (tag, concat_attrs(attrs)))
+        self.out__append('<' + tag + concat_attrs(attrs) + '>')
 
     def handle_endtag(self, tag):
-        self.out__append('</%s>' % tag)
+        self.out__append('</' + tag + '>')
 
     def handle_data(self, data):
         self.out__append(data)
 
     def handle_comment(self, data):
-        self.out__append('<!--%s-->' % data)
+        self.out__append('<!--' + data + '-->')
 
     def handle_decl(self, decl):
-        self.out__append('<!%s>' % decl)
+        self.out__append('<!' + decl + '>')
 
     def handle_pi(self, data):
-        self.out__append('<?%s>' % data)
+        self.out__append('<?' + data + '>')
 
     def unknown_decl(self, decl):
-        self.out__append('<![%s]>' % decl)
+        self.out__append('<![' + decl + ']>')
 
 
 class TermsHTMLReconstructor(NeutralHTMLReconstructor):
