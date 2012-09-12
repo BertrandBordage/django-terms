@@ -2,8 +2,7 @@
 
 from .html import TermsHTMLReconstructor
 from django.core.urlresolvers import resolve, Resolver404
-from .settings import TERMS_IGNORED_APPS
-from django.conf import settings
+from .settings import TERMS_IGNORED_APPS, TERMS_DEBUG
 
 
 class TermsMiddleware:
@@ -16,7 +15,7 @@ class TermsMiddleware:
             app_name = resolve(url).app_name
             app_ignored = app_name in TERMS_IGNORED_APPS
         except Resolver404:
-            if settings.DEBUG:
+            if TERMS_DEBUG:
                 raise Resolver404("could not find whether the application of "
                                   "'%s' is in TERMS_IGNORED_APPS" % url)
             app_ignored = True

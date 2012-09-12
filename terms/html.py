@@ -3,8 +3,7 @@
 from HTMLParser import HTMLParser
 from .models import Term
 from .settings import TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, \
-                      TERMS_IGNORED_IDS, TERMS_REPLACE_FIRST_ONLY
-from django.conf import settings
+                      TERMS_IGNORED_IDS, TERMS_REPLACE_FIRST_ONLY, TERMS_DEBUG
 from .exceptions import HTMLValidationWarning
 
 
@@ -102,7 +101,7 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
             # Adds the tag to HTML only if it has a start tag.
             NeutralHTMLReconstructor.handle_endtag(self, tag)
         except IndexError:
-            if settings.DEBUG:
+            if TERMS_DEBUG:
                 lines = self.rawdata.split('\n')
                 line = self.getpos()[0]
                 lines = '\n'.join(lines[line - 2:line])
@@ -111,7 +110,7 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
                                             % (tag, lines))
             return None
         if tag != opened_tag:
-            if settings.DEBUG:
+            if TERMS_DEBUG:
                 lines = self.rawdata.split('\n')
                 start_line, end_line = pos[0], self.getpos()[0]
                 lines = '\n'.join(lines[start_line - 1:end_line])

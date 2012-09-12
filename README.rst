@@ -147,6 +147,13 @@ Settings
 Common settings
 ---------------
 
+TERMS_DEBUG
+...........
+
+:Default: ``DEBUG``
+:Definition: If set to ``True``, allows django-terms to raise minor exceptions
+             (see `Exceptions`_).
+
 TERMS_ADDITIONAL_IGNORED_APPS
 .............................
 :Default: ``()``
@@ -187,7 +194,7 @@ TERMS_REPLACE_FIRST_ONLY
 ........................
 
 :Default: ``True``
-:Definition: If set to True, adds a link only on the first occurrence
+:Definition: If set to ``True``, adds a link only on the first occurrence
              of each term
 :Used by: `Middleware`_, `Template filter`_
 
@@ -291,7 +298,7 @@ Resolver404
 ...........
 
 :Raised by: `Middleware`_ only.
-:Raised in: ``DEBUG`` mode.  Otherwise the page is ignored by django-terms.
+:Raised in: `TERMS_DEBUG`_ mode.  Otherwise the page is ignored by django-terms.
 :Reason: This happens when django-terms is unable to resolve the current
          ``request.path`` to determine whether the application
          of the current page is in `TERMS_IGNORED_APPS`_.
@@ -302,7 +309,7 @@ HTMLValidationWarning
 .....................
 
 :Raised by: `Middleware`_ and `Template filter`_.
-:Raised in: ``DEBUG`` mode.  Otherwise we try to make terms replacements
+:Raised in: `TERMS_DEBUG`_ mode.  Otherwise we try to make terms replacements
             work anyway.
 :Reason: This happens when django-terms finds a problem in the architecture
          of the current HTML page.

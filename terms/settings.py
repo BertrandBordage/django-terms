@@ -3,6 +3,8 @@
 from django.conf import settings
 
 
+TERMS_DEBUG = getattr(settings, 'TERMS_DEBUG', settings.DEBUG)
+
 TERMS_IGNORED_APPS = getattr(settings, 'TERMS_IGNORED_APPS',
     [
         'admin',
