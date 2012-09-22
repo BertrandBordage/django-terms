@@ -5,7 +5,7 @@ from .models import Term
 
 class TermIndex(RealTimeSearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
-    content_auto = EdgeNgramField(model_attr='name')
+    content_auto = EdgeNgramField(model_attr='original_name')
 
     def get_model(self):
         return Term
