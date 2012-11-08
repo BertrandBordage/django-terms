@@ -2,11 +2,12 @@
 # coding: utf-8
 
 from setuptools import setup, find_packages
+from terms import version_string
 
 
 setup(
     name='django-terms',
-    version='0.4.7',
+    version=version_string,
     author='Bertrand Bordage',
     author_email='bordage.bertrand@gmail.com',
     url='https://github.com/BertrandBordage/django-terms',
