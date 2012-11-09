@@ -16,11 +16,14 @@ Mandatory
 ---------
 
 * `Django <https://www.djangoproject.com/>`_ (tested with 1.4)
+* `beautifulsoup4 <http://www.crummy.com/software/BeautifulSoup/>`_
+  (tested with 4.1.3)
 
 
 Optional
 --------
 
+* `lxml <https://github.com/lxml/lxml>`_ for better performance
 * `django-tinymce <https://github.com/aljosa/django-tinymce>`_
   (tested with 1.5.1b2) to type the definition in a beautiful GUI
   (see `TERMS_DEFINITION_WIDGET`_)
@@ -259,10 +262,8 @@ reconstructed:
 * totally reconstructed if you use the middleware (see `Middleware`_)
 * partially reconstructed if you use the filter (see `Template filter`_)
 
-The content is parsed with
-`HTMLParser <http://docs.python.org/library/htmlparser.html>`_,
-then rebuilt.  See ``NeutralHTMLReconstructor`` and ``TermsHTMLReconstructor``
-in `tems/html.py` to understand exactly how it is rebuilt.
+The content is parsed and rebuilt with `beautifulsoup4`_.  See `tems/html.py`
+to understand exactly how it is rebuilt.
 
 List of known side effects
 ..........................
@@ -279,7 +280,7 @@ A few side effects are therefore happening during HTML reconstruction:
   * End tags ``</ a >``
     -> ``</a>``
   * “Start-end” tags ``<input  style = "text"  />``
-    -> ``<input style="text" />``
+    -> ``<input style="text"/>``
 
 .. warning::
    This implies one bad side effect: the unescaping breaks the special
@@ -303,18 +304,6 @@ Resolver404
          ``request.path`` to determine whether the application
          of the current page is in `TERMS_IGNORED_APPS`_.
 :Encountered: In django-CMS 2.3, when adding a plugin in frontend editing.
-
-
-HTMLValidationWarning
-.....................
-
-:Raised by: `Middleware`_ and `Template filter`_.
-:Raised in: `TERMS_DEBUG`_ mode.  Otherwise we try to make terms replacements
-            work anyway.
-:Reason: This happens when django-terms finds a problem in the architecture
-         of the current HTML page.
-:Encountered: If your HTML page is malformed; if you forget a start tag,
-              an end tag, or the final ``/`` of a “start-end” tag.
 
 
 

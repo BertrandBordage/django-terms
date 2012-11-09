@@ -10,9 +10,9 @@ class TermMenu(CMSAttachMenu):
     name = _('Term Menu')
 
     def get_nodes(self, request):
-        '''
+        """
         This method is used to build the menu tree.
-        '''
+        """
         nodes = []
         for term in Term.objects.iterator():
             try:

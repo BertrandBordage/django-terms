@@ -1,2 +1,2 @@
-from NeutralHTMLReconstructor import *
-from TermsHTMLReconstructor import *
+from .BeautifulSoup import *
+from replace_in_html import *

@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.db.models import Model, CharField, TextField, URLField
+from django.db.models import Model, CharField, TextField
 from django.utils.translation import ugettext_lazy as _
 from .managers import TermManager, CACHE_KEYS
 from HTMLParser import HTMLParser

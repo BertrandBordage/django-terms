@@ -26,7 +26,8 @@ setup(
     license='BSD',
     packages=find_packages(),
     install_requires=[
-        "Django >= 1.4",
+        'Django >= 1.4',
+        'beautifulsoup4',
     ],
     include_package_data=True,
     zip_safe=False,

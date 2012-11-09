@@ -2,7 +2,7 @@
 
 from django.template import Library
 from django.template.defaultfilters import stringfilter
-from ..html import TermsHTMLReconstructor
+from ..html import replace_in_html
 
 register = Library()
 
@@ -10,6 +10,4 @@ register = Library()
 @register.filter
 @stringfilter
 def replace_terms(html):
-    parser = TermsHTMLReconstructor()
-    parser.feed(html)
-    return parser.out
+    return unicode(replace_in_html(html))
