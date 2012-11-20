@@ -74,7 +74,10 @@ class TermsHTMLReconstructor(NeutralHTMLReconstructor):
             replaced_name = replace_dict.get(name, name)
             if TERMS_REPLACE_FIRST_ONLY and name in replace_dict:
                 for variant in self.variants_dict[name]:
-                    del replace_dict[variant]
+                    try:
+                        del replace_dict[variant]
+                    except KeyError:
+                        pass
             return before + replaced_name + after
         return self.replace_regexp__sub(translate, html)
 
