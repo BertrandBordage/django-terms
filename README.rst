@@ -30,7 +30,8 @@ Optional
 * `django-reversion <https://github.com/etianen/django-reversion>`_
   (tested with 1.6.0) to recover changes and deletions
 * `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3)
-  because django-terms has an apphook and a menu
+  because django-terms has an apphook, a menu, a plugin processor and
+  a plugin
 * `django-haystack <http://haystacksearch.org/>`_ (tested with 2.0.0-beta)
   because django-terms has a search index
 * `django.contrib.sitemaps
