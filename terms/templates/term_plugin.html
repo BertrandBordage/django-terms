@@ -1,0 +1,7 @@
+<dl>
+{% for term in terms %}
+    <dt>{{ term|capfirst }}</dt>
+    <dd>{{ term.definition|safe }}</dd>
+    <br/>
+{% endfor %}
+</dl>
