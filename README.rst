@@ -151,7 +151,7 @@ It will parse all plugin output.
 
 Add this in `settings.py`::
 
-   CMS_PLUGIN_PROCESSORS=(
+   CMS_PLUGIN_PROCESSORS = (
       [...]
       'terms.cms_plugin_processors.TermsProcessor',
       [...]
@@ -161,13 +161,7 @@ Add this in `settings.py`::
 TermsIndexPlugin
 ----------------
 
-If you are using django-CMS, you can display all terms and their definition with this plugin.
-
-Add this line to your `INSTALLED_APPS`::
-   
-   'terms.cms_plugins'
-   
-And add the plugin to the placeholder of your choice.
+If you are using django-CMS, you can display all terms and their definitions with the "Terms Index Plugin".
 
 
 Settings
