@@ -15,4 +15,5 @@ class TermsIndexPlugin(CMSPluginBase):
         context['terms'] = terms
         return context
 
+
 plugin_pool.register_plugin(TermsIndexPlugin)
