@@ -62,8 +62,11 @@ Usage
 
    * `Middleware`_ (to give django-terms a try or for development)
    * `Template filter`_ (for production)
+   * `cms_plugin_processor`_ (if you are using django-CMS)
 
 The added terms should now be automatically linked to their definitions.
+
+For django-CMS users : display all terms and their definitions with the `TermsIndexPlugin`_.
 
 
 Middleware
@@ -139,6 +142,32 @@ Example:
 
        TERMS_ADDITIONAL_IGNORED_CLASSES = ['code-snippet']
 
+
+cms_plugin_processor
+--------------------
+
+A cms_plugin_processor is available if you are using django-CMS.
+It will parse all plugin output.
+
+Add this in `settings.py`::
+
+   CMS_PLUGIN_PROCESSORS=(
+      [...]
+      'terms.cms_plugin_processors.TermsProcessor',
+      [...]
+      )
+
+   
+TermsIndexPlugin
+----------------
+
+If you are using django-CMS, you can display all terms and their definition with this plugin.
+
+Add this line to your `INSTALLED_APPS`::
+   
+   'terms.cms_plugins'
+   
+And add the plugin to the placeholder of your choice.
 
 
 Settings
@@ -308,7 +337,7 @@ Resolver404
 HTMLValidationWarning
 .....................
 
-:Raised by: `Middleware`_ and `Template filter`_.
+:Raised by: `Middleware`_, `Template filter`_. and `cms_plugin_processor`_
 :Raised in: `TERMS_DEBUG`_ mode.  Otherwise we try to make terms replacements
             work anyway.
 :Reason: This happens when django-terms finds a problem in the architecture
