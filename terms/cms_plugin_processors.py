@@ -11,9 +11,6 @@ def TermsProcessor(instance, placeholder, rendered_content, original_context):
     """
     if 'terms' in original_context:
         return rendered_content
-    
-    # fix <br> "can't find end tag" error
-    rendered_content.replace('<br>','<br/>')
 
     parser = TermsHTMLReconstructor()
     parser.feed(rendered_content)
