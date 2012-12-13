@@ -13,7 +13,7 @@ def TermsProcessor(instance, placeholder, rendered_content, original_context):
         return rendered_content
     
     # fix <br> "can't find end tag" error
-    rendered_content = re.sub('<br>','<br/>',rendered_content)
+    rendered_content.replace('<br>','<br/>')
 
     parser = TermsHTMLReconstructor()
     parser.feed(rendered_content)
