@@ -1,12 +1,15 @@
 # coding: utf-8
 
 from __future__ import unicode_literals
+try:  # Python 3
+    from html.parser import HTMLParser
+except ImportError:  # Python 2
+    from HTMLParser import HTMLParser
+from django.core.cache import cache
+from django.core.urlresolvers import reverse
 from django.db.models import Model, CharField, TextField
 from django.utils.translation import ugettext_lazy as _
 from .managers import TermManager, CACHE_KEYS
-from HTMLParser import HTMLParser
-from django.core.cache import cache
-from django.core.urlresolvers import reverse
 
 
 class Term(Model):

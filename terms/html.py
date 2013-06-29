@@ -56,9 +56,8 @@ def html_content_iterator(parent_tag, replace_regexp):
         if not tag.find(text=replace_regexp):
             continue
         class_ = tag.class_
-        id = tag.id
         if (not class_ or CLASSES_REGEXP__match(class_)) \
-                and (not id or IDS_REGEXP__match(id)):
+                and (not tag.id or IDS_REGEXP__match(tag.id)):
             if tag.find(text=replace_regexp, recursive=False):
                 yield tag
             for sub_tag in html_content_iterator(tag, replace_regexp):

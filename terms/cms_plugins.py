@@ -11,8 +11,7 @@ class TermsIndexPlugin(CMSPluginBase):
     render_template = "terms_plugin.html"
 
     def render(self, context, instance, placeholder):
-        terms = Term.objects.all()
-        context['terms'] = terms
+        context['terms'] = Term.objects.all()
         return context
 
 
