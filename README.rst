@@ -4,6 +4,15 @@ django-terms
 
 Site-wide adds a definition or a link for specialized terms.
 
+|travis|_
+|coveralls|_
+
+.. |travis| image:: https://travis-ci.org/BertrandBordage/django-terms.png
+.. _travis: https://travis-ci.org/BertrandBordage/django-terms
+
+.. |coveralls| image:: https://coveralls.io/repos/BertrandBordage/django-terms/badge.png
+.. _coveralls: https://coveralls.io/r/BertrandBordage/django-terms
+
 .. contents::
    :depth: 3
 
