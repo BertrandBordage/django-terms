@@ -5,3 +5,4 @@
 * Adds Django 1.5 compatibility.
 * Adds Travis Continuous Integration.
 * Adds some tests.
+* Adds Python 3 compatibiliy.
