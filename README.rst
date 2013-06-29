@@ -15,9 +15,9 @@ Requirements
 Mandatory
 ---------
 
-* `Django <https://www.djangoproject.com/>`_ (tested with 1.4)
+* `Python <http://python.org/>`_ 2.6, 2.7, 3.2 or 3.3
+* `Django <https://www.djangoproject.com/>`_ 1.4 or 1.5
 * `beautifulsoup4 <http://www.crummy.com/software/BeautifulSoup/>`_
-  (tested with 4.1.3)
 
 
 Optional
