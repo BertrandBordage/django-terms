@@ -16,6 +16,7 @@ install:
   - pip install -r requirements.txt --use-mirrors
   - pip install coveralls --use-mirrors
 before_script:
+  - ln -s terms example_project/terms
   - cd example_project
 script:
   - coverage run --source=terms manage.py test
