@@ -33,7 +33,8 @@ Optional
 * `django-reversion <https://github.com/etianen/django-reversion>`_
   (tested with 1.6.0) to recover changes and deletions
 * `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3)
-  because django-terms has an apphook and a menu
+  because django-terms has an apphook, a menu, a plugin processor and
+  a plugin
 * `django-haystack <http://haystacksearch.org/>`_ (tested with 2.0.0-beta)
   because django-terms has a search index
 * `django.contrib.sitemaps
@@ -65,8 +66,11 @@ Usage
 
    * `Middleware`_ (to give django-terms a try or for development)
    * `Template filter`_ (for production)
+   * `cms_plugin_processor`_ (if you are using django-CMS)
 
 The added terms should now be automatically linked to their definitions.
+
+For django-CMS users : display all terms and their definitions with the `TermsIndexPlugin`_.
 
 
 Middleware
@@ -142,6 +146,26 @@ Example:
 
        TERMS_ADDITIONAL_IGNORED_CLASSES = ['code-snippet']
 
+
+cms_plugin_processor
+--------------------
+
+A cms_plugin_processor is available if you are using django-CMS.
+It will parse all plugin output.
+
+Add this in `settings.py`::
+
+   CMS_PLUGIN_PROCESSORS = (
+      [...]
+      'terms.cms_plugin_processors.TermsProcessor',
+      [...]
+      )
+
+   
+TermsIndexPlugin
+----------------
+
+If you are using django-CMS, you can display all terms and their definitions with the "Terms Index Plugin".
 
 
 Settings
