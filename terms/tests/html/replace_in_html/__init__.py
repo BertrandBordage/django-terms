@@ -1,1 +1,1 @@
-from invalid_html import InvalidHTMLTestCase
+from .invalid_html import InvalidHTMLTestCase
