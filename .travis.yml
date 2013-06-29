@@ -18,3 +18,10 @@ script:
   - coverage run --source=terms manage.py test terms
 after_success:
   - coveralls
+
+matrix:
+  exclude:
+    - python: 3.2
+        env: DJANGO_VERSION=1.4
+    - python: 3.3
+        env: DJANGO_VERSION=1.4

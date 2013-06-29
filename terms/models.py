@@ -33,7 +33,7 @@ class Term(Model):
         return self.original_name
 
     def save(self, *args, **kwargs):
-        HTMLParser.unescape.__func__(HTMLParser, self.name)
+        HTMLParser().unescape(self.name)
         cache.delete_many(CACHE_KEYS)
         super(Term, self).save(*args, **kwargs)
 
