@@ -15,6 +15,6 @@ before_script:
   - python setup.py install
   - cd example_project
 script:
-  - coverage run --source=terms manage.py --traceback test terms
+  - coverage run --source=terms manage.py test terms
 after_success:
   - coveralls
