@@ -1,7 +1,28 @@
-<p>
-  This is <span><em>quite</em> a
-  <a href="{{ term.url }}">complicated term</a></span>
-</p>
-<p>
-  Oh, you really think <strong>it's a complicated term?</strong>
-</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What a complicated term!</title>
+    <script>
+      alert('But that is such a complicated term…');
+    </script>
+  </head>
+  <body>
+    <div>
+      <code>
+        Since we are in a &lt;code&gt;,
+        a complicated term should not be replaced.
+      </code>
+      <div class="cms_reset">
+        cms_reset is in TERMS_IGNORED_CLASSES, so a complicated term should
+        be ignored here.
+      </div>
+      <p>
+        This is <span><em>quite</em> a
+        <a href="{{ term.url }}">complicated term</a></span>
+      </p>
+      <p>
+        Oh, you really think <strong>it's a complicated term?</strong>
+      </p>
+    </div>
+  </body>
+</html>

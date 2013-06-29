@@ -1,8 +1,9 @@
 import os
+from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.test import TestCase
-from terms.templatetags.terms import replace_terms
 from terms.models import Term
+from terms.templatetags.terms import replace_terms
 
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -31,7 +32,10 @@ class TermsTestCase(TestCase):
             definition='A nice mix between a rhino and a giraffe.')
 
     def assertDetailView(self, term, status_code=200):
-        response = self.client.get(term.get_absolute_url())
+        self.assertURL(term.get_absolute_url(), status_code=status_code)
+
+    def assertURL(self, url, status_code=200):
+        response = self.client.get(url)
         self.assertEqual(response.status_code, status_code)
 
     def assertCachedRegex(self):
@@ -47,6 +51,7 @@ class TermsTestCase(TestCase):
                 replace_terms(read_file(before_template))
 
     def test1(self):
+        self.maxDiff = 800
         self.assertHTMLEqual(
             replace_terms(read_file('1_before.html')),
             read_file('1_after.html', {'term': self.term1}))
@@ -61,3 +66,8 @@ class TermsTestCase(TestCase):
         self.assertDetailView(self.term2)
 
         self.assertCachedRegex()
+
+    def testAdminRendering(self):
+        for term in Term.objects.all():
+            self.assertURL(
+                reverse('admin:terms_term_change', args=(term.pk,)))

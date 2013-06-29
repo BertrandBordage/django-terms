@@ -17,9 +17,15 @@ def build_ignored_regexp(l):
 
 TAGS_REGEXP = build_ignored_regexp(TERMS_IGNORED_TAGS)
 CLASSES_REGEXP = build_ignored_regexp(TERMS_IGNORED_CLASSES)
-CLASSES_REGEXP__match = CLASSES_REGEXP.match
 IDS_REGEXP = build_ignored_regexp(TERMS_IGNORED_IDS)
-IDS_REGEXP__match = IDS_REGEXP.match
+
+
+def valid_class(class_):
+    return class_ is None or CLASSES_REGEXP.match(class_) is not None
+
+
+def valid_id(id_):
+    return id_ is None or IDS_REGEXP.match(id_) is not None
 
 
 if TERMS_REPLACE_FIRST_ONLY:
@@ -52,16 +58,15 @@ def is_navigable_string(navigable_string):
 def html_content_iterator(parent_tag, replace_regexp):
     if not parent_tag.find(text=replace_regexp):
         return
-    for tag in parent_tag.find_all(name=TAGS_REGEXP, recursive=False):
+    for tag in parent_tag.find_all(
+            name=TAGS_REGEXP, class_=valid_class, id=valid_id,
+            recursive=False):
         if not tag.find(text=replace_regexp):
             continue
-        class_ = tag.class_
-        if (not class_ or CLASSES_REGEXP__match(class_)) \
-                and (not tag.id or IDS_REGEXP__match(tag.id)):
-            if tag.find(text=replace_regexp, recursive=False):
-                yield tag
-            for sub_tag in html_content_iterator(tag, replace_regexp):
-                yield sub_tag
+        if tag.find(text=replace_regexp, recursive=False):
+            yield tag
+        for sub_tag in html_content_iterator(tag, replace_regexp):
+            yield sub_tag
 
 
 def str_to_soup(html):
