@@ -23,7 +23,6 @@ Mandatory
 Optional
 --------
 
-* `lxml <https://github.com/lxml/lxml>`_ for better performance
 * `django-tinymce <https://github.com/aljosa/django-tinymce>`_
   (tested with 1.5.1b2) to type the definition in a beautiful GUI
   (see `TERMS_DEFINITION_WIDGET`_)
@@ -156,16 +155,17 @@ It will parse all plugin output.
 Add this in `settings.py`::
 
    CMS_PLUGIN_PROCESSORS = (
-      [...]
-      'terms.cms_plugin_processors.TermsProcessor',
-      [...]
-      )
+       [...]
+       'terms.cms_plugin_processors.TermsProcessor',
+       [...]
+   )
 
    
 TermsIndexPlugin
 ----------------
 
-If you are using django-CMS, you can display all terms and their definitions with the "Terms Index Plugin".
+If you are using django-CMS, you can display all terms and their definitions
+with the "Terms Index Plugin".
 
 
 Settings

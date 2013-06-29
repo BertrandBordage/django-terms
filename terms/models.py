@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from __future__ import unicode_literals
 from django.db.models import Model, CharField, TextField
 from django.utils.translation import ugettext_lazy as _
 from .managers import TermManager, CACHE_KEYS
@@ -10,8 +11,8 @@ from django.core.urlresolvers import reverse
 
 class Term(Model):
     name = CharField(_('name'), max_length=100, unique=True,
-                     help_text=_(u'Variants of the name can be specified with '
-                                 u'a “|” separator (e.g. “Name|name|names”).'))
+                     help_text=_('Variants of the name can be specified with '
+                                 'a “|” separator (e.g. “Name|name|names”).'))
     definition = TextField(_('definition'), blank=True,
                            help_text=_('Accepts HTML tags.'))
     url = CharField(_('link'), max_length=200, blank=True,
@@ -20,7 +21,7 @@ class Term(Model):
 
     objects = TermManager()
 
-    class Meta:
+    class Meta(object):
         verbose_name = _('term')
         verbose_name_plural = _('terms')
         ordering = ('name',)

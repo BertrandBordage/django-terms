@@ -1,8 +1,8 @@
 <dl class="terms-index">
-{% for term in terms %}
+  {% for term in terms %}
     <dt>{{ term|capfirst }}</dt>
     <dd>{{ term.definition|safe }}
-        {% if term.url and term.definition %}<br/>{%endif %}
+        {% if term.url and term.definition %}<br />{%endif %}
         {{ term.url|urlizetrunc:40 }}</dd>
-{% endfor %}
+  {% endfor %}
 </dl>

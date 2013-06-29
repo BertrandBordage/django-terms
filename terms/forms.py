@@ -1,10 +1,11 @@
 # coding: utf-8
 
-from django.forms import ModelForm, TextInput, ValidationError
-from .models import Term
-from django.utils.translation import ugettext as _
-from .settings import AVAILABLE_WIDGETS, TERMS_DEFINITION_WIDGET as WIDGET
+from __future__ import unicode_literals
 from django.conf import settings
+from django.forms import ModelForm, TextInput, ValidationError
+from django.utils.translation import ugettext as _
+from .models import Term
+from .settings import AVAILABLE_WIDGETS, TERMS_DEFINITION_WIDGET as WIDGET
 
 # If WIDGET == 'auto': get the best widget one can import.
 # Otherwise: Get the specified widget.
@@ -23,10 +24,10 @@ class TermForm(ModelForm):
         definition = self.cleaned_data.get('definition')
         url = self.cleaned_data.get('url')
         if not definition and not url:
-            raise ValidationError(_(u'Fill either “Definition” or “Link”.'))
+            raise ValidationError(_('Fill either “Definition” or “Link”.'))
         return super(TermForm, self).clean()
 
-    class Meta:
+    class Meta(object):
         model = Term
         widgets = {
             'name': TextInput(attrs={'size': 120}),

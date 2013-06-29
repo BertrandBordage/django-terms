@@ -2,6 +2,7 @@
 
 from django.template import Library
 from django.template.defaultfilters import stringfilter
+from django.utils.encoding import smart_text
 from ..html import replace_in_html
 
 register = Library()
@@ -10,4 +11,4 @@ register = Library()
 @register.filter
 @stringfilter
 def replace_terms(html):
-    return unicode(replace_in_html(html))
+    return smart_text(replace_in_html(html))

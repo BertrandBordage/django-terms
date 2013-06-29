@@ -1,11 +1,12 @@
 # coding: utf-8
 
-from .html import replace_in_html
 from django.core.urlresolvers import resolve, Resolver404
+from django.utils.encoding import smart_text
+from .html import replace_in_html
 from .settings import TERMS_IGNORED_APPS, TERMS_DEBUG
 
 
-class TermsMiddleware:
+class TermsMiddleware(object):
     def process_response(self, request, response):
         url = request.path
         try:
@@ -20,6 +21,6 @@ class TermsMiddleware:
         is_html = 'text/html' in response['Content-Type']
 
         if not app_ignored and is_html and response.status_code == 200:
-            response.content = unicode(replace_in_html(response.content))
+            response.content = smart_text(replace_in_html(response.content))
 
         return response

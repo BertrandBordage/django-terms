@@ -8,7 +8,7 @@ from .models import Term
 class TermsIndexPlugin(CMSPluginBase):
     model = CMSPlugin
     name = _("Terms Index Plugin")
-    render_template = "term_plugin.html"
+    render_template = "terms_plugin.html"
 
     def render(self, context, instance, placeholder):
         terms = Term.objects.all()

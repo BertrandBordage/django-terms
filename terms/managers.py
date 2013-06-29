@@ -1,9 +1,9 @@
 # coding: utf-8
 
-from django.db.models import Manager
-from django.core.cache import cache
-from django.template.loader import render_to_string
 import re
+from django.core.cache import cache
+from django.db.models import Manager
+from django.template.loader import render_to_string
 
 
 VARIANTS_DICT_CACHE_KEY = 'terms__variants_dict'

@@ -1,23 +1,24 @@
 from cms.menu_bases import CMSAttachMenu
+from django.core.urlresolvers import NoReverseMatch
+from django.utils.encoding import smart_text
+from django.utils.translation import ugettext_lazy as _
 from menus.base import NavigationNode
 from menus.menu_pool import menu_pool
-from django.core.urlresolvers import NoReverseMatch
 from .models import Term
-from django.utils.translation import ugettext_lazy as _
 
 
-class TermMenu(CMSAttachMenu):
-    name = _('Term Menu')
+class TermsMenu(CMSAttachMenu):
+    name = _('Terms menu')
 
     def get_nodes(self, request):
         """
         This method is used to build the menu tree.
         """
         nodes = []
-        for term in Term.objects.iterator():
+        for term in Term.objects.all():
             try:
                 node = NavigationNode(
-                    unicode(term),
+                    smart_text(term),
                     term.get_absolute_url(),
                     term.pk,
                 )
@@ -27,4 +28,4 @@ class TermMenu(CMSAttachMenu):
         return nodes
 
 
-menu_pool.register_menu(TermMenu)
+menu_pool.register_menu(TermsMenu)

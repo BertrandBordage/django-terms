@@ -1,2 +1,0 @@
-class HTMLValidationWarning(Warning):
-    pass

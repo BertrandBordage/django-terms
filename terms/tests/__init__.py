@@ -1,1 +1,2 @@
-from html import *
+from .html import *
+from .terms import *

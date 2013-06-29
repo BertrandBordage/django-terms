@@ -1,8 +1,12 @@
 import os.path
-from unittest import TestCase
-from terms.html import replace_in_html
+from django.test import TestCase
+from terms.templatetags.terms import replace_terms
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
+
+
+def read_file(filename):
+    return open(os.path.join(CURRENT_PATH, filename)).read()
 
 
 class ValidHTMLTestCase(TestCase):
@@ -13,13 +17,11 @@ class ValidHTMLTestCase(TestCase):
         be exactly the same as valid_html (since extra whitespaces within tags
         are stripped).
         """
-        filename = 'valid_html.html'
-        html = open(os.path.join(CURRENT_PATH, filename)).read()
-        filename = 'valid_html_with_extra_spaces.html'
-        html_w_extra_spaces = open(os.path.join(CURRENT_PATH, filename)).read()
+        html = read_file('valid_html.html')
+        html_w_extra_spaces = read_file('valid_html_with_extra_spaces.html')
 
-        new_html = replace_in_html(html).prettify()
-        self.assertEqual(html, new_html)
+        new_html = replace_terms(html)
+        self.assertHTMLEqual(html, new_html)
 
-        new_html_w_extra_spaces = replace_in_html(html_w_extra_spaces).prettify()
-        self.assertEqual(html, new_html_w_extra_spaces)
+        new_html_w_extra_spaces = replace_terms(html_w_extra_spaces)
+        self.assertHTMLEqual(html, new_html_w_extra_spaces)
