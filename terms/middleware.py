@@ -1,7 +1,10 @@
 # coding: utf-8
 
 from django.core.urlresolvers import resolve, Resolver404
-from django.utils.encoding import smart_text
+try:
+    from django.utils.encoding import smart_text
+except ImportError:  # For Django < 1.4.2
+    from django.utils.encoding import smart_unicode as smart_text
 from .html import replace_in_html
 from .settings import TERMS_IGNORED_APPS, TERMS_DEBUG
 

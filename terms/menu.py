@@ -1,6 +1,9 @@
 from cms.menu_bases import CMSAttachMenu
 from django.core.urlresolvers import NoReverseMatch
-from django.utils.encoding import smart_text
+try:
+    from django.utils.encoding import smart_text
+except ImportError:  # For Django < 1.4.2
+    from django.utils.encoding import smart_unicode as smart_text
 from django.utils.translation import ugettext_lazy as _
 from menus.base import NavigationNode
 from menus.menu_pool import menu_pool

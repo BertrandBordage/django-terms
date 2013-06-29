@@ -19,6 +19,6 @@ before_script:
   - cp -r terms example_project/terms
   - cd example_project
 script:
-  - coverage run --source=terms manage.py test
+  - coverage run --source=terms manage.py test terms
 after_success:
   - coveralls
