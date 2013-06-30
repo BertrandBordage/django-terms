@@ -16,5 +16,9 @@ class TermAdmin(ModelAdmin):
     list_editable = ('name', 'url', 'case_sensitive')
     search_fields = ('name', 'definition', 'url')
 
+    def get_changelist_form(self, request, **kwargs):
+        kwargs['form'] = self.form
+        return super(TermAdmin, self).get_changelist_form(request, **kwargs)
+
 
 site.register(Term, TermAdmin)
