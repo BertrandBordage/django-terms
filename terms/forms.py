@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 from django.conf import settings
+from django.db.models import Q
 from django.forms import ModelForm, TextInput, ValidationError
 from django.utils.translation import ugettext as _
 from .models import Term
@@ -22,7 +23,13 @@ if WIDGET == AVAILABLE_WIDGETS[3] or (WIDGET == AVAILABLE_WIDGETS[0]
 class TermForm(ModelForm):
     def clean_name(self):
         data = self.cleaned_data
-        return data['name'].strip(' |')
+        data = data['name'].strip(' |')
+        name = data.split('|')[0]
+        if Term.objects.exclude(pk=self.instance.pk).filter(
+                Q(name=name) | Q(name__startswith=name + '|')).exists():
+            raise ValidationError(
+                _('A term already exists with this main variant.'))
+        return data
 
     def clean(self):
         definition = self.cleaned_data.get('definition')
