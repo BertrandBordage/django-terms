@@ -24,9 +24,10 @@ def python_2_unicode_compatible(klass):
 
 @python_2_unicode_compatible
 class Term(Model):
-    name = CharField(_('name'), max_length=100, unique=True,
-                     help_text=_('Variants of the name can be specified with '
-                                 'a “|” separator (e.g. “Name|name|names”).'))
+    name = CharField(
+        _('name'), max_length=100, unique=True, help_text=_(
+            'Variants of the name can be specified with a “|” separator '
+            '(e.g. “name|names|to name”).'))
     case_sensitive = BooleanField(_('case sensitive'), default=False)
     definition = TextField(_('definition'), blank=True,
                            help_text=_('Accepts HTML tags.'))
