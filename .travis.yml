@@ -9,7 +9,7 @@ env:
   - DJANGO=1.5.1
 install:
   - pip install Django==$DJANGO --use-mirrors
-  - pip install -r requirements.txt --use-mirrors
+  - pip install -r example_project/requirements.txt --use-mirrors
   - pip install coveralls --use-mirrors
 before_script:
   - python setup.py install
