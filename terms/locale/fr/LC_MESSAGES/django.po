@@ -1,87 +1,80 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Bertrand Bordage <bordage.bertrand@gmail.com>, 2012.
+# Bertrand Bordage <bordage.bertrand@gmail.com>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: django-terms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-01 00:11+0200\n"
-"PO-Revision-Date: 2012-08-17 17:29+0000\n"
+"POT-Creation-Date: 2013-07-01 01:25+0200\n"
+"PO-Revision-Date: 2013-06-30 23:26+0000\n"
 "Last-Translator: Bertrand Bordage <bordage.bertrand@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/django-terms/"
-"language/fr/)\n"
-"Language: fr\n"
+"Language-Team: French (http://www.transifex.com/projects/p/django-terms/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cms_app.py:8
-#, fuzzy
 msgid "Terms"
-msgstr "Glossaire"
+msgstr "Termes"
 
 #: cms_plugins.py:10
-msgid "Terms Index Plugin"
-msgstr ""
+msgid "Glossary"
+msgstr "Glossaire"
 
 #: forms.py:31
 msgid "A term already exists with this main variant."
-msgstr ""
+msgstr "Un terme existe déjà avec cette variante principale."
 
-#: forms.py:38
+#: forms.py:41
 msgid "Fill either “Definition” or “Link”."
 msgstr "Remplir « Définition » ou bien « Lien »."
 
 #: menu.py:14
-#, fuzzy
 msgid "Terms menu"
-msgstr "Menu du glossaire"
+msgstr "Menu des termes"
 
-#: models.py:16
+#: models.py:28
 msgid "name"
 msgstr "nom"
 
-#: models.py:17
+#: models.py:29
 msgid ""
-"Variants of the name can be specified with a “|” separator (e.g. “Name|name|"
-"names”)."
-msgstr ""
-"Des variantes du nom peuvent être précisées avec un séparateur « | » (par "
-"ex. « Nom|nom|noms »)."
+"Variants of the name can be specified with a “|” separator (e.g. "
+"“name|names|to name”)."
+msgstr "Des variantes du nom peuvent être précisées avec un séparateur « | » (par ex. « nom|noms|nommer »)."
 
-#: models.py:19
+#: models.py:31
 msgid "case sensitive"
-msgstr ""
+msgstr "sensible à la casse"
 
-#: models.py:20
+#: models.py:32
 msgid "definition"
 msgstr "définition"
 
-#: models.py:21
+#: models.py:33
 msgid "Accepts HTML tags."
 msgstr "Accepte des balises HTML."
 
-#: models.py:22
+#: models.py:34
 msgid "link"
 msgstr "lien"
 
-#: models.py:23
+#: models.py:35
 msgid ""
 "Address to which the term will redirect (instead of redirecting to the "
 "definition)."
-msgstr ""
-"Adresse vers laquelle le terme redirigera (au lieu de rediriger vers la "
-"définition)."
+msgstr "Adresse vers laquelle le terme redirigera (au lieu de rediriger vers la définition)."
 
-#: models.py:29
+#: models.py:41
 msgid "term"
 msgstr "terme"
 
-#: models.py:30
+#: models.py:42
 msgid "terms"
 msgstr "termes"
 
