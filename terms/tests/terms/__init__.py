@@ -97,6 +97,7 @@ class TermsTestCase(TestCase):
                 reverse('admin:terms_term_change', args=(term.pk,)))
 
     def testPerformance(self):
+        self.maxDiff = 50000
         self.assertHTMLEqual(
             replace_terms(read_file('performance_test_before.html')),
             read_file('performance_test_after.html'))
