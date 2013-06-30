@@ -55,7 +55,7 @@ href="/static/css/styles.css" />
 href="/static/css/main.css" />
 <link rel="stylesheet" type="text/css"
 href="/static/css/specific.css" />
-<script>
+<script><![CDATA[
 function sl()
 {
 $('#chargement').show()
@@ -63,7 +63,7 @@ $('#chargement').show()
 function el()
 {
 $('#chargement').hide()
-}
+}]]>
 </script>
 <script src="/static/dajaxice/dajaxice.core.js" charset="utf-8">
 </script>
@@ -74,7 +74,7 @@ $('#chargement').hide()
 <script src="/static/js/jquery-ui-1.8.22.custom.min.js"
 charset="utf-8">
 </script>
-<script type="text/javascript">
+<script type="text/javascript"><![CDATA[
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-37057310-1']);
 _gaq.push(['_trackPageview']);
@@ -82,7 +82,7 @@ _gaq.push(['_trackPageview']);
 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+})();]]>
 </script>
 </head>
 <body onLoad="
@@ -104,16 +104,16 @@ placeholder="Rechercher…" /><button type="submit" title="Lancer la recherche">
 </div>
 </div>
 </nav>
-<script>
+<script><![CDATA[
 $(function() {
 $('#id_searchbox_q').autocomplete({
 source: '/autocomplete'
 });
-});
+});]]>
 </script>
 </div>
 <div id="main" class="indexpage">
-<script id="browser-script">
+<script id="browser-script"><![CDATA[
 $(function() {
 var version = parseInt($.browser.version);
 if (($.browser.mozilla && version <= 3) || ($.browser.msie && version <= 8) || ($.browser.webkit && version <= 532)) {
@@ -129,7 +129,7 @@ Google Chrome \
 </a> pour le remplacer. \
 </div>");
 }
-});
+});]]>
 </script>
 <article>
 <header>
@@ -139,15 +139,15 @@ Le justiciable devant les tribunaux criminels à Paris (1790-1792)
 <div class="article-metadata bordered">
 Date de publication : 22 janvier 2010
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script><![CDATA[(function(d, s, id) {
 var js, fjs = d.getElementsByTagName(s)[0];
 if (d.getElementById(id)) return;
 js = d.createElement(s); js.id = id;
 js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
 fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));]]></script>
 <a href="https://twitter.com/share" class="twitter-share-button" data-via="criminocorpus" data-lang="fr" data-related="criminocorpus">Tweeter</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script><![CDATA[!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");]]></script>
 <div class="fb-like" data-send="false" data-layout="button_count" data-width="200" data-show-faces="false" data-action="recommend" data-font="arial"></div>
 <img src="/static/images/zotero_16x16x32.png"
 title="Compatible Zotero"
@@ -287,12 +287,12 @@ Compléments
 </span>
 </div>
 </div>
-<script>
+<script><![CDATA[
 Dajaxice.setup({
 'default_exception_callback': function(){
 alert('Erreur ! Veuillez nous contactez si le problème persiste.');
 }
-});
+});]]>
 </script>
 <div id="chargement">
 Chargement en cours…
@@ -363,7 +363,7 @@ Chargement en cours…
 </footer>
 </div>
 <script src="/static/jstree/jquery.jstree.js"></script>
-<script>
+<script><![CDATA[
 $(function () {
 $('.sub-menu').jstree({
 core: {
@@ -397,7 +397,7 @@ return new_data;
 }
 }
 });
-});
+});]]>
 </script>
 </body>
 </html>
