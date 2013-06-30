@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-01 01:20+0200\n"
+"POT-Creation-Date: 2013-07-01 01:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,43 +37,43 @@ msgstr ""
 msgid "Terms menu"
 msgstr ""
 
-#: models.py:27
+#: models.py:28
 msgid "name"
 msgstr ""
 
-#: models.py:28
+#: models.py:29
 msgid ""
-"Variants of the name can be specified with a “|” separator (e.g. “Name|name|"
-"names”)."
-msgstr ""
-
-#: models.py:30
-msgid "case sensitive"
+"Variants of the name can be specified with a “|” separator (e.g. “name|names|"
+"to name”)."
 msgstr ""
 
 #: models.py:31
-msgid "definition"
+msgid "case sensitive"
 msgstr ""
 
 #: models.py:32
-msgid "Accepts HTML tags."
+msgid "definition"
 msgstr ""
 
 #: models.py:33
-msgid "link"
+msgid "Accepts HTML tags."
 msgstr ""
 
 #: models.py:34
+msgid "link"
+msgstr ""
+
+#: models.py:35
 msgid ""
 "Address to which the term will redirect (instead of redirecting to the "
 "definition)."
 msgstr ""
 
-#: models.py:40
+#: models.py:41
 msgid "term"
 msgstr ""
 
-#: models.py:41
+#: models.py:42
 msgid "terms"
 msgstr ""
 
