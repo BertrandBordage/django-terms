@@ -18,7 +18,7 @@ class TermManager(Manager):
         d = cache.get(VARIANTS_DICT_CACHE_KEY)
         if d is None:
             d = {}
-            for term in self.get_query_set().iterator():
+            for term in self.get_query_set():
                 name_variants = term.name_variants()
                 for variant in name_variants:
                     d[variant] = name_variants
@@ -30,7 +30,7 @@ class TermManager(Manager):
         if d is None:
             d = {}
             template = 'terms/term_replace.html'
-            for term in self.get_query_set().iterator():
+            for term in self.get_query_set():
                 url = term.get_absolute_url()
                 name_variants = term.name.split('|')
                 context = {'url': url,
