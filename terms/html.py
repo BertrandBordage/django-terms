@@ -8,24 +8,13 @@ from .settings import TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, \
                       TERMS_IGNORED_IDS, TERMS_REPLACE_FIRST_ONLY
 
 
-IGNORED_PATTERN = r'^(?!(?:%s)$).*$'
+def build_or_regexp(l):
+    return re.compile(r'^(?:%s)$' % '|'.join(l))
 
 
-def build_ignored_regexp(l):
-    return re.compile(IGNORED_PATTERN % '|'.join(l))
-
-
-TAGS_REGEXP = build_ignored_regexp(TERMS_IGNORED_TAGS)
-CLASSES_REGEXP = build_ignored_regexp(TERMS_IGNORED_CLASSES)
-IDS_REGEXP = build_ignored_regexp(TERMS_IGNORED_IDS)
-
-
-def valid_class(class_):
-    return class_ is None or CLASSES_REGEXP.match(class_) is not None
-
-
-def valid_id(id_):
-    return id_ is None or IDS_REGEXP.match(id_) is not None
+TAGS_REGEXP = build_or_regexp(TERMS_IGNORED_TAGS)
+CLASSES_REGEXP = build_or_regexp(TERMS_IGNORED_CLASSES)
+IDS_REGEXP = build_or_regexp(TERMS_IGNORED_IDS)
 
 
 if TERMS_REPLACE_FIRST_ONLY:
@@ -56,22 +45,14 @@ def is_navigable_string(navigable_string):
 
 
 def html_content_iterator(parent_tag, replace_regexp):
-    if not parent_tag.find(text=replace_regexp):
-        return
-    valid_tags = parent_tag.find_all(
-        name=TAGS_REGEXP, class_=valid_class, id=valid_id,
-        recursive=False)
-
-    if not valid_tags:
-        yield parent_tag
-
-    for tag in valid_tags:
-        if not tag.find(text=replace_regexp):
+    out = []
+    for tag in parent_tag.find_all(text=replace_regexp):
+        if tag.find_parent(name=TAGS_REGEXP) \
+            or tag.find_parent(class_=CLASSES_REGEXP) \
+                or tag.find_parent(id=IDS_REGEXP):
             continue
-        if tag.find(text=replace_regexp, recursive=False):
-            yield tag
-        for sub_tag in html_content_iterator(tag, replace_regexp):
-            yield sub_tag
+        out.append(tag)
+    return out
 
 
 def str_to_soup(html):
@@ -85,10 +66,8 @@ def replace_in_html(html):
     replace_regexp = Term.objects.replace_regexp()
     replace_regexp__sub = replace_regexp.sub
     soup = str_to_soup(html)
-    for tag in list(html_content_iterator(soup, replace_regexp)):
-        contents = list(tag.contents)
-        for content in (c for c in contents if is_navigable_string(c)):
-            new_content = str_to_soup(replace_terms(
-                replace_dict, variants_dict, replace_regexp__sub, content))
-            content.replace_with(new_content)
+    for content in html_content_iterator(soup, replace_regexp):
+        new_content = str_to_soup(replace_terms(
+            replace_dict, variants_dict, replace_regexp__sub, content))
+        content.replace_with(new_content)
     return soup

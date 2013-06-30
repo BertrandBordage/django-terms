@@ -20,6 +20,7 @@ class ValidHTMLTestCase(TestCase):
         be exactly the same as valid_html (since extra whitespaces within tags
         are stripped).
         """
+        self.maxDiff = 800
         html = read_file('valid_html.html')
         html_w_extra_spaces = read_file('valid_html_with_extra_spaces.html')
 

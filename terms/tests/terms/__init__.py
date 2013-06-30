@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 import os
+from timeit import timeit
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.test import TestCase
@@ -82,6 +83,15 @@ class TermsTestCase(TestCase):
         self.assertHTMLEqual(
             replace_terms(read_file('4_before.html')),
             read_file('4_after.html', {'term': self.term3}))
+
+        # Parsing & rebuilding should take less than 5 ms on this page, even
+        # if your computer is slow.  On my laptop it takes 2.6 ms.
+        self.assertLess(
+            timeit("replace_terms(read_file('1_before.html'))",
+                   setup='from terms.tests.terms import read_file\n'
+                   'from terms.templatetags.terms import replace_terms',
+                   number=100) / 100.0,
+            0.005)
 
     def testAdminRendering(self):
         for term in Term.objects.all():
