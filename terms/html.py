@@ -41,9 +41,9 @@ def replace_terms(replace_dict, variants_dict, replace_regexp__sub, html):
 
 def get_interesting_contents(parent_tag, replace_regexp):
     return [tag for tag in parent_tag.find_all(text=replace_regexp)
-            if not (tag.find_parent(name=TAGS_REGEXP)
-                    or tag.find_parent(class_=CLASSES_REGEXP)
-                    or tag.find_parent(id=IDS_REGEXP))]
+            if not (tag.find_parents(TAGS_REGEXP)
+                    or tag.find_parents(class_=CLASSES_REGEXP)
+                    or tag.find_parents(id=IDS_REGEXP))]
 
 
 def str_to_soup(html):
