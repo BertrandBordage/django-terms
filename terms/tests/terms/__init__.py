@@ -23,18 +23,25 @@ def read_file(filename, context=None):
 
 
 class TermsTestCase(TestCase):
+    fixtures = [
+        os.path.join(CURRENT_PATH, 'performance_test.json'),
+    ]
     templates = [
         ('1_before.html', '1_after.html'),
         ('2_before.html', '2_after.html'),
+        ('3_before.html', '3_after.html'),
+        ('4_before.html', '4_after.html'),
     ]
 
     def setUp(self):
+        # Taken from http://criminocorpus.cnrs.fr/expositions/282/
+        self.performance_test_page = read_file('performance_test_before.html')
         self.term1 = Term.objects.create(
             name='complicated term', url='http://en.wiktionary.org/wiki/term')
         self.term2 = Term.objects.create(
             name='indricothere',
             definition='A nice mix between a rhino and a giraffe.')
-        self.term3 = Term.objects.create(
+        self.term3 = self.term4 = Term.objects.create(
             name='optimiser|optimize|optimise|optimisé|optimized|optimised',
             url='/optimisation')
 
@@ -58,7 +65,6 @@ class TermsTestCase(TestCase):
                 replace_terms(read_file(before_template))
 
     def test1(self):
-        self.maxDiff = 800
         self.assertHTMLEqual(
             replace_terms(read_file('1_before.html')),
             read_file('1_after.html', {'term': self.term1}))
@@ -80,20 +86,28 @@ class TermsTestCase(TestCase):
             read_file('3_after.html', {'term': self.term3}))
         self.assertDetailView(self.term3, status_code=404)
 
+    def test4(self):
         self.assertHTMLEqual(
             replace_terms(read_file('4_before.html')),
-            read_file('4_after.html', {'term': self.term3}))
-
-        # Parsing & rebuilding should take less than 10 ms on this page, even
-        # if your computer is slow.  On my laptop it takes 2.6 ms.
-        self.assertLess(
-            timeit("replace_terms(read_file('1_before.html'))",
-                   setup='from terms.tests.terms import read_file\n'
-                   'from terms.templatetags.terms import replace_terms',
-                   number=100) / 100.0,
-            0.01)
+            read_file('4_after.html', {'term': self.term4}))
 
     def testAdminRendering(self):
         for term in Term.objects.all():
             self.assertURL(
                 reverse('admin:terms_term_change', args=(term.pk,)))
+
+    def testPerformance(self):
+        self.assertHTMLEqual(
+            replace_terms(read_file('performance_test_before.html')),
+            read_file('performance_test_after.html'))
+
+        # Parsing & rebuilding should take less than 100 ms
+        # on this complex page, even if your computer is slow.
+        # On my laptop it takes 42.6 ms.
+        self.assertLess(
+            timeit("replace_terms(test_page)",
+                   setup='test_page = """%s"""\n'
+                         'from terms.templatetags.terms import '
+                         'replace_terms' % self.performance_test_page,
+                   number=100) / 100.0,
+            0.1)
