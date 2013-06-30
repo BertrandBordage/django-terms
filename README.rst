@@ -43,12 +43,12 @@ Optional
 * `django-CMS <https://www.django-cms.org/>`_ (tested with 2.3)
   because django-terms has an apphook, a menu, a plugin processor and
   a plugin
-* `django-haystack <http://haystacksearch.org/>`_ (tested with 2.0.0-beta)
+* `django-haystack <http://haystacksearch.org/>`_ (tested with 1.2.7)
   because django-terms has a search index
 * `django.contrib.sitemaps
   <https://docs.djangoproject.com/en/1.4/ref/contrib/sitemaps/>`_
   because django-terms has a sitemap
-* `South <http://south.aeracode.org/>`_ (tested with 0.7.6) because
+* `South <http://south.aeracode.org/>`_ (tested with 0.8.1) because
   django-terms has migrations
 
 
