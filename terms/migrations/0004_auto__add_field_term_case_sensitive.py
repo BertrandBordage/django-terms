@@ -9,22 +9,22 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding field 'Term.case_sensitive'
-        db.add_column(u'terms_term', 'case_sensitive',
+        db.add_column('terms_term', 'case_sensitive',
                       self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
 
     def backwards(self, orm):
         # Deleting field 'Term.case_sensitive'
-        db.delete_column(u'terms_term', 'case_sensitive')
+        db.delete_column('terms_term', 'case_sensitive')
 
 
     models = {
-        u'terms.term': {
+        'terms.term': {
             'Meta': {'ordering': "(u'name',)", 'object_name': 'Term'},
             'case_sensitive': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'definition': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
             'url': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'})
         }
