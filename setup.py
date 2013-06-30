@@ -1,8 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
 
 from setuptools import setup, find_packages
 from terms import version_string
+
+
+CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
+
+with open(os.path.join(CURRENT_PATH, 'requirements.txt')) as f:
+    required = f.read().splitlines()
 
 
 setup(
@@ -25,10 +32,7 @@ setup(
     ],
     license='BSD',
     packages=find_packages(),
-    install_requires=[
-        'Django >= 1.4',
-        'beautifulsoup4',
-    ],
+    install_requires=required,
     include_package_data=True,
     zip_safe=False,
 )

@@ -1,2 +1,2 @@
-include README.rst COPYING
+include README.rst COPYING AUTHORS.rst CHANGELOG.rst requi
 recursive-include terms *.html *.po *.mo *.txt *.json

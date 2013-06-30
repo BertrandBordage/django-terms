@@ -24,7 +24,7 @@ Requirements
 Mandatory
 ---------
 
-* `Python <http://python.org/>`_ 2.6, 2.7, 3.2 or 3.3
+* `Python <http://python.org/>`_ 2.6, 2.7, 3.2, or 3.3
 * `Django <https://www.djangoproject.com/>`_ 1.4 or 1.5
 * `beautifulsoup4 <http://www.crummy.com/software/BeautifulSoup/>`_
 
@@ -74,11 +74,9 @@ Usage
 
    * `Middleware`_ (to give django-terms a try or for development)
    * `Template filter`_ (for production)
-   * `cms_plugin_processor`_ (if you are using django-CMS)
+   * `With django-CMS`_
 
 The added terms should now be automatically linked to their definitions.
-
-For django-CMS users : display all terms and their definitions with the `TermsIndexPlugin`_.
 
 
 Middleware
@@ -155,26 +153,43 @@ Example:
        TERMS_ADDITIONAL_IGNORED_CLASSES = ['code-snippet']
 
 
-cms_plugin_processor
---------------------
+With django-CMS
+---------------
 
-A cms_plugin_processor is available if you are using django-CMS.
-It will parse all plugin output.
+A few tools are available to make your life easier if you use `django-CMS`_.
 
-Add this in `settings.py`::
+Plugin processor
+................
+
+It will automatically apply the `template filter` on every plugin.
+
+To use it, add or modify ``CMS_PLUGIN_PROCESSORS`` in `settings.py`::
 
    CMS_PLUGIN_PROCESSORS = (
-       [...]
+       ...
        'terms.cms_plugin_processors.TermsProcessor',
-       [...]
+       ...
    )
 
-   
-TermsIndexPlugin
-----------------
+Terms Index Plugin
+..................
 
-If you are using django-CMS, you can display all terms and their definitions
-with the "Terms Index Plugin".
+This plugin displays all terms and their definitions.
+
+Don't forget to update ``CMS_PLACEHOLDER_CONF`` in your `settings.py`
+if you defined it, otherwise this plugin will not be available from your
+placeholders.
+
+Apart from this, nothing to do to make it work.
+
+App hook and menu
+.................
+
+You can use the the app hook and the menu to integrate the complete glossary
+to your CMS architecture.
+
+Nothing to do to make it work.
+
 
 
 Settings
@@ -292,11 +307,12 @@ Why?
 When using django-terms, your HTML pages are totally or partially
 reconstructed:
 
-* totally reconstructed if you use the middleware (see `Middleware`_)
-* partially reconstructed if you use the filter (see `Template filter`_)
+* totally reconstructed if you use the `middleware`_
+* partially reconstructed if you use the `template filter`_
+  or `with django-CMS`_
 
 The content is parsed and rebuilt with `beautifulsoup4`_.  See `tems/html.py`
-to understand exactly how it is rebuilt.
+to understand exactly how.
 
 List of known side effects
 ..........................
