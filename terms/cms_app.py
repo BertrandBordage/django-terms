@@ -4,10 +4,10 @@ from .menu import TermsMenu
 from django.utils.translation import ugettext_lazy as _
 
 
-class TermApp(CMSApp):
-    name = _('Term')
+class TermsApp(CMSApp):
+    name = _('Terms')
     urls = ['terms.urls']
     menus = [TermsMenu]
 
 
-apphook_pool.register(TermApp)
+apphook_pool.register(TermsApp)
