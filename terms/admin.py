@@ -12,7 +12,8 @@ if 'reversion' in settings.INSTALLED_APPS:
 class TermAdmin(ModelAdmin):
     model = Term
     form = TermForm
-    list_display = ('name', 'url')
+    list_display = ('__str__', 'name', 'url', 'case_sensitive')
+    list_editable = ('name', 'url', 'case_sensitive')
     search_fields = ('name', 'definition', 'url')
 
 

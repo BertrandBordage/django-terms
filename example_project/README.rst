@@ -5,6 +5,7 @@ django-terms example project
 Usage
 =====
 
+#. ``pip install -r requirements.txt``
 #. Run ``./manage.py runserver``
 #. In your browser, go to http://localhost:8000
 
