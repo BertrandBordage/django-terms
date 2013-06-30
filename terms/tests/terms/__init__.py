@@ -1,3 +1,6 @@
+# coding: utf-8
+
+from __future__ import unicode_literals
 import os
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
@@ -30,6 +33,9 @@ class TermsTestCase(TestCase):
         self.term2 = Term.objects.create(
             name='indricothere',
             definition='A nice mix between a rhino and a giraffe.')
+        self.term3 = Term.objects.create(
+            name='optimiser|optimize|optimise|optimisé|optimized|optimised',
+            url='/optimisation')
 
     def assertDetailView(self, term, status_code=200):
         self.assertURL(term.get_absolute_url(), status_code=status_code)
@@ -66,6 +72,16 @@ class TermsTestCase(TestCase):
         self.assertDetailView(self.term2)
 
         self.assertCachedRegex()
+
+    def test3(self):
+        self.assertHTMLEqual(
+            replace_terms(read_file('3_before.html')),
+            read_file('3_after.html', {'term': self.term3}))
+        self.assertDetailView(self.term3, status_code=404)
+
+        self.assertHTMLEqual(
+            replace_terms(read_file('4_before.html')),
+            read_file('4_after.html', {'term': self.term3}))
 
     def testAdminRendering(self):
         for term in Term.objects.all():

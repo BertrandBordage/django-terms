@@ -58,9 +58,14 @@ def is_navigable_string(navigable_string):
 def html_content_iterator(parent_tag, replace_regexp):
     if not parent_tag.find(text=replace_regexp):
         return
-    for tag in parent_tag.find_all(
-            name=TAGS_REGEXP, class_=valid_class, id=valid_id,
-            recursive=False):
+    valid_tags = parent_tag.find_all(
+        name=TAGS_REGEXP, class_=valid_class, id=valid_id,
+        recursive=False)
+
+    if not valid_tags:
+        yield parent_tag
+
+    for tag in valid_tags:
         if not tag.find(text=replace_regexp):
             continue
         if tag.find(text=replace_regexp, recursive=False):
