@@ -1,3 +1,6 @@
+# coding: utf-8
+
+from __future__ import unicode_literals
 import os.path
 from django.test import TestCase
 from terms.templatetags.terms import replace_terms
@@ -25,3 +28,10 @@ class ValidHTMLTestCase(TestCase):
 
         new_html_w_extra_spaces = replace_terms(html_w_extra_spaces)
         self.assertHTMLEqual(html, new_html_w_extra_spaces)
+
+    def testUnicode(self):
+        text = 'Il était une fois…'
+        self.assertEqual(text, replace_terms(text))
+
+        html = 'Il &eacute;tait une fois&hellip;'
+        self.assertEqual(text, replace_terms(html))

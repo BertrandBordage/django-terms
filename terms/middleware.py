@@ -1,12 +1,8 @@
 # coding: utf-8
 
 from django.core.urlresolvers import resolve, Resolver404
-try:
-    from django.utils.encoding import smart_text
-except ImportError:  # For Django < 1.4.2
-    from django.utils.encoding import smart_unicode as smart_text
-from .html import replace_in_html
 from .settings import TERMS_IGNORED_APPS, TERMS_DEBUG
+from .templatetags.terms import replace_terms
 
 
 class TermsMiddleware(object):
@@ -24,6 +20,6 @@ class TermsMiddleware(object):
         is_html = 'text/html' in response['Content-Type']
 
         if not app_ignored and is_html and response.status_code == 200:
-            response.content = smart_text(replace_in_html(response.content))
+            response.content = replace_terms(response.content)
 
         return response
