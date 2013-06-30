@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-01 00:11+0200\n"
+"POT-Creation-Date: 2013-07-01 01:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,14 +22,14 @@ msgid "Terms"
 msgstr ""
 
 #: cms_plugins.py:10
-msgid "Terms Index Plugin"
+msgid "Glossary"
 msgstr ""
 
 #: forms.py:31
 msgid "A term already exists with this main variant."
 msgstr ""
 
-#: forms.py:38
+#: forms.py:41
 msgid "Fill either “Definition” or “Link”."
 msgstr ""
 
@@ -37,43 +37,43 @@ msgstr ""
 msgid "Terms menu"
 msgstr ""
 
-#: models.py:16
+#: models.py:27
 msgid "name"
 msgstr ""
 
-#: models.py:17
+#: models.py:28
 msgid ""
 "Variants of the name can be specified with a “|” separator (e.g. “Name|name|"
 "names”)."
 msgstr ""
 
-#: models.py:19
+#: models.py:30
 msgid "case sensitive"
 msgstr ""
 
-#: models.py:20
+#: models.py:31
 msgid "definition"
 msgstr ""
 
-#: models.py:21
+#: models.py:32
 msgid "Accepts HTML tags."
 msgstr ""
 
-#: models.py:22
+#: models.py:33
 msgid "link"
 msgstr ""
 
-#: models.py:23
+#: models.py:34
 msgid ""
 "Address to which the term will redirect (instead of redirecting to the "
 "definition)."
 msgstr ""
 
-#: models.py:29
+#: models.py:40
 msgid "term"
 msgstr ""
 
-#: models.py:30
+#: models.py:41
 msgid "terms"
 msgstr ""
 

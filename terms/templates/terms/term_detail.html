@@ -35,13 +35,13 @@
 
       {% if perms.terms_change_term %}
         <button onclick="document.location =
-                                 '{% url 'admin:terms_term_change' term.pk %}';">
+                         '{% url 'admin:terms_term_change' term.pk %}';">
           {% trans 'Change' %}
         </button>
       {% endif %}
       {% if perms.terms_delete_term %}
         <button onclick="document.location =
-                                 '{% url 'admin:terms_term_delete' term.pk %}';">
+                         '{% url 'admin:terms_term_delete' term.pk %}';">
           {% trans 'Delete' %}
         </button>
       {% endif %}

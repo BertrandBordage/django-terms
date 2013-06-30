@@ -175,8 +175,8 @@ To use it, add or modify ``CMS_PLUGIN_PROCESSORS`` in `settings.py`::
        ...
    )
 
-Terms Index Plugin
-..................
+Glossary plugin
+...............
 
 This plugin displays all terms and their definitions.
 
