@@ -20,6 +20,10 @@ if WIDGET == AVAILABLE_WIDGETS[3] or (WIDGET == AVAILABLE_WIDGETS[0]
 
 
 class TermForm(ModelForm):
+    def clean_name(self):
+        data = self.cleaned_data
+        return data['name'].strip(' |')
+
     def clean(self):
         definition = self.cleaned_data.get('definition')
         url = self.cleaned_data.get('url')
