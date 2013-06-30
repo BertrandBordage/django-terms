@@ -97,13 +97,12 @@ class TermsTestCase(TestCase):
                 reverse('admin:terms_term_change', args=(term.pk,)))
 
     def testPerformance(self):
-        self.maxDiff = 50000
         self.assertHTMLEqual(
             replace_terms(read_file('performance_test_before.html')),
             read_file('performance_test_after.html'))
 
-        # Parsing & rebuilding should take less than 100 ms
-        # on this complex page, even if your computer is slow.
+        # Parsing & rebuilding should take less than 200 ms
+        # on this complex page, even if your computer is a bit slow.
         # On my laptop it takes 42.6 ms.
         self.assertLess(
             timeit("replace_terms(test_page)",
@@ -111,4 +110,4 @@ class TermsTestCase(TestCase):
                          'from terms.templatetags.terms import '
                          'replace_terms' % self.performance_test_page,
                    number=100) / 100.0,
-            0.1)
+            0.2)
