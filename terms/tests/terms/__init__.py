@@ -44,6 +44,8 @@ class TermsTestCase(TestCase):
         self.term3 = self.term4 = Term.objects.create(
             name='optimiser|optimize|optimise|optimisé|optimized|optimised',
             url='/optimisation')
+        self.term5 = Term.objects.create(
+            name='Google', case_sensitive=False, url='http://google.com')
 
     def assertDetailView(self, term, status_code=200):
         self.assertURL(term.get_absolute_url(), status_code=status_code)
@@ -90,6 +92,18 @@ class TermsTestCase(TestCase):
         self.assertHTMLEqual(
             replace_terms(read_file('4_before.html')),
             read_file('4_after.html', {'term': self.term4}))
+
+    def test5(self):
+        self.assertHTMLEqual(
+            replace_terms(read_file('5_before.html')),
+            read_file('5_after1.html', {'term': self.term5}))
+
+        self.term5.case_sensitive = True
+        self.term5.save()
+
+        self.assertHTMLEqual(
+            replace_terms(read_file('5_before.html')),
+            read_file('5_after2.html', {'term': self.term5}))
 
     def testAdminRendering(self):
         for term in Term.objects.all():
