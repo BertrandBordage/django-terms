@@ -22,14 +22,14 @@ if WIDGET == AVAILABLE_WIDGETS[3] or (WIDGET == AVAILABLE_WIDGETS[0]
 
 class TermForm(ModelForm):
     def clean_name(self):
-        name = self.cleaned_data['name']
-        name = name.strip(' |')
-        name = name.split('|')[0]
+        data = self.cleaned_data['name']
+        data = data.strip(' |')
+        name = data.split('|')[0]
         if Term.objects.exclude(pk=self.instance.pk).filter(
                 Q(name=name) | Q(name__startswith=name + '|')).exists():
             raise ValidationError(
                 _('A term already exists with this main variant.'))
-        return name
+        return data
 
     def clean(self):
         data = self.cleaned_data
