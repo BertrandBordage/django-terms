@@ -47,6 +47,6 @@ class TermManager(Manager):
             terms = sorted(self.replace_dict().keys(), key=len, reverse=True)
             r = re.compile('(?P<before>^|\W)(?P<name>%s)(?P<after>\W|$)'
                            % '|'.join(map(re.escape, terms)),
-                           flags=re.IGNORECASE)
+                           flags=re.IGNORECASE | re.UNICODE)
             cache.set(REPLACE_REGEXP_CACHE_KEY, r)
         return r
