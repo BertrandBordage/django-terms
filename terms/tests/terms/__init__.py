@@ -34,8 +34,6 @@ class TermsTestCase(TestCase):
     ]
 
     def setUp(self):
-        # Taken from http://criminocorpus.cnrs.fr/expositions/282/
-        self.performance_test_page = read_file('performance_test_before.html')
         self.term1 = Term.objects.create(
             name='complicated term', url='http://en.wiktionary.org/wiki/term')
         self.term2 = Term.objects.create(
@@ -52,6 +50,9 @@ class TermsTestCase(TestCase):
         self.term6_2 = Term.objects.create(
             name='Black & White 2',
             url='http://en.wikipedia.org/wiki/Black_%26_White_2')
+
+        # Taken from http://criminocorpus.cnrs.fr/expositions/282/
+        self.performance_test_page = read_file('performance_test_before.html')
 
     def assertDetailView(self, term, status_code=200):
         self.assertURL(term.get_absolute_url(), status_code=status_code)
@@ -151,7 +152,7 @@ class TermsTestCase(TestCase):
 
         # Parsing & rebuilding should take less than 200 ms
         # on this complex page, even if your computer is a bit slow.
-        # On my laptop it takes 42.6 ms.
+        # On my laptop it takes 45 ms.
         self.assertLess(
             timeit("replace_terms(test_page)",
                    setup='test_page = """%s"""\n'

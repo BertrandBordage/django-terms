@@ -341,6 +341,29 @@ A few side effects are therefore happening during HTML reconstruction:
    rendering.
 
 
+Performance
+-----------
+
+.. note::
+   I'll talk about speed, since there is no terrible impact on memory, even if
+   you only a GB of RAM on your server.
+
+Unfortunately, django-terms has a significant impact on performance,
+especially if you use the `middleware`_.  That's why we recommend using the
+`template filter`_.
+
+What is important is the number of HTML tags wrapped by the filter or the
+middleware.  Then comes the complexity of your HTML tree.  The amount of
+flat text, luckily, has no impact.
+
+To give you an idea, `terms/tests/terms/performance_test_before.html`
+contains 263 tags and takes 45 ms to be parsed and rebuilt on my computer
+with the middleware.  That gives an average of 160 µs per tag.
+If you use the template tag only on the content of the page (124 tags), it
+takes 28 ms.  Quite slow, but if you cache the part of the template that's
+filtered, this issue should be negligible.
+
+
 Exceptions
 ----------
 
