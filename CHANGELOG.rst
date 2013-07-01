@@ -1,8 +1,10 @@
-0.5.0
+1.0.0
 =====
 
-* Rewrites django-terms to use beautifulsoup4.  It fixes all known bugs.
-* Adds Django 1.5 compatibility.
+* Allows for per-object case-sensitiveness.
+* Fixes all known bugs.
+* Rewrites django-terms to use beautifulsoup4.  It eases development.
+* Adds lots of tests.
 * Adds Travis Continuous Integration.
-* Adds some tests.
+* Adds Django 1.5 compatibility.
 * Adds Python 3 compatibiliy.
