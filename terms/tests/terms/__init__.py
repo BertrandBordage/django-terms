@@ -46,6 +46,12 @@ class TermsTestCase(TestCase):
             url='/optimisation')
         self.term5 = Term.objects.create(
             name='Google', case_sensitive=False, url='http://google.com')
+        self.term6_1 = Term.objects.create(
+            name='Black & White',
+            url='http://en.wikipedia.org/wiki/Black_%26_White_(video_game)')
+        self.term6_2 = Term.objects.create(
+            name='Black & White 2',
+            url='http://en.wikipedia.org/wiki/Black_%26_White_2')
 
     def assertDetailView(self, term, status_code=200):
         self.assertURL(term.get_absolute_url(), status_code=status_code)
@@ -67,6 +73,9 @@ class TermsTestCase(TestCase):
                 replace_terms(read_file(before_template))
 
     def test1(self):
+        """
+        Tests regular case, with a complete HTML structure.
+        """
         self.assertHTMLEqual(
             replace_terms(read_file('1_before.html')),
             read_file('1_after.html', {'term': self.term1}))
@@ -75,6 +84,9 @@ class TermsTestCase(TestCase):
         self.assertCachedRegex()
 
     def test2(self):
+        """
+        Tests links with definitions.
+        """
         self.assertHTMLEqual(
             replace_terms(read_file('2_before.html')),
             read_file('2_after.html', {'term': self.term2}))
@@ -83,17 +95,26 @@ class TermsTestCase(TestCase):
         self.assertCachedRegex()
 
     def test3(self):
+        """
+        Tests term variants.
+        """
         self.assertHTMLEqual(
             replace_terms(read_file('3_before.html')),
             read_file('3_after.html', {'term': self.term3}))
         self.assertDetailView(self.term3, status_code=404)
 
     def test4(self):
+        """
+        Tests isolated term without even a single HTML tag.
+        """
         self.assertHTMLEqual(
             replace_terms(read_file('4_before.html')),
             read_file('4_after.html', {'term': self.term4}))
 
     def test5(self):
+        """
+        Tests case sensitiveness.
+        """
         self.assertHTMLEqual(
             replace_terms(read_file('5_before.html')),
             read_file('5_after1.html', {'term': self.term5}))
@@ -105,10 +126,23 @@ class TermsTestCase(TestCase):
             replace_terms(read_file('5_before.html')),
             read_file('5_after2.html', {'term': self.term5}))
 
+    def test6(self):
+        """
+        Tests if a term starting with another shorter term is correctly linked.
+        """
+        self.assertHTMLEqual(
+            replace_terms(read_file('6_before.html')),
+            read_file('6_after.html', {'bw1': self.term6_1,
+                                       'bw2': self.term6_2}))
+
     def testAdminRendering(self):
+        self.assertURL(
+            reverse('admin:terms_term_changelist'))
         for term in Term.objects.all():
             self.assertURL(
                 reverse('admin:terms_term_change', args=(term.pk,)))
+            self.assertURL(
+                reverse('admin:terms_term_delete', args=(term.pk,)))
 
     def testPerformance(self):
         self.assertHTMLEqual(

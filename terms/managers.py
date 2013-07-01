@@ -33,7 +33,7 @@ class TermManager(Manager):
             for term in self.get_query_set():
                 url = term.get_absolute_url()
                 name_variants = term.name.split('|')
-                context = {'url': url,
+                context = {'url': url.replace('%', '%%'),
                            'url_is_external': bool(term.url)}
                 case_sensitive = term.case_sensitive
                 for name_variant in name_variants:
@@ -44,7 +44,7 @@ class TermManager(Manager):
     def replace_regexp(self):
         r = cache.get(REPLACE_REGEXP_CACHE_KEY)
         if r is None:
-            terms = self.replace_dict().keys()
+            terms = sorted(self.replace_dict().keys(), key=len, reverse=True)
             r = re.compile('(?P<before>^|\W)(?P<name>%s)(?P<after>\W|$)'
                            % '|'.join(map(re.escape, terms)),
                            flags=re.IGNORECASE)
