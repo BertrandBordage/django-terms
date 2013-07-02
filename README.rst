@@ -348,11 +348,22 @@ A few side effects are therefore happening during HTML reconstruction:
 Performance
 -----------
 
-.. note::
-   I'll talk about speed, since there is no terrible impact on memory, even if
-   you only a GB of RAM on your server.
+Good news
+.........
 
-Unfortunately, django-terms has a significant impact on performance,
+django-terms nearly never hits the database.  After each change in your terms
+table, the database is hit just one time in order to build a regular expression
+that's saved into your cache (assuming you `set up the cache
+ <https://docs.djangoproject.com/en/dev/topics/cache/#setting-up-the-cache>`_).
+If you never change your terms and if your cache is never emptied, there will
+zero database hits.
+
+Considering memory, no particular leak has been found.
+
+Bad news
+........
+
+Unfortunately, django-terms has a significant impact on speed,
 especially if you use the `middleware`_.  That's why we recommend using the
 `template filter`_.
 

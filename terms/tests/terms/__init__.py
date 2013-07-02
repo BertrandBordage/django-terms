@@ -77,9 +77,10 @@ class TermsTestCase(TestCase):
         """
         Tests regular case, with a complete HTML structure.
         """
-        self.assertHTMLEqual(
-            replace_terms(read_file('1_before.html')),
-            read_file('1_after.html', {'term': self.term1}))
+        with self.assertNumQueries(1):
+            self.assertHTMLEqual(
+                replace_terms(read_file('1_before.html')),
+                read_file('1_after.html', {'term': self.term1}))
         self.assertDetailView(self.term1, status_code=404)
 
         self.assertCachedRegex()
@@ -88,9 +89,10 @@ class TermsTestCase(TestCase):
         """
         Tests links with definitions.
         """
-        self.assertHTMLEqual(
-            replace_terms(read_file('2_before.html')),
-            read_file('2_after.html', {'term': self.term2}))
+        with self.assertNumQueries(1):
+            self.assertHTMLEqual(
+                replace_terms(read_file('2_before.html')),
+                read_file('2_after.html', {'term': self.term2}))
         self.assertDetailView(self.term2)
 
         self.assertCachedRegex()
@@ -99,26 +101,29 @@ class TermsTestCase(TestCase):
         """
         Tests term variants.
         """
-        self.assertHTMLEqual(
-            replace_terms(read_file('3_before.html')),
-            read_file('3_after.html', {'term': self.term3}))
+        with self.assertNumQueries(1):
+            self.assertHTMLEqual(
+                replace_terms(read_file('3_before.html')),
+                read_file('3_after.html', {'term': self.term3}))
         self.assertDetailView(self.term3, status_code=404)
 
     def test4(self):
         """
         Tests isolated term without even a single HTML tag.
         """
-        self.assertHTMLEqual(
-            replace_terms(read_file('4_before.html')),
-            read_file('4_after.html', {'term': self.term4}))
+        with self.assertNumQueries(1):
+            self.assertHTMLEqual(
+                replace_terms(read_file('4_before.html')),
+                read_file('4_after.html', {'term': self.term4}))
 
     def test5(self):
         """
         Tests case sensitiveness.
         """
-        self.assertHTMLEqual(
-            replace_terms(read_file('5_before.html')),
-            read_file('5_after1.html', {'term': self.term5}))
+        with self.assertNumQueries(1):
+            self.assertHTMLEqual(
+                replace_terms(read_file('5_before.html')),
+                read_file('5_after1.html', {'term': self.term5}))
 
         self.term5.case_sensitive = True
         self.term5.save()
@@ -131,10 +136,11 @@ class TermsTestCase(TestCase):
         """
         Tests if a term starting with another shorter term is correctly linked.
         """
-        self.assertHTMLEqual(
-            replace_terms(read_file('6_before.html')),
-            read_file('6_after.html', {'bw1': self.term6_1,
-                                       'bw2': self.term6_2}))
+        with self.assertNumQueries(1):
+            self.assertHTMLEqual(
+                replace_terms(read_file('6_before.html')),
+                read_file('6_after.html', {'bw1': self.term6_1,
+                                           'bw2': self.term6_2}))
 
     def testAdminRendering(self):
         self.assertURL(

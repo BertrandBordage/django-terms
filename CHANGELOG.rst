@@ -1,3 +1,8 @@
+1.0.3
+=====
+
+* Removes a useless database hit.
+
 1.0.0
 =====
 
