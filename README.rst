@@ -17,7 +17,7 @@ Continuous integration status:
 .. image:: https://travis-ci.org/BertrandBordage/django-terms.png
     :target: https://travis-ci.org/BertrandBordage/django-terms
 
-.. |coveralls| image:: https://coveralls.io/repos/BertrandBordage/django-terms/badge.png
+.. image:: https://coveralls.io/repos/BertrandBordage/django-terms/badge.png
     :target: https://coveralls.io/r/BertrandBordage/django-terms
 
 
