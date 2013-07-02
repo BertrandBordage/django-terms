@@ -31,10 +31,7 @@ else:
 
 def replace_terms(replace_dict, variants_dict, replace_regexp__sub, html):
     def translate(match):
-        match__group = match.group
-        before = match__group('before')
-        name = match__group('name')
-        after = match__group('after')
+        before, name, after = match.group('before', 'name', 'after')
 
         key = name.lower()
 
@@ -68,6 +65,7 @@ def replace_in_html(html):
     replace_dict = Term.objects.replace_dict()
     replace_regexp = Term.objects.replace_regexp()
     replace_regexp__sub = replace_regexp.sub
+
     soup = str_to_soup(html)
     for content in get_interesting_contents(soup, replace_regexp):
         new_content = str_to_soup(replace_terms(
