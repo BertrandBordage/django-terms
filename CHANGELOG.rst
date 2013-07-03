@@ -2,6 +2,7 @@
 =====
 
 * Removes a useless database hit.
+* Separates docs and put them on ReadTheDocs.
 
 1.0.0
 =====
