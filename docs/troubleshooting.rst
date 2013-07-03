@@ -17,7 +17,7 @@ reconstructed:
   or :ref:`with django-CMS`
 
 The content is parsed and rebuilt with `beautifulsoup4`_.
-See :file:`tems/html.py` to understand exactly how.
+See :file:`terms/html.py` to understand exactly how.
 
 List of known side effects
 ..........................
