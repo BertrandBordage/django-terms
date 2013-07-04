@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Rodrigo Prior <rprior@infranology.com.br>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: django-terms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-01 01:25+0200\n"
+"PO-Revision-Date: 2013-07-03 16:57+0000\n"
+"Last-Translator: Rodrigo Prior <rprior@infranology.com.br>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/django-terms/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cms_app.py:8
+msgid "Terms"
+msgstr "Termos"
+
+#: cms_plugins.py:10
+msgid "Glossary"
+msgstr "Glossário"
+
+#: forms.py:31
+msgid "A term already exists with this main variant."
+msgstr "Já existe um termo com a seguinte variação."
+
+#: forms.py:41
+msgid "Fill either “Definition” or “Link”."
+msgstr "Preencher a \"Definição\" ou \"Link\"."
+
+#: menu.py:14
+msgid "Terms menu"
+msgstr "Menu de termos"
+
+#: models.py:28
+msgid "name"
+msgstr "nome"
+
+#: models.py:29
+msgid ""
+"Variants of the name can be specified with a “|” separator (e.g. "
+"“name|names|to name”)."
+msgstr "As variações de nome podem ser especificadas com o separador \"|\" (ex.: “nome|nomes|para o nome”)."
+
+#: models.py:31
+msgid "case sensitive"
+msgstr "diferenciar maiúsculas e minúsculas"
+
+#: models.py:32
+msgid "definition"
+msgstr "definição"
+
+#: models.py:33
+msgid "Accepts HTML tags."
+msgstr "Aceita tags em HTML."
+
+#: models.py:34
+msgid "link"
+msgstr "link"
+
+#: models.py:35
+msgid ""
+"Address to which the term will redirect (instead of redirecting to the "
+"definition)."
+msgstr "Endereço para qual o termo será redirecionado (ao invés de redirecionar para a definição)."
+
+#: models.py:41
+msgid "term"
+msgstr "termo"
+
+#: models.py:42
+msgid "terms"
+msgstr "termos"
+
+#: templates/terms/term_detail.html:39
+msgid "Change"
+msgstr "Alterar"
+
+#: templates/terms/term_detail.html:45
+msgid "Delete"
+msgstr "Remover"

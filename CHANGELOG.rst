@@ -1,3 +1,8 @@
+1.0.4
+=====
+
+* Adds Portuguese (Brazil) translation.
+
 1.0.3
 =====
 
