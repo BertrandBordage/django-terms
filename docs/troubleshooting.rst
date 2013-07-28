@@ -57,7 +57,7 @@ table, the database is hit just one time in order to build a regular expression
 that's saved into your cache (assuming you
 `set up the cache <https://docs.djangoproject.com/en/dev/topics/cache/#setting-up-the-cache>`_).
 If you never change your terms and if your cache is never emptied, there will
-zero database hits.
+be zero database hit.
 
 Considering memory, no particular leak has been found.
 
