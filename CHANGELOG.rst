@@ -1,3 +1,8 @@
+1.0.5
+=====
+
+* Adds django-haystack 2.x.x compatibility.
+
 1.0.4
 =====
 
