@@ -18,16 +18,17 @@ class TermsMenu(CMSAttachMenu):
         This method is used to build the menu tree.
         """
         nodes = []
-        for term in Term.objects.all():
+        for term in Term.objects.only('pk', 'name', 'url'):
             try:
-                node = NavigationNode(
-                    smart_text(term),
-                    term.get_absolute_url(),
-                    term.pk,
-                )
-                nodes.append(node)
+                url = term.get_absolute_url()
             except NoReverseMatch:
-                pass
+                continue
+
+            nodes.append(NavigationNode(
+                smart_text(term),
+                url,
+                term.pk,
+            ))
         return nodes
 
 
