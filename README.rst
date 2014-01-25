@@ -6,6 +6,11 @@ Site-wide adds a definition or a link for specialized terms.
 
 .. image:: https://raw.github.com/BertrandBordage/django-terms/master/example_project/screenshot.png
 
+Code statistics:
+
+.. image:: https://www.ohloh.net/p/django-terms/widgets/project_thin_badge.gif
+    :target: https://www.ohloh.net/p/django-terms
+
 PyPI status:
 
 .. image:: https://pypip.in/v/django-terms/badge.png
