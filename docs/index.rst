@@ -10,6 +10,11 @@ Source:
 
 https://github.com/BertrandBordage/django-terms
 
+Code statistics:
+
+.. image:: https://www.ohloh.net/p/django-terms/widgets/project_thin_badge.gif
+    :target: https://www.ohloh.net/p/django-terms
+
 PyPI status:
 
 .. image:: https://pypip.in/v/django-terms/badge.png
@@ -29,7 +34,7 @@ Continuous integration status:
 Live example
 ============
 
-http://criminocorpus.cnrs.fr/expositions/282/
+https://criminocorpus.org/expositions/282/
 
 (To learn more about the connection between django-terms and Criminocorpus,
 read the :ref:`bounty` paragraph)
