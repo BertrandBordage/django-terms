@@ -13,7 +13,7 @@ class TermsMiddleware(object):
             app_ignored = app_name in TERMS_IGNORED_APPS
         except Resolver404:
             if TERMS_DEBUG:
-                raise Resolver404("could not find whether the application of "
+                raise Resolver404("Could not find whether the application of "
                                   "'%s' is in TERMS_IGNORED_APPS" % url)
             app_ignored = True
 
