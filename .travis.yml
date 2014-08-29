@@ -4,9 +4,11 @@ python:
   - 2.7
   - 3.2
   - 3.3
+  - 3.4
 env:
-  - DJANGO=1.4.5
-  - DJANGO=1.5.1
+  - DJANGO=1.4.14
+  - DJANGO=1.5.9
+  - DJANGO=1.6.6
 install:
   - pip install Django==$DJANGO --use-mirrors
   - pip install -r example_project/requirements.txt --use-mirrors
@@ -22,6 +24,8 @@ after_success:
 matrix:
   exclude:
     - python: 3.2
-      env: DJANGO=1.4.5
+      env: DJANGO=1.4.14
     - python: 3.3
-      env: DJANGO=1.4.5
+      env: DJANGO=1.4.14
+    - python: 3.4
+      env: DJANGO=1.4.14
