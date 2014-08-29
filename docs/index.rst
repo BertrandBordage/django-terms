@@ -12,8 +12,8 @@ https://github.com/BertrandBordage/django-terms
 
 Code statistics:
 
-.. image:: https://www.ohloh.net/p/django-terms/widgets/project_thin_badge.gif
-    :target: https://www.ohloh.net/p/django-terms
+.. image:: https://www.openhub.net/p/django-terms/widgets/project_thin_badge.gif
+    :target: https://www.openhub.net/p/django-terms
 
 PyPI status:
 
