@@ -7,7 +7,7 @@ Bounty
 ------
 
 django-terms was originally developed for a french website,
-`Criminocorpus <http://criminocorpus.cnrs.fr>`_.  Now that it is finished,
+`Criminocorpus <https://criminocorpus.org>`_.  Now that it is finished,
 I don't have credits to continue development on django-terms.
 
 Maybe you want a new feature in django-terms but don't want to code anything.

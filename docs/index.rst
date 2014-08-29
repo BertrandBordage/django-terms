@@ -34,7 +34,7 @@ Continuous integration status:
 Live example
 ============
 
-https://criminocorpus.org/expositions/282/
+https://criminocorpus.org/musee/282/
 
 (To learn more about the connection between django-terms and Criminocorpus,
 read the :ref:`bounty` paragraph)

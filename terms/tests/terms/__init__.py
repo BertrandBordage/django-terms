@@ -51,7 +51,7 @@ class TermsTestCase(TestCase):
             name='Black & White 2',
             url='http://en.wikipedia.org/wiki/Black_%26_White_2')
 
-        # Taken from http://criminocorpus.cnrs.fr/expositions/282/
+        # Taken from https://criminocorpus.org/musee/282/
         self.performance_test_page = read_file('performance_test_before.html')
 
     def assertDetailView(self, term, status_code=200):
