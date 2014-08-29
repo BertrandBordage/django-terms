@@ -1,3 +1,9 @@
+1.0.6
+=====
+
+* Adds a ``TERMS_ENABLED`` setting.
+* Improves CMS menu nodes building.
+
 1.0.5
 =====
 
