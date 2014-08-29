@@ -10,8 +10,8 @@ Requirements
 Mandatory
 ---------
 
-* `Python`_ 2.6, 2.7, 3.2, or 3.3
-* `Django`_ 1.4 or 1.5
+* `Python`_ 2.6, 2.7, 3.2, 3.3 or 3.4
+* `Django`_ 1.4, 1.5 or 1.6
 * `beautifulsoup4`_
 
 
