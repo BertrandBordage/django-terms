@@ -8,6 +8,14 @@ Settings
 Common settings
 ---------------
 
+.. _TERMS_ENABLED:
+
+TERMS_ENABLED
+.............
+
+:Default: ``True``
+:Definition: If set to ``False``, globally disabled django-terms.
+
 .. _TERMS_DEBUG:
 
 TERMS_DEBUG
@@ -21,6 +29,7 @@ TERMS_DEBUG
 
 TERMS_ADDITIONAL_IGNORED_APPS
 .............................
+
 :Default: ``()``
 :Definition: A list or tuple of ignored Django applications
              (expressed as strings)

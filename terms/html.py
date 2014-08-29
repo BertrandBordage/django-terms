@@ -2,9 +2,14 @@
 
 import re
 from bs4 import BeautifulSoup
+try:
+    from django.utils.encoding import smart_text
+except ImportError:  # For Django < 1.4.2
+    from django.utils.encoding import smart_unicode as smart_text
 from .models import Term
-from .settings import TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, \
-                      TERMS_IGNORED_IDS, TERMS_REPLACE_FIRST_ONLY
+from .settings import (
+    TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, TERMS_IGNORED_IDS,
+    TERMS_REPLACE_FIRST_ONLY, TERMS_ENABLED)
 
 
 def build_or_regexp(l):
@@ -60,15 +65,21 @@ def str_to_soup(html):
     return BeautifulSoup(html, 'html.parser')
 
 
-def replace_in_html(html):
-    variants_dict = Term.objects.variants_dict()
-    replace_dict = Term.objects.replace_dict()
-    replace_regexp = Term.objects.replace_regexp()
-    replace_regexp__sub = replace_regexp.sub
+if TERMS_ENABLED:
+    def replace_in_html(html):
+        soup = str_to_soup(html)
 
-    soup = str_to_soup(html)
-    for content in get_interesting_contents(soup, replace_regexp):
-        new_content = str_to_soup(replace_terms(
-            replace_dict, variants_dict, replace_regexp__sub, content))
-        content.replace_with(new_content)
-    return soup
+        variants_dict = Term.objects.variants_dict()
+        replace_dict = Term.objects.replace_dict()
+        replace_regexp = Term.objects.replace_regexp()
+        replace_regexp__sub = replace_regexp.sub
+
+        for content in get_interesting_contents(soup, replace_regexp):
+            new_content = str_to_soup(replace_terms(
+                replace_dict, variants_dict, replace_regexp__sub, content))
+            content.replace_with(new_content)
+
+        return smart_text(soup)
+else:
+    def replace_in_html(html):
+        return html
