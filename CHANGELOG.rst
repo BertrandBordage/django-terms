@@ -1,3 +1,8 @@
+1.0.7
+=====
+
+* Supports Django 1.6 and Python 3.4.
+
 1.0.6
 =====
 
