@@ -25,6 +25,16 @@ TERMS_DEBUG
 :Definition: If set to ``True``, allows django-terms to raise minor exceptions
              (see :ref:`Exceptions`).
 
+.. _TERMS_REPLACE_FIRST_ONLY:
+
+TERMS_REPLACE_FIRST_ONLY
+........................
+
+:Default: ``True``
+:Definition: If set to ``True``, adds a link only on the first occurrence
+             of each term
+:Used by: :ref:`Middleware`, :ref:`Template filter`
+
 .. _TERMS_ADDITIONAL_IGNORED_APPS:
 
 TERMS_ADDITIONAL_IGNORED_APPS
@@ -69,16 +79,6 @@ TERMS_ADDITIONAL_IGNORED_IDS
 :Used by: :ref:`Middleware`, :ref:`Template filter`
 :Extends: `TERMS_IGNORED_IDS`_
 :Syntax example: ``['article-footer', 'side-content']``
-
-.. _TERMS_REPLACE_FIRST_ONLY:
-
-TERMS_REPLACE_FIRST_ONLY
-........................
-
-:Default: ``True``
-:Definition: If set to ``True``, adds a link only on the first occurrence
-             of each term
-:Used by: :ref:`Middleware`, :ref:`Template filter`
 
 .. _TERMS_DEFINITION_WIDGET:
 

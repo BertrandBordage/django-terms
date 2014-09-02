@@ -73,10 +73,10 @@ middleware.  Then comes the complexity of your HTML tree.  The amount of
 flat text, luckily, has no impact.
 
 To give you an idea, `terms/tests/terms/performance_test_before.html`
-contains 263 tags and takes 45 ms to be parsed and rebuilt on my computer
+contains 263 tags and takes 35 ms to be parsed and rebuilt on my computer
 with the middleware.  That gives an average of 160 µs per tag.
 If you use the template tag only on the content of the page (124 tags), it
-takes 28 ms.  Quite slow, but if you cache the part of the template that's
+takes 23 ms.  Quite slow, but if you cache the part of the template that's
 filtered, this issue should be negligible.
 
 
