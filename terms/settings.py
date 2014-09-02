@@ -34,15 +34,13 @@ if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_TAGS'):
     TERMS_IGNORED_TAGS.extend(settings.TERMS_ADDITIONAL_IGNORED_TAGS)
 
 
-TERMS_IGNORED_CLASSES = set(
-    getattr(settings, 'TERMS_IGNORED_CLASSES',
-        (
-            'cms_reset',
-        )
-    )
+TERMS_IGNORED_CLASSES = getattr(settings, 'TERMS_IGNORED_CLASSES',
+    [
+        'cms_reset',
+    ]
 )
 if hasattr(settings, 'TERMS_ADDITIONAL_IGNORED_CLASSES'):
-    TERMS_IGNORED_CLASSES |= set(settings.TERMS_ADDITIONAL_IGNORED_CLASSES)
+    TERMS_IGNORED_CLASSES.extend(settings.TERMS_ADDITIONAL_IGNORED_CLASSES)
 
 
 TERMS_IGNORED_IDS = getattr(settings, 'TERMS_IGNORED_IDS',
