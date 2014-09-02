@@ -26,7 +26,7 @@ else:
 
 def replace_terms(replace_dict, variants_dict, replace_regexp__sub, html):
     def translate(match):
-        before, name, after = match.group('before', 'name', 'after')
+        before, name = match.group('before', 'name')
 
         key = name.lower()
 
@@ -39,7 +39,7 @@ def replace_terms(replace_dict, variants_dict, replace_regexp__sub, html):
                 del_other_occurrences(key, replace_dict, variants_dict)
         else:
             replaced_name = name
-        return before + replaced_name + after
+        return before + replaced_name
     return replace_regexp__sub(translate, html)
 
 
