@@ -17,7 +17,11 @@ before_script:
   - python setup.py install
   - cd example_project
 script:
-  - coverage run --source=terms manage.py test --traceback terms
+  - if [[ $DJANGO == 1.6.6 ]]; then
+      coverage run --source=terms manage.py test --traceback terms.tests;
+    else
+      coverage run --source=terms manage.py test --traceback terms;
+    fi
 after_success:
   - coveralls
 
