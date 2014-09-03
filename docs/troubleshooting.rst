@@ -16,7 +16,7 @@ reconstructed:
 * partially reconstructed if you use the :ref:`Template filter`
   or :ref:`with django-CMS`
 
-The content is parsed and rebuilt with `beautifulsoup4`_.
+The content is parsed and rebuilt with `lxml`_.
 See :file:`terms/html.py` to understand exactly how.
 
 List of known side effects
@@ -37,7 +37,7 @@ A few side effects are therefore happening during HTML reconstruction:
     -> ``<input style="text"/>``
 
 .. warning::
-   This implies one bad side effect: the unescaping breaks the special
+   This implies one bad side effect: the unescaping may break the special
    characters rendering in some complex form fields like
    `django-ckeditor`_.  `django.contrib.admin` is already ignored,
    so you should not encounter any problem.  Otherwise, using filters
@@ -73,10 +73,10 @@ middleware.  Then comes the complexity of your HTML tree.  The amount of
 flat text, luckily, has no impact.
 
 To give you an idea, `terms/tests/terms/performance_test_before.html`
-contains 263 tags and takes 35 ms to be parsed and rebuilt on my computer
-with the middleware.  That gives an average of 160 µs per tag.
+contains 263 tags and takes 11 ms to be parsed and rebuilt on my computer
+with the middleware.  That gives an average of 40 µs per tag.
 If you use the template tag only on the content of the page (124 tags), it
-takes 23 ms.  Quite slow, but if you cache the part of the template that's
+takes 9 ms.  Quite slow, but if you cache the part of the template that's
 filtered, this issue should be negligible.
 
 

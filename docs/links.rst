@@ -1,6 +1,6 @@
 .. _Python: http://python.org/
 .. _Django: https://www.djangoproject.com/
-.. _beautifulsoup4: http://www.crummy.com/software/BeautifulSoup/
+.. _lxml: http://lxml.de/
 
 .. _django-tinymce: https://github.com/aljosa/django-tinymce
 .. _django-ckeditor: https://github.com/shaunsephton/django-ckeditor

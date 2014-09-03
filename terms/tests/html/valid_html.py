@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import os.path
 from django.test import TestCase
-from terms.templatetags.terms import replace_terms
+from terms.html import replace_terms
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 

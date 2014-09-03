@@ -2,7 +2,7 @@
 
 from django.core.urlresolvers import resolve, Resolver404
 from .settings import TERMS_IGNORED_APPS, TERMS_DEBUG
-from .templatetags.terms import replace_terms
+from .html import replace_terms
 
 
 class TermsMiddleware(object):

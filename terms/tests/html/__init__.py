@@ -1,2 +1,2 @@
-from .BeautifulSoup import *
-from .replace_in_html import *
+from .valid_html import ValidHTMLTestCase
+from .invalid_html import InvalidHTMLTestCase

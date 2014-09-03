@@ -27,7 +27,7 @@ class TermManager(Manager):
         template = 'terms/term_replace.html'
         for term in qs:
             url = term.get_absolute_url()
-            name_variants = term.name.split('|')
+            name_variants = term.name_variants()
             context = {'url': url.replace('%', '%%'),
                        'url_is_external': bool(term.url)}
 

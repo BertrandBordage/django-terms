@@ -6,8 +6,8 @@ from timeit import timeit
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.test import TestCase
+from terms.html import replace_terms
 from terms.models import Term
-from terms.templatetags.terms import replace_terms
 
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -156,13 +156,13 @@ class TermsTestCase(TestCase):
             replace_terms(read_file('performance_test_before.html')),
             read_file('performance_test_after.html'))
 
-        # Parsing & rebuilding should take less than 200 ms
+        # Parsing & rebuilding should take less than 50 ms
         # on this complex page, even if your computer is a bit slow.
-        # On my laptop it takes 45 ms.
+        # On my laptop it takes 11 ms.
         self.assertLess(
             timeit("replace_terms(test_page)",
                    setup='test_page = """%s"""\n'
-                         'from terms.templatetags.terms import '
+                         'from terms.html import '
                          'replace_terms' % self.performance_test_page,
                    number=100) / 100.0,
-            0.2)
+            0.05)

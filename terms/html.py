@@ -1,10 +1,12 @@
 # coding: utf-8
 
-from bs4 import BeautifulSoup
+from io import StringIO
+from lxml.etree import Comment
+from lxml.html import tostring, _looks_like_full_html_unicode, parse
 try:
-    from django.utils.encoding import smart_text
+    from django.utils.encoding import force_text
 except ImportError:  # For Django < 1.4.2
-    from django.utils.encoding import smart_unicode as smart_text
+    from django.utils.encoding import force_unicode as force_text
 from .models import Term
 from .settings import (
     TERMS_IGNORED_TAGS, TERMS_IGNORED_CLASSES, TERMS_IGNORED_IDS,
@@ -43,27 +45,45 @@ def get_translate_function(replace_dict, variants_dict):
     return translate
 
 
-def is_ignored_parent(parent_tag):
-    classes = frozenset(parent_tag.get('class', ()))
-    return (parent_tag.name in TERMS_IGNORED_TAGS
-            or not classes.isdisjoint(TERMS_IGNORED_CLASSES)
-            or parent_tag.get('id') in TERMS_IGNORED_IDS)
+def is_valid_node(node):
+    if node.tag is Comment or node.tag in TERMS_IGNORED_TAGS \
+            or node.get('id') in TERMS_IGNORED_IDS:
+        return False
+    classes = frozenset(node.get('class', '').split())
+    return classes.isdisjoint(TERMS_IGNORED_CLASSES)
 
 
-def get_interesting_contents(soup, replace_regexp):
-    for tag in soup.find_all(text=replace_regexp):
-        if not any(is_ignored_parent(parent) for parent in tag.parents):
-            yield tag
+def get_text(node):
+    text = node.text or ''
+    for subnode in node.getchildren():
+        text += subnode.tail or ''
+    return text.replace('&', '&amp;')
 
 
-def str_to_soup(html):
-    # We use html.parser since lxml adds html and body automatically.
-    return BeautifulSoup(html, 'html.parser')
+def get_interesting_contents(parent_node, replace_regexp):
+    if is_valid_node(parent_node):
+
+        text = get_text(parent_node)
+        if text and replace_regexp.search(text):
+            yield parent_node
+
+        for node in parent_node.getchildren():
+            for subnode in get_interesting_contents(node, replace_regexp):
+                yield subnode
 
 
 if TERMS_ENABLED:
-    def replace_in_html(html):
-        soup = str_to_soup(html)
+    def replace_terms(html):
+        html = force_text(html)
+        remove_body = False
+        remove_p = False
+        etree = parse(StringIO(html))
+        root_node = etree.getroot()
+        if not _looks_like_full_html_unicode(html):
+            root_node = root_node.getchildren()[0]
+            remove_body = True
+            if root_node.getchildren()[0].tag == 'p' and html[:3] != '<p>':
+                remove_p = True
 
         variants_dict = Term.objects.variants_dict()
         replace_dict = Term.objects.replace_dict()
@@ -71,11 +91,22 @@ if TERMS_ENABLED:
         replace_regexp__sub = replace_regexp.sub
         translate = get_translate_function(replace_dict, variants_dict)
 
-        for tag in get_interesting_contents(soup, replace_regexp):
-            new_tag = str_to_soup(replace_regexp__sub(translate, tag))
-            tag.replace_with(new_tag)
+        for node in get_interesting_contents(root_node, replace_regexp):
+            new_content = replace_regexp__sub(
+                translate, tostring(node, encoding='unicode'))
+            new_node = parse(StringIO(new_content)).getroot().getchildren()[0]
+            if node.tag != 'body':
+                new_node = new_node.getchildren()[0]
+            node.getparent().replace(node, new_node)
 
-        return smart_text(soup)
+        if remove_body:
+            if remove_p:
+                root_node = root_node.getchildren()[0]
+            out = root_node.text or ''
+            out += ''.join([tostring(node, encoding='unicode')
+                            for node in root_node.getchildren()])
+            return out
+        return tostring(etree, encoding='unicode')
 else:
-    def replace_in_html(html):
+    def replace_terms(html):
         return html

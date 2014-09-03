@@ -12,7 +12,7 @@ Mandatory
 
 * `Python`_ 2.6, 2.7, 3.2, 3.3 or 3.4
 * `Django`_ 1.4, 1.5 or 1.6
-* `beautifulsoup4`_
+* `lxml`_
 
 
 .. _Optional:

@@ -1,10 +1,6 @@
 # coding: utf-8
 
 from __future__ import unicode_literals
-try:  # Python 3
-    from html.parser import HTMLParser
-except ImportError:  # Python 2
-    from HTMLParser import HTMLParser
 import sys
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -46,7 +42,6 @@ class Term(Model):
         return self.original_name
 
     def save(self, *args, **kwargs):
-        HTMLParser().unescape(self.name)
         cache.delete_many(CACHE_KEYS)
         super(Term, self).save(*args, **kwargs)
 
@@ -56,7 +51,7 @@ class Term(Model):
         return reverse('term', kwargs={'pk': self.pk})
 
     def name_variants(self, variant_slice=slice(0, None)):
-        return self.name.split('|')[variant_slice]
+        return self.name.replace('&', '&amp;').split('|')[variant_slice]
 
     @property
     def original_name(self):
