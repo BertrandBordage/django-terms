@@ -1,3 +1,9 @@
+1.1.0
+=====
+
+* Rewrites django-terms using lxml; more than a 300% speedup!
+* Tested with Django 1.7; migrations still need to be rewrote without South.
+
 1.0.7
 =====
 
