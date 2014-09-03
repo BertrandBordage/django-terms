@@ -24,7 +24,7 @@ else:
         pass
 
 
-def replace_terms(replace_dict, variants_dict, replace_regexp__sub, html):
+def get_translate_function(replace_dict, variants_dict):
     def translate(match):
         before, name = match.group('before', 'name')
 
@@ -40,7 +40,7 @@ def replace_terms(replace_dict, variants_dict, replace_regexp__sub, html):
         else:
             replaced_name = name
         return before + replaced_name
-    return replace_regexp__sub(translate, html)
+    return translate
 
 
 def is_ignored_parent(parent_tag):
@@ -69,10 +69,10 @@ if TERMS_ENABLED:
         replace_dict = Term.objects.replace_dict()
         replace_regexp = Term.objects.replace_regexp()
         replace_regexp__sub = replace_regexp.sub
+        translate = get_translate_function(replace_dict, variants_dict)
 
         for tag in get_interesting_contents(soup, replace_regexp):
-            new_tag = str_to_soup(replace_terms(
-                replace_dict, variants_dict, replace_regexp__sub, tag))
+            new_tag = str_to_soup(replace_regexp__sub(translate, tag))
             tag.replace_with(new_tag)
 
         return smart_text(soup)
