@@ -1,2 +1,2 @@
--e git+https://github.com/BertrandBordage/django-terms#egg=django-terms
-South==0.8.1
+https://github.com/BertrandBordage/django-terms/tarball/master
+South==1.0.2
