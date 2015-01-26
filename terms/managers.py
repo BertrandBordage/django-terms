@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import re
+import django
 from django.core.cache import cache
 from django.db.models import Manager
 from django.template.loader import render_to_string
@@ -41,7 +42,9 @@ class TermManager(Manager):
         """
         Caches variants_dict and replace_dict in a single database hit.
         """
-        qs = self.get_query_set()
+
+        qs = (self.get_query_set() if django.VERSION < (1, 6)
+              else self.get_queryset())
 
         variants_dict = self._get_variants_dict(qs)
         cache.set(VARIANTS_DICT_CACHE_KEY, variants_dict)
