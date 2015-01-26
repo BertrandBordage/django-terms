@@ -10,6 +10,7 @@ env:
   - DJANGO=1.5.12
   - DJANGO=1.6.10
   - DJANGO=1.7.3
+sudo: false
 install:
   - pip install Django==$DJANGO --use-mirrors
   - pip install -r example_project/requirements.txt --use-mirrors
@@ -23,8 +24,7 @@ script:
     else
       coverage run --source=terms manage.py test --traceback terms;
     fi
-after_success:
-  - coveralls
+after_success: coveralls
 
 matrix:
   exclude:
