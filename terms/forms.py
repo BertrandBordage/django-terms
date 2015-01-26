@@ -47,3 +47,4 @@ class TermForm(ModelForm):
             'name': TextInput(attrs={'size': 120}),
             'definition': Textarea(),
         }
+        fields = ('name', 'case_sensitive', 'definition', 'url')
