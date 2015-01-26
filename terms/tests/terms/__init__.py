@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 import os
 from timeit import timeit
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.test import TestCase
@@ -53,6 +54,8 @@ class TermsTestCase(TestCase):
 
         # Taken from https://criminocorpus.org/musee/282/
         self.performance_test_page = read_file('performance_test_before.html')
+
+        self.user = User.objects.create_superuser('test', 'a@b.com', 'test')
 
     def assertDetailView(self, term, status_code=200):
         self.assertURL(term.get_absolute_url(), status_code=status_code)
@@ -143,6 +146,7 @@ class TermsTestCase(TestCase):
                                            'bw2': self.term6_2}))
 
     def testAdminRendering(self):
+        self.client.login(username='test', password='test')
         self.assertURL(
             reverse('admin:terms_term_changelist'))
         for term in Term.objects.all():
