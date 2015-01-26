@@ -10,6 +10,7 @@ env:
   - DJANGO=1.5.12
   - DJANGO=1.6.10
   - DJANGO=1.7.3
+  - DJANGO=1.8a1
 sudo: false
 install:
   - pip install Django==$DJANGO --use-mirrors
@@ -19,7 +20,7 @@ before_script:
   - python setup.py install
   - cd example_project
 script:
-  - if [[ $DJANGO == 1.6.10 ]] || [[ $DJANGO == 1.7.3 ]]; then
+  - if [[ $DJANGO == 1.6.10 ]] || [[ $DJANGO == 1.7.3 ]] || [[ $DJANGO == 1.8a1 ]]; then
       coverage run --source=terms manage.py test --traceback terms.tests;
     else
       coverage run --source=terms manage.py test --traceback terms;
@@ -36,3 +37,5 @@ matrix:
       env: DJANGO=1.4.18
     - python: 2.6
       env: DJANGO=1.7.3
+    - python: 2.6
+      env: DJANGO=1.8a1
