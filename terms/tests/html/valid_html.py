@@ -13,6 +13,9 @@ def read_file(filename):
 
 
 class ValidHTMLTestCase(TestCase):
+    def testEmptyString(self):
+        self.assertHTMLEqual(replace_terms(''), '')
+
     def test(self):
         """
         After being reconstructed, valid_html should be exactly the same.
