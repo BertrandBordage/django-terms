@@ -164,4 +164,5 @@ LOGGING = {
     }
 }
 
-TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+if django.VERSION >= (1, 6):
+    TEST_RUNNER = 'django.test.runner.DiscoverRunner'
