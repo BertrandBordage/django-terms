@@ -75,6 +75,8 @@ def get_interesting_contents(parent_node, replace_regexp):
 if TERMS_ENABLED:
     def replace_terms(html):
         html = force_text(html)
+        if not html:
+            return html
         remove_body = False
         remove_p = False
         etree = parse(StringIO(html))
