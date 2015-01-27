@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 import os.path
 from django.test import TestCase
 from terms.html import replace_terms
+from terms.models import Term
+
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -33,8 +35,12 @@ class ValidHTMLTestCase(TestCase):
         self.assertHTMLEqual(html, new_html_w_extra_spaces)
 
     def testUnicode(self):
+        Term.objects.create(name='était', url='github.com')
+
+        control = 'Il <a href="github.com">était</a> une fois…'
+
         text = 'Il était une fois…'
-        self.assertEqual(text, replace_terms(text))
+        self.assertEqual(replace_terms(text), control)
 
         html = 'Il &eacute;tait une fois&hellip;'
-        self.assertEqual(text, replace_terms(html))
+        self.assertEqual(replace_terms(html), control)
