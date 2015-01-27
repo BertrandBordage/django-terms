@@ -73,8 +73,8 @@ def get_interesting_contents(parent_node, replace_regexp):
 
 
 if TERMS_ENABLED:
-    def replace_terms(html):
-        html = force_text(html)
+    def replace_terms(original_html):
+        html = force_text(original_html)
         if not html:
             return html
         remove_body = False
@@ -93,7 +93,12 @@ if TERMS_ENABLED:
         replace_regexp__sub = replace_regexp.sub
         translate = get_translate_function(replace_dict, variants_dict)
 
-        for node in get_interesting_contents(root_node, replace_regexp):
+        interesting_contents = list(get_interesting_contents(root_node,
+                                                             replace_regexp))
+        if not interesting_contents:
+            return original_html
+
+        for node in interesting_contents:
             new_content = replace_regexp__sub(
                 translate, tostring(node, encoding='unicode'))
             new_node = parse(StringIO(new_content)).getroot().getchildren()[0]
