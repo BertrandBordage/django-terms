@@ -2,12 +2,9 @@
 
 from django.template import Library
 from django.template.defaultfilters import stringfilter
-from ..html import replace_terms as replace_terms_util
+from ..html import replace_terms
 
 register = Library()
 
 
-@register.filter
-@stringfilter
-def replace_terms(html):
-    return replace_terms_util(html)
+register.filter(stringfilter(replace_terms))
