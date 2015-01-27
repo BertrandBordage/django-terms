@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from io import StringIO
+import re
 from lxml.etree import Comment
 from lxml.html import tostring, _looks_like_full_html_unicode, parse
 try:
@@ -72,6 +73,9 @@ def get_interesting_contents(parent_node, replace_regexp):
                 yield subnode
 
 
+PARAGRAPH_RE = re.compile(r'^\s*<p[^>]*>.*</p>\s*$', flags=re.DOTALL)
+
+
 if TERMS_ENABLED:
     def replace_terms(original_html):
         html = force_text(original_html)
@@ -84,7 +88,9 @@ if TERMS_ENABLED:
         if not _looks_like_full_html_unicode(html):
             root_node = root_node.getchildren()[0]
             remove_body = True
-            if root_node.getchildren()[0].tag == 'p' and html[:3] != '<p>':
+            children = root_node.getchildren()
+            if len(children) == 1 and children[0].tag == 'p' \
+                    and PARAGRAPH_RE.match(html) is None:
                 remove_p = True
 
         variants_dict = Term.objects.variants_dict()
