@@ -1,3 +1,14 @@
+1.1.2
+=====
+
+* Adds a reliable Django 1.7 support.
+* Adds Django 1.8a1 compatibility.
+
+1.1.1
+=====
+
+* Fixes an exception occurring when an empty string is passed to the parser.
+
 1.1.0
 =====
 
