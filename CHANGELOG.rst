@@ -1,3 +1,8 @@
+1.1.3
+=====
+
+* Fixes an issue occurring when parsing paragraphs with attributes.
+
 1.1.2
 =====
 
