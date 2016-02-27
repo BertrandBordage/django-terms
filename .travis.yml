@@ -1,4 +1,6 @@
 language: python
+sudo: false
+
 python:
   - 2.7
   - 3.2
@@ -8,10 +10,10 @@ env:
   - DJANGO=1.7.3
   - DJANGO=1.8a1
   - DJANGO=1.9.2
-sudo: false
+
 install:
-  - pip install Django==$DJANGO --use-mirrors
-  - pip install -r example_project/requirements.txt --use-mirrors
+  - pip install Django==$DJANGO
+  - pip install -r example_project/requirements.txt
 
   # Coveralls 4.0 doesn't support Python 3.2
   - if [ "$TRAVIS_PYTHON_VERSION" == "3.2" ]; then
@@ -19,9 +21,12 @@ install:
     else
       pip install coverage;
     fi
+
 before_script:
   - python setup.py install
   - cd example_project
+
 script:
   - coverage run --source=terms manage.py test --traceback terms.tests;
+
 after_success: coveralls
