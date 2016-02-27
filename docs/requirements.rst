@@ -10,8 +10,8 @@ Requirements
 Mandatory
 ---------
 
-* `Python`_ 2.6, 2.7, 3.2, 3.3 or 3.4
-* `Django`_ 1.4, 1.5, 1.6 or 1.7
+* `Python`_ 2.7, 3.3 or 3.4
+* `Django`_ 1.7, 1.8 or 1.9
 * `lxml`_
 
 
