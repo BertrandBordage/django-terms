@@ -12,7 +12,13 @@ sudo: false
 install:
   - pip install Django==$DJANGO --use-mirrors
   - pip install -r example_project/requirements.txt --use-mirrors
-  - pip install coveralls --use-mirrors
+
+  # Coveralls 4.0 doesn't support Python 3.2
+  - if [ "$TRAVIS_PYTHON_VERSION" == "3.2" ]; then
+      pip install coverage==3.7.1;
+    else
+      pip install coverage;
+    fi
 before_script:
   - python setup.py install
   - cd example_project
