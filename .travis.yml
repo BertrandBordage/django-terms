@@ -7,8 +7,8 @@ python:
   - 3.3
   - 3.4
 env:
-  - DJANGO=1.7.3
-  - DJANGO=1.8a1
+  - DJANGO=1.7.11
+  - DJANGO=1.8.9
   - DJANGO=1.9.2
 
 install:
