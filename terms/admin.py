@@ -6,7 +6,7 @@ from .forms import TermForm
 from django.conf import settings
 from django.contrib.admin import ModelAdmin
 if 'reversion' in settings.INSTALLED_APPS:
-    from reversion import VersionAdmin as ModelAdmin
+    from reversion.admin import VersionAdmin as ModelAdmin
 
 
 class TermAdmin(ModelAdmin):
