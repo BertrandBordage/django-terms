@@ -1,3 +1,11 @@
+1.2.0
+=====
+
+* Adds Django 1.9 compatibility.
+* Adds Python 3.5 support.
+* Drops Django 1.4, 1.5, & 1.6 support.
+* Drops Python 2.6 & 3.2 support.
+
 1.1.3
 =====
 
