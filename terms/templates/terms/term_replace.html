@@ -3,6 +3,7 @@
         href="{{ url }}"
       {% else %}
         onclick="window.open('{{ url }}', '', 'height=450px, width=700px');"
+        class="tooltip" title="{{ definition|safe }}"
         style="cursor: help;"
-      {% endif %}>%s</a>
+      {% endif %}><span title="{{ tooltip_span }}">%s</a>
 {% endspaceless %}

@@ -5,6 +5,7 @@ import django
 from django.core.cache import cache
 from django.db.models import Manager
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
 
 VARIANTS_DICT_CACHE_KEY = 'terms__variants_dict'
@@ -30,7 +31,9 @@ class TermManager(Manager):
             url = term.get_absolute_url()
             name_variants = term.name_variants()
             context = {'url': url.replace('%', '%%'),
-                       'url_is_external': bool(term.url)}
+                       'url_is_external': bool(term.url),
+                       'tooltip_span': _('Open in new window'),
+                       'definition': term.definition}
 
             case_sensitive = term.case_sensitive
             for name_variant in name_variants:
