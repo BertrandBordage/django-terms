@@ -13,10 +13,10 @@ Code statistics:
 
 PyPI status:
 
-.. image:: https://pypip.in/v/django-terms/badge.png
+.. image:: https://img.shields.io/pypi/v/django-terms.svg
     :target: https://crate.io/packages/django-terms/
 
-.. image:: https://pypip.in/d/django-terms/badge.png
+.. image:: https://img.shields.io/pypi/dm/django-terms.svg
     :target: https://crate.io/packages/django-terms/
 
 Continuous integration status:
