@@ -47,6 +47,8 @@ def get_translate_function(replace_dict, variants_dict):
 
 
 def is_valid_node(node):
+    if not node:
+        return False
     if node.tag is Comment or node.tag in TERMS_IGNORED_TAGS \
             or node.get('id') in TERMS_IGNORED_IDS:
         return False
@@ -57,7 +59,7 @@ def is_valid_node(node):
 def get_text(node):
     text = node.text or ''
     for subnode in node.getchildren():
-        text += subnode.tail or ''
+        text += subnode.text or subnode.tail or ''
     return text.replace('&', '&amp;')
 
 
@@ -85,7 +87,7 @@ if TERMS_ENABLED:
         remove_p = False
         etree = parse(StringIO(html))
         root_node = etree.getroot()
-        if not _looks_like_full_html_unicode(html):
+        if not _looks_like_full_html_unicode(html) and root_node:
             root_node = root_node.getchildren()[0]
             remove_body = True
             children = root_node.getchildren()
