@@ -9,3 +9,4 @@ django_terms.egg-info/top_level.txt
 django_terms.egg-info/not-zip-safe
 *.txt
 django_terms.egg-info/PKG-INFO
+django-terms.dot  
