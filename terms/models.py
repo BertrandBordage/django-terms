@@ -37,6 +37,7 @@ class Term(Model):
         verbose_name = _('term')
         verbose_name_plural = _('terms')
         ordering = ('name',)
+        app_label = 'term'
 
     def __str__(self):
         return self.original_name
