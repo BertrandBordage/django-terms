@@ -1,3 +1,8 @@
+1.2.1
+=====
+
+* Adds Django 1.10 compatibility.
+
 1.2.0
 =====
 
