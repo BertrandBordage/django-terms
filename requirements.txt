@@ -1,5 +1,6 @@
 Django>=1.7,<1.11
-django-cms==3.4.7
+django-cms==3.4.7              ; python_version < '3.6'
+django-cms==3.5.4              ; python_version >= '3.7'
 lxml==4.7.1
 django-treebeard==4.2.0
 django-sekizai==0.10.0
