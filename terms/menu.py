@@ -1,5 +1,5 @@
 from cms.menu_bases import CMSAttachMenu
-from django.core.urlresolvers import NoReverseMatch
+from django.urls import NoReverseMatch
 try:
     from django.utils.encoding import smart_text
 except ImportError:  # For Django < 1.4.2

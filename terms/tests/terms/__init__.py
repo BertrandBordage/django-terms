@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import os
 from timeit import timeit
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template import Template, Context
 from django.test import TestCase
 from terms.html import replace_terms
