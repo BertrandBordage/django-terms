@@ -3,3 +3,10 @@
 *~
 
 .idea
+django_terms.egg-info/dependency_links.txt
+django_terms.egg-info/requires.txt
+django_terms.egg-info/top_level.txt
+django_terms.egg-info/not-zip-safe
+*.txt
+django_terms.egg-info/PKG-INFO
+django-terms.dot  

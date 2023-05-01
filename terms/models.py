@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import sys
 from django.core.cache import cache
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import Model, CharField, TextField, BooleanField
 from django.utils.translation import ugettext_lazy as _
 from .managers import TermManager, CACHE_KEYS
@@ -37,6 +37,7 @@ class Term(Model):
         verbose_name = _('term')
         verbose_name_plural = _('terms')
         ordering = ('name',)
+        app_label = 'terms'
 
     def __str__(self):
         return self.original_name

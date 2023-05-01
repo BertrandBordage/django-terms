@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.core.urlresolvers import resolve, Resolver404
+from django.urls import resolve, Resolver404
 from .settings import TERMS_IGNORED_APPS, TERMS_DEBUG
 from .html import replace_terms
 

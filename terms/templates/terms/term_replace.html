@@ -1,8 +1,21 @@
 {% spaceless %}
   <a  {% if url_is_external %}
-        href="{{ url }}"
+        href="{{ url }}" target="_blank"
       {% else %}
         onclick="window.open('{{ url }}', '', 'height=450px, width=700px');"
         style="cursor: help;"
       {% endif %}>%s</a>
 {% endspaceless %}
+
+
+{#{% spaceless %}#}
+{#  <a {% if url_is_external %}#}
+{#        href="{{ url }}"#}
+{#     {% else %}#}
+{#        onclick="window.open('{{ url }}', '', 'height=450px, width=700px');"#}
+{#        class="tooltip" title="{{ definition|safe }}" style="cursor: help;"#}
+{#    {% endif %}#}
+{#  >#}
+{#    <span title="{{ tooltip_span }}">%s</span>#}
+{#  </a>#}
+{#{% endspaceless %}#}

@@ -1,0 +1,11 @@
+_schema: https://static.datakortet.no/schema/dkbuild.schema.yaml
+
+package:
+  name: terms
+  package_name: django-terms
+  description: wide adds a definition or a link for specialized terms.
+  version: 1.2.2
+  created: 2014
+
+build:
+  venv: django-terms
